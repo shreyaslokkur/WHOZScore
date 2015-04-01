@@ -31,6 +31,7 @@ public class FormView extends Fragment {
     private Spinner yearsSpinner, monthsSpinner, weeksSpinner;
     private Button submitButton;
     private EditText weightText;
+    private EditText heightText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +50,8 @@ public class FormView extends Fragment {
 
         submitButton = (Button) view.findViewById(R.id.submitButton);
 
+        heightText = (EditText) view.findViewById(R.id.heightId);
+
         weightText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -63,17 +66,43 @@ public class FormView extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length()> 0){
-                    submitButton.setEnabled(true);
+                    ((WhoZScore)getActivity()).setPatientWeight(Double.parseDouble(weightText.getText().toString()));
+                    toggleSubmitButton();
                 }else {
-                    submitButton.setEnabled(false);
+                    ((WhoZScore)getActivity()).setPatientWeight(0.0);
+                    toggleSubmitButton();
                 }
             }
         });
+
+        heightText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()> 0){
+                    ((WhoZScore)getActivity()).setPatientHeight(Integer.parseInt(heightText.getText().toString()));
+                    toggleSubmitButton();
+                }else {
+                    ((WhoZScore)getActivity()).setPatientHeight(0);
+                    toggleSubmitButton();
+                }
+            }
+        });
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("valuesSubmitted.............................");
-                ((WhoZScore)getActivity()).setPatientWeight(Double.parseDouble(weightText.getText().toString()));
+
                 ((WhoZScore)getActivity()).onFormSubmit();
 
                 ((WhoZScore)getActivity()).replaceFragment(resultView);
@@ -84,6 +113,14 @@ public class FormView extends Fragment {
         // Inflate the layout for this fragment
         return view;
 
+    }
+
+    public void toggleSubmitButton(){
+        if(weightText.getText().length() > 0 || heightText.getText().length() > 0){
+            submitButton.setEnabled(true);
+        }else {
+            submitButton.setEnabled(false);
+        }
     }
 
     @Override

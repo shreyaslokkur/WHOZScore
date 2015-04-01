@@ -16,6 +16,7 @@ public class Patient {
     private int ageInMonths;
     private int ageInWeeks;
     private double weight;
+    private int height;
     private int zScore;
 
     public Sex getSex() {
@@ -56,6 +57,14 @@ public class Patient {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public int getzScore() {

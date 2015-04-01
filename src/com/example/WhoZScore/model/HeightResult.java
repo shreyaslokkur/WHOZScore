@@ -3,15 +3,12 @@ package com.example.WhoZScore.model;
 /**
  * Created with IntelliJ IDEA.
  * User: shreyasl
- * Date: 4/1/15
- * Time: 11:04 PM
+ * Date: 3/29/15
+ * Time: 3:57 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Result {
-
+public class HeightResult {
     private boolean isHealthy;
-    private String zScoreWeightMessage;
-    private String healthyWeightMessage;
     private String zScoreHeightMessage;
     private String healthyHeightMessage;
 
@@ -23,21 +20,6 @@ public class Result {
         isHealthy = healthy;
     }
 
-    public String getzScoreWeightMessage() {
-        return zScoreWeightMessage;
-    }
-
-    public void setzScoreWeightMessage(String zScoreWeightMessage) {
-        this.zScoreWeightMessage = zScoreWeightMessage;
-    }
-
-    public String getHealthyWeightMessage() {
-        return healthyWeightMessage;
-    }
-
-    public void setHealthyWeightMessage(String healthyWeightMessage) {
-        this.healthyWeightMessage = healthyWeightMessage;
-    }
 
     public String getzScoreHeightMessage() {
         return zScoreHeightMessage;

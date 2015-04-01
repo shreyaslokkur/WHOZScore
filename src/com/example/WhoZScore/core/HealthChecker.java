@@ -1,9 +1,11 @@
 package com.example.WhoZScore.core;
 
-import com.example.WhoZScore.WhoZScore;
+import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.WeightForAge;
+import com.example.WhoZScore.model.HeightResult;
 import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
+import com.example.WhoZScore.model.WeightResult;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,21 +16,38 @@ import com.example.WhoZScore.model.Result;
  */
 public class HealthChecker {
 
-    public Result checkIfHealthy(Patient patient, WeightForAge weightForAge){
-        double weight = patient.getWeight();
-        String message = null;
+    public Result checkIfHealthy(Patient patient, WeightForAge weightForAge, HeightForAge heightForAge){
         Result result = null;
-        if(patient.getAgeInYears() < 5){
-            result = ageLessThanFiveYears(patient,weightForAge);
-        }else {
-            result = ageGreaterThanFiveYears(patient,weightForAge);
+        WeightResult resultForWeight = null;
+        HeightResult resultForHeight = null;
+        if(weightForAge != null){
+           resultForWeight = getResultForWeight(patient, weightForAge);
         }
+        if(heightForAge != null){
+            resultForHeight = getResultForHeight(patient, heightForAge);
+        }
+        result = setResult(resultForWeight, resultForHeight);
         return result;
     }
 
-    private Result ageLessThanFiveYears(Patient patient, WeightForAge weightForAge){
+    private WeightResult getResultForWeight(Patient patient, WeightForAge weightForAge){
+        WeightResult weightResult;
+        if(patient.getAgeInYears() < 5){
+            weightResult = calculateWeightResultForAgeLessThanFiveYears(patient, weightForAge);
+        }else {
+            weightResult = calculateWeightResultForAgeGreaterThanFiveYears(patient, weightForAge);
+        }
+        return weightResult;
+
+    }
+
+    private HeightResult getResultForHeight(Patient patient, HeightForAge heightForAge){
+        return  null;
+    }
+
+    private WeightResult calculateWeightResultForAgeLessThanFiveYears(Patient patient, WeightForAge weightForAge){
+        WeightResult weightResult = new WeightResult();
         double weight = patient.getWeight();
-        Result result = new Result();
         String message = null;
         boolean isHealthy;
         if(weight > weightForAge.getThreeScore() ){
@@ -54,14 +73,14 @@ public class HealthChecker {
             message = "Lesser than -3 index: "+weightForAge.getMinusThreeScore()+"kg";
             isHealthy = false;
         }
-        result.setHealthy(isHealthy);
-        result.setzScoreMessage(message);
-        return result;
+        weightResult.setHealthy(isHealthy);
+        weightResult.setzScoreWeightMessage(message);
+        return weightResult;
     }
 
-    private Result ageGreaterThanFiveYears(Patient patient, WeightForAge weightForAge){
+    private WeightResult calculateWeightResultForAgeGreaterThanFiveYears(Patient patient, WeightForAge weightForAge){
+        WeightResult weightResult = new WeightResult();
         double weight = patient.getWeight();
-        Result result = new Result();
         String message = null;
         boolean isHealthy;
         if(weight > weightForAge.getThreeScore() ){
@@ -95,9 +114,21 @@ public class HealthChecker {
             message = "Lesser than -3 index: "+weightForAge.getMinusThreeScore()+"kg";
             isHealthy = false;
         }
-        result.setHealthy(isHealthy);
-        result.setzScoreMessage(message);
-        return result;
+        weightResult.setHealthy(isHealthy);
+        weightResult.setzScoreWeightMessage(message);
+        return weightResult;
 
+    }
+
+    private Result setResult(WeightResult weightResult, HeightResult heightResult){
+        Result result = new Result();
+        if(weightResult != null){
+            result.setzScoreWeightMessage(weightResult.getzScoreWeightMessage());
+
+        }
+        if(heightResult != null){
+            result.setzScoreHeightMessage(heightResult.getzScoreHeightMessage());
+        }
+        return result;
     }
 }

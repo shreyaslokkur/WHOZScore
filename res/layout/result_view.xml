@@ -62,6 +62,31 @@
 
             </LinearLayout>
 
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:background="#ffffff"
+                      android:layout_marginBottom="10dp"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Height: "
+                    android:textStyle="bold"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left"
+                    android:textSize="14dp"
+                    android:textIsSelectable="false"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:id="@+id/heightResultTextId"
+
+                    />
+
+        </LinearLayout>
+
         <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"

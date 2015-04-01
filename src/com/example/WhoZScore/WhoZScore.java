@@ -7,16 +7,16 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import android.widget.Spinner;
 import com.example.WhoZScore.core.Calculator;
 import com.example.WhoZScore.core.HealthChecker;
-import com.example.WhoZScore.data.dao.WeightForAgeDataSource;
+import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.enums.Age;
 import com.example.WhoZScore.enums.Sex;
 import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
+import com.example.WhoZScore.model.WeightResult;
 import com.example.WhoZScore.views.FragmentChangeListener;
 import com.example.WhoZScore.views.HomeView;
 
@@ -72,9 +72,21 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
         patient.setWeight(weight);
     }
 
+    public void setPatientHeight(int height){
+        patient.setHeight(height);
+    }
+
     public void onFormSubmit(){
-        WeightForAge weightForAge = calculator.calculateWeightForAgeZScore(patient, this);
-        result = healthChecker.checkIfHealthy(patient, weightForAge);
+        WeightForAge weightForAge = null;
+        HeightForAge heightForAge = null;
+        if(patient.getWeight() > 0.0){
+            weightForAge = calculator.calculateWeightForAgeZScore(patient, this);
+        }
+        /*if(patient.getHeight() > 0){
+            heightForAge = calculator.calculateHeightForAgeZScore(patient,this);
+        }*/
+
+        result = healthChecker.checkIfHealthy(patient, weightForAge, heightForAge);
 
     }
 
