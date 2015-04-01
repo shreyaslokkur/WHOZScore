@@ -19,8 +19,8 @@ public class HeightForAgeDataSource {
 
     private MySqliteHelper dbHelper;
 
-    public static final String BOYS_LENGTH_FOR_AGE = "BoysLengthForAge";
-    public static final String GIRLS_LENGTH_FOR_AGE = "GirlsLengthForAge";
+    public static final String BOYS_LENGTH_FOR_AGE = "BoysHeightForAge";
+    public static final String GIRLS_LENGTH_FOR_AGE = "GirlsHeightForAge";
 
     private final int THREE_SCORE_COLUMN_INDEX = 0;
     private final int TWO_SCORE_COLUMN_INDEX = 1;
