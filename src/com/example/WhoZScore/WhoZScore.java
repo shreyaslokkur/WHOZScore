@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Spinner;
 import com.example.WhoZScore.core.Calculator;
 import com.example.WhoZScore.core.HealthChecker;
 import com.example.WhoZScore.data.dao.WeightForAgeDataSource;
@@ -95,18 +96,27 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
     }
 
     public void toggleSpinners(Age age, boolean enable){
-        View monthsSpinner = findViewById(R.id.monthsId);
-        View yearsSpinner = findViewById(R.id.yearsId);
-        View weeksSpinner = findViewById(R.id.weeksId);
+        Spinner monthsSpinner = (Spinner) findViewById(R.id.monthsId);
+        Spinner yearsSpinner = (Spinner) findViewById(R.id.yearsId);
+        Spinner weeksSpinner = (Spinner) findViewById(R.id.weeksId);
         switch (age){
             case WEEKS: weeksSpinner.setEnabled(enable);
-                        if(!enable) patient.setAgeInWeeks(0);
+                        if(!enable) {
+                            patient.setAgeInWeeks(0);
+                            weeksSpinner.setSelection(0);
+                        }
                         break;
             case MONTHS: monthsSpinner.setEnabled(enable);
-                         if(!enable) patient.setAgeInMonths(0);
+                         if(!enable){
+                             patient.setAgeInMonths(0);
+                             monthsSpinner.setSelection(0);
+                         }
                          break;
             case YEARS: yearsSpinner.setEnabled(enable);
-                        if(!enable) patient.setAgeInYears(0);
+                        if(!enable){
+                            patient.setAgeInYears(0);
+                            yearsSpinner.setSelection(0);
+                        }
                         break;
         }
     }
