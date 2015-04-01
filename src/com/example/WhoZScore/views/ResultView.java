@@ -41,6 +41,7 @@ public class ResultView extends Fragment {
         zScoreMessageText.setText(result.getzScoreWeightMessage());
 
 
+
         // Inflate the layout for this fragment
         return view;
 
