@@ -1,10 +1,12 @@
 package com.example.WhoZScore.views;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.WhoZScore.R;
 import com.example.WhoZScore.WhoZScore;
@@ -31,12 +33,34 @@ public class ResultView extends Fragment {
         ageText = (TextView) view.findViewById(R.id.ageResultTextId);
         weightText = (TextView) view.findViewById(R.id.weightResultTextId);
         heightText = (TextView) view.findViewById(R.id.heightResultTextId);
-        zScoreMessageText = (TextView) view.findViewById(R.id.zScoreResultTextId);
+        zScoreMessageText = (TextView) view.findViewById(R.id.zScoreWeightResultTextId);
+
 
         Result result = ((WhoZScore) getActivity()).getResult();
         Patient patient = ((WhoZScore) getActivity()).getPatient();
-        weightText.setText(String.valueOf(patient.getWeight()) + "kg");
-        heightText.setText(String.valueOf(patient.getHeight()) + "cms");
+        if(patient.getHeight() == 0){
+            View heightHeader = view.findViewById(R.id.heightHeader);
+            View heightResultLayout = view.findViewById(R.id.heightResultLayout);
+
+            ((LinearLayout)heightHeader.getParent()).removeView(heightHeader);
+            ((LinearLayout)heightResultLayout.getParent()).removeView(heightResultLayout);
+        }else {
+            heightText.setText(String.valueOf(patient.getHeight()) + "cms");
+            heightText.setTextColor(Color.BLACK);
+        }
+
+        if(patient.getWeight() == 0){
+            View weightHeader = view.findViewById(R.id.weightHeader);
+            View weightResultLayout = view.findViewById(R.id.weightResultLayout);
+
+            ((LinearLayout)weightHeader.getParent()).removeView(weightHeader);
+            ((LinearLayout)weightResultLayout.getParent()).removeView(weightResultLayout);
+        }else {
+            weightText.setText(String.valueOf(patient.getWeight()) + "kg");
+            weightText.setTextColor(Color.BLACK);
+        }
+
+
         ageText.setText(getAge(patient));
         zScoreMessageText.setText(result.getzScoreWeightMessage());
 

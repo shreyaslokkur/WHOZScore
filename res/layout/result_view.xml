@@ -9,6 +9,7 @@
                   android:orientation="vertical"
                   android:layout_width="fill_parent"
                   android:layout_height="fill_parent"
+                  android:id="@+id/resultLayout"
                   android:background="#ffffff">
 
 
@@ -57,6 +58,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="10"
                         android:id="@+id/weightResultTextId"
+                        android:text="Weight not entered"
+                        android:textColor="#4D4F50"
 
                         />
 
@@ -82,7 +85,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
                     android:id="@+id/heightResultTextId"
-
+                    android:text="Height not entered"
+                    android:textColor="#4D4F50"
                     />
 
         </LinearLayout>
@@ -96,6 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Weight For Age "
+                android:id="@+id/weightHeader"
                 android:textStyle="bold"
                 android:textColor="#122e4d"
                 android:layout_gravity="left|center_vertical"
@@ -112,6 +117,7 @@
                       android:layout_height="wrap_content"
                       android:orientation="horizontal"
                       android:background="#ffffff"
+                      android:id="@+id/weightResultLayout"
                       >
             <TextView
                     android:layout_width="wrap_content"
@@ -126,7 +132,49 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
-                    android:id="@+id/zScoreResultTextId"
+                    android:id="@+id/zScoreWeightResultTextId"
+
+                    />
+
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height For Age "
+                android:id="@+id/heightHeader"
+                android:textStyle="bold"
+                android:textColor="#122e4d"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="18dp"
+                android:textIsSelectable="false" android:singleLine="false"/>
+
+
+
+
+
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:background="#ffffff"
+                      android:id="@+id/heightResultLayout"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Z Score: "
+                    android:textStyle="bold"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left"
+                    android:textSize="14dp"
+                    android:textIsSelectable="false"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:id="@+id/zScoreHeightResultTextId"
 
                     />
 
