@@ -40,7 +40,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="years"
-                    android:id="@+id/textView"
                     android:layout_gravity="center"
                     android:layout_weight="10"
                     android:textColor="#122e4d"
@@ -66,7 +65,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="months"
-                    android:id="@+id/textView"
                     android:layout_gravity="center"
                     android:layout_weight="10"
                     android:textColor="#122e4d"
@@ -93,7 +91,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="weeks"
-                    android:id="@+id/textView"
                     android:layout_gravity="center"
                     android:layout_weight="10"
                     android:textColor="#122e4d"
@@ -133,7 +130,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="kg"
-                    android:id="@+id/textView"
                     android:layout_gravity="center"
                     android:layout_weight="10"
                     android:textColor="#122e4d"
@@ -153,8 +149,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="10"
                     android:id="@+id/heightId"
-                    android:inputType="number|none"
-                    android:digits="0123456789"
+                    android:inputType="numberDecimal|none"
+                    android:digits="0123456789."
                     android:hint="100"/>
 
             <TextView

@@ -16,7 +16,6 @@
                 android:textStyle="bold"
                 android:textColor="#122e4d"
                 android:layout_gravity="left|center_vertical"
-                android:id="@+id/textView"
                 android:layout_marginBottom="20dp"
                 android:textSize="24dp"
                 android:textIsSelectable="false"

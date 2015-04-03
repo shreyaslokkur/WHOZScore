@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import com.example.WhoZScore.core.Calculator;
 import com.example.WhoZScore.core.HealthChecker;
@@ -79,6 +80,7 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
     public void onFormSubmit(){
         WeightForAge weightForAge = null;
         HeightForAge heightForAge = null;
+
         if(patient.getWeight() > 0.0){
             weightForAge = calculator.calculateWeightForAgeZScore(patient, this);
         }
@@ -106,6 +108,24 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
         fragmentTransaction.addToBackStack(fragment.toString());
         fragmentTransaction.commit();
     }
+
+    /*public void changeWeeksDataProvider(boolean partial){
+        Spinner weeksSpinner = (Spinner) findViewById(R.id.weeksId);
+        if(partial){
+
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, R.array.weeks_partial_arrays); //selected item will look like a spinner set from XML
+            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            weeksSpinner.setAdapter(spinnerArrayAdapter);
+
+
+        }else {
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, R.array.weeks_arrays); //selected item will look like a spinner set from XML
+            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            weeksSpinner.setAdapter(spinnerArrayAdapter);
+
+
+        }
+    }*/
 
     public void toggleSpinners(Age age, boolean enable){
         Spinner monthsSpinner = (Spinner) findViewById(R.id.monthsId);

@@ -34,14 +34,10 @@ public class Calculator {
     }
 
     public HeightForAge calculateHeightForAgeZScore(Patient patient, Context context){
-        HeightForAge heightForAge;
-        heightForAgeDataSource = new HeightForAgeDataSource(context);
-        if(Sex.FEMALE.equals(patient.getSex())){
-            heightForAge = heightForAgeDataSource.getScoreForGirls(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears());
 
-        }else {
-            heightForAge = heightForAgeDataSource.getScoreForBoys(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears());
-        }
+        heightForAgeDataSource = new HeightForAgeDataSource(context);
+        HeightForAge heightForAge = heightForAgeDataSource.getScore(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears(), patient.getSex());
+
         return heightForAge;
 
     }

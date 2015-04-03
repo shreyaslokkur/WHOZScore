@@ -42,7 +42,88 @@ public class HealthChecker {
     }
 
     private HeightResult getResultForHeight(Patient patient, HeightForAge heightForAge){
-        return  null;
+        HeightResult heightResult;
+        if(patient.getAgeInYears() < 5){
+            heightResult = calculateHeightResultForAgeLessThanFiveYears(patient, heightForAge);
+        }else {
+            heightResult = calculateHeightResultForAgeGreaterThanFiveYears(patient, heightForAge);
+        }
+        return heightResult;
+    }
+
+    private HeightResult calculateHeightResultForAgeGreaterThanFiveYears(Patient patient, HeightForAge heightForAge) {
+        HeightResult heightResult = new HeightResult();
+        double height = patient.getHeight();
+        String message = null;
+        boolean isHealthy;
+        if(height > heightForAge.getThreeScore() ){
+            message = "Greater than 3 index : "+ heightForAge.getThreeScore()+"cms";
+            isHealthy = false;
+
+        }else if(height <= heightForAge.getThreeScore() && height >= heightForAge.getTwoScore()){
+            message = "Inbetween 3 index: "+heightForAge.getThreeScore()+"cms and 2 index: "+heightForAge.getTwoScore()+"cms";
+            isHealthy = false;
+
+        }else if(height < heightForAge.getTwoScore() && height >= heightForAge.getOneScore()){
+            message = "Inbetween 2 index: "+heightForAge.getTwoScore()+"cms and 1 index: "+heightForAge.getOneScore()+"cms";
+            isHealthy = true;
+
+        }else if(height < heightForAge.getOneScore() && height >= heightForAge.getZeroScore()){
+            message = "Inbetween 1 index: "+heightForAge.getOneScore()+"cms and 0 index: "+heightForAge.getZeroScore()+"cms";
+            isHealthy = true;
+
+        }else if(height < heightForAge.getZeroScore() && height >= heightForAge.getMinusOneScore()){
+            message = "Inbetween 0 index: "+heightForAge.getZeroScore()+"cms and -1 index: "+heightForAge.getMinusOneScore()+"cms";
+            isHealthy = true;
+
+        }else if(height < heightForAge.getMinusOneScore() && height >= heightForAge.getMinusTwoScore()){
+            message = "Inbetween -1 index: "+heightForAge.getMinusOneScore()+"cms and -2 index: "+heightForAge.getMinusTwoScore()+"cms";
+            isHealthy = true;
+
+        }else if(height < heightForAge.getMinusTwoScore() && height >= heightForAge.getMinusThreeScore()){
+            message = "Inbetween -2 index: "+heightForAge.getMinusTwoScore()+"cms and -3 index: "+heightForAge.getMinusThreeScore()+"cms";
+            isHealthy = false;
+        }else{
+            message = "Lesser than -3 index: "+heightForAge.getMinusThreeScore()+"cms";
+            isHealthy = false;
+        }
+        heightResult.setHealthy(isHealthy);
+        heightResult.setzScoreHeightMessage(message);
+        return heightResult;
+
+    }
+
+    private HeightResult calculateHeightResultForAgeLessThanFiveYears(Patient patient, HeightForAge heightForAge) {
+        HeightResult heightResult = new HeightResult();
+        double height = patient.getHeight();
+        String message = null;
+        boolean isHealthy;
+        if(height > heightForAge.getThreeScore() ){
+            message = "Greater than 3 index: "+ heightForAge.getThreeScore()+"cms";
+            isHealthy = false;
+
+        }else if(height <= heightForAge.getThreeScore() && height >= heightForAge.getTwoScore()){
+            message = "Inbetween 3 index: "+heightForAge.getThreeScore()+"cms and 2 index: "+heightForAge.getTwoScore()+"cms";
+            isHealthy = false;
+
+        }else if(height < heightForAge.getTwoScore() && height >= heightForAge.getZeroScore()){
+            message = "Inbetween 2 index: "+heightForAge.getTwoScore()+"cms and 0 index: "+heightForAge.getZeroScore()+"cms";
+            isHealthy = true;
+
+        }else if(height < heightForAge.getZeroScore() && height >= heightForAge.getMinusTwoScore()){
+            message = "Inbetween 0 index: "+heightForAge.getZeroScore()+"cms and -2 index: "+heightForAge.getMinusTwoScore()+"cms";
+            isHealthy = true;
+
+        }else if(height < heightForAge.getMinusTwoScore() && height >= heightForAge.getMinusThreeScore()){
+            message = "Inbetween -2 index: "+heightForAge.getMinusTwoScore()+"cms and -3 index: "+heightForAge.getMinusThreeScore()+"cms";
+            isHealthy = false;
+        }else{
+            message = "Lesser than -3 index: "+heightForAge.getMinusThreeScore()+"cms";
+            isHealthy = false;
+        }
+        heightResult.setHealthy(isHealthy);
+        heightResult.setzScoreHeightMessage(message);
+        return heightResult;
     }
 
     private WeightResult calculateWeightResultForAgeLessThanFiveYears(Patient patient, WeightForAge weightForAge){
@@ -54,19 +135,19 @@ public class HealthChecker {
             message = "Greater than 3 index: "+ weightForAge.getThreeScore()+"kg";
             isHealthy = false;
 
-        }else if(weight <= weightForAge.getThreeScore() && weight > weightForAge.getTwoScore()){
+        }else if(weight <= weightForAge.getThreeScore() && weight >= weightForAge.getTwoScore()){
             message = "Inbetween 3 index: "+weightForAge.getThreeScore()+"kg and 2 index: "+weightForAge.getTwoScore()+"kg";
             isHealthy = false;
 
-        }else if(weight <= weightForAge.getTwoScore() && weight > weightForAge.getZeroScore()){
+        }else if(weight < weightForAge.getTwoScore() && weight >= weightForAge.getZeroScore()){
             message = "Inbetween 2 index: "+weightForAge.getTwoScore()+"kg and 0 index: "+weightForAge.getZeroScore()+"kg";
             isHealthy = true;
 
-        }else if(weight <= weightForAge.getZeroScore() && weight > weightForAge.getMinusTwoScore()){
+        }else if(weight < weightForAge.getZeroScore() && weight >= weightForAge.getMinusTwoScore()){
             message = "Inbetween 0 index: "+weightForAge.getZeroScore()+"kg and -2 index: "+weightForAge.getMinusTwoScore()+"kg";
             isHealthy = true;
 
-        }else if(weight <= weightForAge.getMinusTwoScore() && weight > weightForAge.getMinusThreeScore()){
+        }else if(weight < weightForAge.getMinusTwoScore() && weight >= weightForAge.getMinusThreeScore()){
             message = "Inbetween -2 index: "+weightForAge.getMinusTwoScore()+"kg and -3 index: "+weightForAge.getMinusThreeScore()+"kg";
             isHealthy = false;
         }else{
@@ -87,27 +168,27 @@ public class HealthChecker {
             message = "Greater than 3 index : "+ weightForAge.getThreeScore()+"kg";
             isHealthy = false;
 
-        }else if(weight <= weightForAge.getThreeScore() && weight > weightForAge.getTwoScore()){
+        }else if(weight <= weightForAge.getThreeScore() && weight >= weightForAge.getTwoScore()){
             message = "Inbetween 3 index: "+weightForAge.getThreeScore()+"kg and 2 index: "+weightForAge.getTwoScore()+"kg";
             isHealthy = false;
 
-        }else if(weight <= weightForAge.getTwoScore() && weight > weightForAge.getOneScore()){
+        }else if(weight < weightForAge.getTwoScore() && weight >= weightForAge.getOneScore()){
             message = "Inbetween 2 index: "+weightForAge.getTwoScore()+"kg and 1 index: "+weightForAge.getOneScore()+"kg";
             isHealthy = true;
 
-        }else if(weight <= weightForAge.getOneScore() && weight > weightForAge.getZeroScore()){
+        }else if(weight < weightForAge.getOneScore() && weight >= weightForAge.getZeroScore()){
             message = "Inbetween 1 index: "+weightForAge.getOneScore()+"kg and 0 index: "+weightForAge.getZeroScore()+"kg";
             isHealthy = true;
 
-        }else if(weight <= weightForAge.getZeroScore() && weight > weightForAge.getMinusOneScore()){
+        }else if(weight < weightForAge.getZeroScore() && weight >= weightForAge.getMinusOneScore()){
             message = "Inbetween 0 index: "+weightForAge.getZeroScore()+"kg and -1 index: "+weightForAge.getMinusOneScore()+"kg";
             isHealthy = true;
 
-        }else if(weight <= weightForAge.getMinusOneScore() && weight > weightForAge.getMinusTwoScore()){
+        }else if(weight < weightForAge.getMinusOneScore() && weight >= weightForAge.getMinusTwoScore()){
             message = "Inbetween -1 index: "+weightForAge.getMinusOneScore()+"kg and -2 index: "+weightForAge.getMinusTwoScore()+"kg";
             isHealthy = true;
 
-        }else if(weight <= weightForAge.getMinusTwoScore() && weight > weightForAge.getMinusThreeScore()){
+        }else if(weight < weightForAge.getMinusTwoScore() && weight >= weightForAge.getMinusThreeScore()){
             message = "Inbetween -2 index: "+weightForAge.getMinusTwoScore()+"kg and -3 index: "+weightForAge.getMinusThreeScore()+"kg";
             isHealthy = false;
         }else{

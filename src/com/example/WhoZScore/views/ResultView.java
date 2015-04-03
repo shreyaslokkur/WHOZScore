@@ -12,7 +12,6 @@ import com.example.WhoZScore.R;
 import com.example.WhoZScore.WhoZScore;
 import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
-import com.example.WhoZScore.model.WeightResult;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,7 +22,7 @@ import com.example.WhoZScore.model.WeightResult;
  */
 public class ResultView extends Fragment {
 
-    private TextView ageText, weightText, heightText, zScoreMessageText;
+    private TextView ageText, weightText, heightText, zScoreWeightMessageText, zScoreHeightMessageText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +32,8 @@ public class ResultView extends Fragment {
         ageText = (TextView) view.findViewById(R.id.ageResultTextId);
         weightText = (TextView) view.findViewById(R.id.weightResultTextId);
         heightText = (TextView) view.findViewById(R.id.heightResultTextId);
-        zScoreMessageText = (TextView) view.findViewById(R.id.zScoreWeightResultTextId);
+        zScoreWeightMessageText = (TextView) view.findViewById(R.id.zScoreWeightResultTextId);
+        zScoreHeightMessageText = (TextView) view.findViewById(R.id.zScoreHeightResultTextId);
 
 
         Result result = ((WhoZScore) getActivity()).getResult();
@@ -47,6 +47,7 @@ public class ResultView extends Fragment {
         }else {
             heightText.setText(String.valueOf(patient.getHeight()) + "cms");
             heightText.setTextColor(Color.BLACK);
+            zScoreHeightMessageText.setText(result.getzScoreHeightMessage());
         }
 
         if(patient.getWeight() == 0){
@@ -58,11 +59,12 @@ public class ResultView extends Fragment {
         }else {
             weightText.setText(String.valueOf(patient.getWeight()) + "kg");
             weightText.setTextColor(Color.BLACK);
+            zScoreWeightMessageText.setText(result.getzScoreWeightMessage());
         }
 
 
         ageText.setText(getAge(patient));
-        zScoreMessageText.setText(result.getzScoreWeightMessage());
+
 
 
 

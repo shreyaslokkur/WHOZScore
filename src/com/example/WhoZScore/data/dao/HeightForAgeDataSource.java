@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import com.example.WhoZScore.data.MySqliteHelper;
 import com.example.WhoZScore.data.entities.HeightForAge;
+import com.example.WhoZScore.enums.Sex;
 
 import java.io.IOException;
 
@@ -19,16 +20,16 @@ public class HeightForAgeDataSource {
 
     private MySqliteHelper dbHelper;
 
-    public static final String BOYS_LENGTH_FOR_AGE = "BoysHeightForAge";
-    public static final String GIRLS_LENGTH_FOR_AGE = "GirlsHeightForAge";
+    public static final String BOYS_HEIGHT_FOR_AGE = "BoysHeightForAge";
+    public static final String GIRLS_HEIGHT_FOR_AGE = "GirlsHeightForAge";
 
-    private final int THREE_SCORE_COLUMN_INDEX = 0;
-    private final int TWO_SCORE_COLUMN_INDEX = 1;
-    private final int ONE_SCORE_COLUMN_INDEX = 2;
+    private final int MINUS_THREE_SCORE_COLUMN_INDEX = 0;
+    private final int MINUS_TWO_SCORE_COLUMN_INDEX = 1;
+    private final int MINUS_ONE_SCORE_COLUMN_INDEX = 2;
     private final int ZERO_SCORE_COLUMN_INDEX = 3;
-    private final int MINUS_ONE_SCORE_COLUMN_INDEX = 4;
-    private final int MINUS_TWO_SCORE_COLUMN_INDEX = 5;
-    private final int MINUS_THREE_SCORE_COLUMN_INDEX = 6;
+    private final int ONE_SCORE_COLUMN_INDEX = 4;
+    private final int TWO_SCORE_COLUMN_INDEX = 5;
+    private final int THREE_SCORE_COLUMN_INDEX = 6;
 
     private final String COLUMN_WEEKS = "weeks";
     private final String COLUMN_MONTHS = "months";
@@ -42,7 +43,7 @@ public class HeightForAgeDataSource {
     private final String COLUMN_MINUS_THREE_SCORE = "minusThreeScore";
 
 
-    private String[] scoreColumns = { COLUMN_THREE_SCORE,COLUMN_TWO_SCORE,COLUMN_ONE_SCORE,COLUMN_ZERO_SCORE,COLUMN_MINUS_ONE_SCORE,COLUMN_MINUS_TWO_SCORE,COLUMN_MINUS_THREE_SCORE };
+    private String[] scoreColumns = { COLUMN_MINUS_THREE_SCORE,COLUMN_MINUS_TWO_SCORE,COLUMN_MINUS_ONE_SCORE,COLUMN_ZERO_SCORE,COLUMN_ONE_SCORE,COLUMN_TWO_SCORE,COLUMN_THREE_SCORE };
 
     public HeightForAgeDataSource(Context context) {
 
@@ -57,13 +58,13 @@ public class HeightForAgeDataSource {
     }
 
 
-    public HeightForAge getScoreForBoys(int weeks, int months, int years) {
+    private HeightForAge getScoreForBoys(int weeks, int months, int years) {
         HeightForAge heightForAge = null;
         String whereClaue = COLUMN_WEEKS + "=?" + " and " + COLUMN_MONTHS + "=?" + " and " + COLUMN_YEARS + "=?" ;
         String[] whereParameters = new String[]{String.valueOf(weeks),String.valueOf(months),String.valueOf(years)};
 
 
-        Cursor cursor = dbHelper.myDataBase.query(BOYS_LENGTH_FOR_AGE,
+        Cursor cursor = dbHelper.myDataBase.query(BOYS_HEIGHT_FOR_AGE,
                 scoreColumns, whereClaue, whereParameters, null, null, null);
 
         cursor.moveToFirst();
@@ -79,13 +80,63 @@ public class HeightForAgeDataSource {
         return heightForAge;
     }
 
-    public HeightForAge getScoreForGirls(int weeks, int months, int years) {
+    public HeightForAge getScore(int weeks, int months, int years, Sex sex){
+        if(years >= 5){
+            int minMonth=months;
+            int maxMonth = months;
+            int maxYear = years;
+            HeightForAge scoreForMinMonth = null;
+            HeightForAge scoreForMaxMonth = null;
+            if(months > 0 && months < 3 ){
+                minMonth = 0;
+                maxMonth = 3;
+            }else if(months > 3 && months <6){
+                minMonth = 3;
+                maxMonth = 6;
+            }else if(months > 6 && months <9){
+                minMonth = 6;
+                maxMonth = 9;
+            }else if(months > 9) {
+                minMonth = 9;
+                maxMonth = 0;
+                maxYear = maxYear + 1;
+            }
+            if(Sex.FEMALE.equals(sex)){
+                scoreForMinMonth = getScoreForGirls(weeks, minMonth, years);
+                scoreForMaxMonth = getScoreForGirls(weeks, maxMonth, maxYear);
+
+            }else {
+                scoreForMinMonth = getScoreForBoys(weeks, minMonth, years);
+                scoreForMaxMonth = getScoreForBoys(weeks, maxMonth, maxYear);
+            }
+
+            return averageHeightForAge(scoreForMinMonth, scoreForMaxMonth);
+        }else {
+            return getScoreForBoys(weeks,months,years);
+        }
+
+    }
+
+    private HeightForAge averageHeightForAge(HeightForAge scoreForBoysForMinMonth, HeightForAge scoreForBoysForMaxMonth) {
+        HeightForAge heightForAge = new HeightForAge();
+        heightForAge.setMinusOneScore(scoreForBoysForMinMonth.getMinusOneScore());
+        heightForAge.setMinusTwoScore(scoreForBoysForMinMonth.getMinusTwoScore());
+        heightForAge.setMinusThreeScore(scoreForBoysForMinMonth.getMinusThreeScore());
+        heightForAge.setOneScore(scoreForBoysForMaxMonth.getOneScore());
+        heightForAge.setTwoScore(scoreForBoysForMaxMonth.getTwoScore());
+        heightForAge.setThreeScore(scoreForBoysForMaxMonth.getThreeScore());
+        double averageZeroScore = (scoreForBoysForMaxMonth.getZeroScore() + scoreForBoysForMinMonth.getZeroScore()) / 2;
+        heightForAge.setZeroScore(averageZeroScore);
+        return heightForAge;
+    }
+
+    private HeightForAge getScoreForGirls(int weeks, int months, int years) {
         HeightForAge heightForAge = null;
         String whereClaue = COLUMN_WEEKS + "=?" + " and " + COLUMN_MONTHS + "=?" + " and " + COLUMN_YEARS + "=?" ;
         String[] whereParameters = new String[]{String.valueOf(weeks),String.valueOf(months),String.valueOf(years)};
 
 
-        Cursor cursor = dbHelper.myDataBase.query(GIRLS_LENGTH_FOR_AGE,
+        Cursor cursor = dbHelper.myDataBase.query(GIRLS_HEIGHT_FOR_AGE,
                 scoreColumns, whereClaue, whereParameters, null, null, null);
 
         cursor.moveToFirst();
