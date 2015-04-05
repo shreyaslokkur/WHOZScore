@@ -73,7 +73,7 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
         patient.setWeight(weight);
     }
 
-    public void setPatientHeight(int height){
+    public void setPatientHeight(double height){
         patient.setHeight(height);
     }
 

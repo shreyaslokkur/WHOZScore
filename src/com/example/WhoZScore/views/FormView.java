@@ -89,10 +89,10 @@ public class FormView extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length()> 0){
-                    ((WhoZScore)getActivity()).setPatientHeight(Integer.parseInt(heightText.getText().toString()));
+                    ((WhoZScore)getActivity()).setPatientHeight(Double.parseDouble(heightText.getText().toString()));
                     toggleSubmitButton();
                 }else {
-                    ((WhoZScore)getActivity()).setPatientHeight(0);
+                    ((WhoZScore)getActivity()).setPatientHeight(0.0);
                     toggleSubmitButton();
                 }
             }
