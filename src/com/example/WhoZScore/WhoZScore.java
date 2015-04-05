@@ -109,23 +109,6 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
         fragmentTransaction.commit();
     }
 
-    /*public void changeWeeksDataProvider(boolean partial){
-        Spinner weeksSpinner = (Spinner) findViewById(R.id.weeksId);
-        if(partial){
-
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, R.array.weeks_partial_arrays); //selected item will look like a spinner set from XML
-            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            weeksSpinner.setAdapter(spinnerArrayAdapter);
-
-
-        }else {
-            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, R.array.weeks_arrays); //selected item will look like a spinner set from XML
-            spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            weeksSpinner.setAdapter(spinnerArrayAdapter);
-
-
-        }
-    }*/
 
     public void toggleSpinners(Age age, boolean enable){
         Spinner monthsSpinner = (Spinner) findViewById(R.id.monthsId);

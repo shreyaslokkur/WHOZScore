@@ -8,8 +8,18 @@ package com.example.WhoZScore.enums;
  * To change this template use File | Settings | File Templates.
  */
 public enum Age {
-    WEEKS,
-    MONTHS,
-    YEARS;
+    WEEKS("weeks"),
+    MONTHS("months"),
+    YEARS("years");
+
+    private String name;
+
+    private Age(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
 

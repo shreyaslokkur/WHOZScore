@@ -78,6 +78,8 @@ public class ResultView extends Fragment {
         return age;
     }
 
+
+
     @Override
     public String toString(){
         return "ResultView";

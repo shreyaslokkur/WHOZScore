@@ -6,6 +6,8 @@ import com.example.WhoZScore.data.dao.WeightForAgeDataSource;
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.enums.Sex;
+import com.example.WhoZScore.enums.ZScoreGraphTypes;
+import com.example.WhoZScore.model.GraphModel;
 import com.example.WhoZScore.model.Patient;
 
 /**
@@ -40,6 +42,10 @@ public class Calculator {
 
         return heightForAge;
 
+    }
+
+    public GraphModel getGraphModel(Patient patient, ZScoreGraphTypes zScoreGraphTypes){
+        return null;
     }
 
 
