@@ -14,70 +14,70 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class GraphModel {
-    private List<Integer> minusThreeScore = new ArrayList<Integer>();
-    private List<Integer> minusTwoScore = new ArrayList<Integer>();
-    private List<Integer> minusOneScore = new ArrayList<Integer>();
-    private List<Integer> zeroScore = new ArrayList<Integer>();
-    private List<Integer> oneScore = new ArrayList<Integer>();
-    private List<Integer> twoScore = new ArrayList<Integer>();
-    private List<Integer> threeScore = new ArrayList<Integer>();
+    private List<Double> minusThreeScore = new ArrayList<Double>();
+    private List<Double> minusTwoScore = new ArrayList<Double>();
+    private List<Double> minusOneScore = new ArrayList<Double>();
+    private List<Double> zeroScore = new ArrayList<Double>();
+    private List<Double> oneScore = new ArrayList<Double>();
+    private List<Double> twoScore = new ArrayList<Double>();
+    private List<Double> threeScore = new ArrayList<Double>();
     private List<Integer> xAxis = new ArrayList<Integer>();
     private Age age;
     private ZScoreGraphTypes zScoreGraphTypes;
 
-    public List<Integer> getMinusThreeScore() {
+    public List<Double> getMinusThreeScore() {
         return minusThreeScore;
     }
 
-    public void setMinusThreeScore(List<Integer> minusThreeScore) {
+    public void setMinusThreeScore(List<Double> minusThreeScore) {
         this.minusThreeScore = minusThreeScore;
     }
 
-    public List<Integer> getMinusTwoScore() {
+    public List<Double> getMinusTwoScore() {
         return minusTwoScore;
     }
 
-    public void setMinusTwoScore(List<Integer> minusTwoScore) {
+    public void setMinusTwoScore(List<Double> minusTwoScore) {
         this.minusTwoScore = minusTwoScore;
     }
 
-    public List<Integer> getMinusOneScore() {
+    public List<Double> getMinusOneScore() {
         return minusOneScore;
     }
 
-    public void setMinusOneScore(List<Integer> minusOneScore) {
+    public void setMinusOneScore(List<Double> minusOneScore) {
         this.minusOneScore = minusOneScore;
     }
 
-    public List<Integer> getZeroScore() {
+    public List<Double> getZeroScore() {
         return zeroScore;
     }
 
-    public void setZeroScore(List<Integer> zeroScore) {
+    public void setZeroScore(List<Double> zeroScore) {
         this.zeroScore = zeroScore;
     }
 
-    public List<Integer> getOneScore() {
+    public List<Double> getOneScore() {
         return oneScore;
     }
 
-    public void setOneScore(List<Integer> oneScore) {
+    public void setOneScore(List<Double> oneScore) {
         this.oneScore = oneScore;
     }
 
-    public List<Integer> getTwoScore() {
+    public List<Double> getTwoScore() {
         return twoScore;
     }
 
-    public void setTwoScore(List<Integer> twoScore) {
+    public void setTwoScore(List<Double> twoScore) {
         this.twoScore = twoScore;
     }
 
-    public List<Integer> getThreeScore() {
+    public List<Double> getThreeScore() {
         return threeScore;
     }
 
-    public void setThreeScore(List<Integer> threeScore) {
+    public void setThreeScore(List<Double> threeScore) {
         this.threeScore = threeScore;
     }
 

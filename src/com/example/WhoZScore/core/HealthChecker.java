@@ -57,34 +57,34 @@ public class HealthChecker {
         String message = null;
         boolean isHealthy;
         if(height > heightForAge.getThreeScore() ){
-            message = "Greater than 3 index : "+ heightForAge.getThreeScore()+"cms";
+            message = "Greater than 3 Zscore";
             isHealthy = false;
 
         }else if(height <= heightForAge.getThreeScore() && height >= heightForAge.getTwoScore()){
-            message = "Inbetween 3 index: "+heightForAge.getThreeScore()+"cms and 2 index: "+heightForAge.getTwoScore()+"cms";
+            message = "Between 2 and 3 ZScore";
             isHealthy = false;
 
         }else if(height < heightForAge.getTwoScore() && height >= heightForAge.getOneScore()){
-            message = "Inbetween 2 index: "+heightForAge.getTwoScore()+"cms and 1 index: "+heightForAge.getOneScore()+"cms";
+            message = "Between 1 and 2 ZScore";
             isHealthy = true;
 
         }else if(height < heightForAge.getOneScore() && height >= heightForAge.getZeroScore()){
-            message = "Inbetween 1 index: "+heightForAge.getOneScore()+"cms and 0 index: "+heightForAge.getZeroScore()+"cms";
+            message = "Between 0 and 1 ZScore";
             isHealthy = true;
 
         }else if(height < heightForAge.getZeroScore() && height >= heightForAge.getMinusOneScore()){
-            message = "Inbetween 0 index: "+heightForAge.getZeroScore()+"cms and -1 index: "+heightForAge.getMinusOneScore()+"cms";
+            message = "Between -1 and 0 ZScore";
             isHealthy = true;
 
         }else if(height < heightForAge.getMinusOneScore() && height >= heightForAge.getMinusTwoScore()){
-            message = "Inbetween -1 index: "+heightForAge.getMinusOneScore()+"cms and -2 index: "+heightForAge.getMinusTwoScore()+"cms";
+            message = "Between -2 and -1 ZScore";
             isHealthy = true;
 
         }else if(height < heightForAge.getMinusTwoScore() && height >= heightForAge.getMinusThreeScore()){
-            message = "Inbetween -2 index: "+heightForAge.getMinusTwoScore()+"cms and -3 index: "+heightForAge.getMinusThreeScore()+"cms";
+            message = "Between -3 and -2 ZScore";
             isHealthy = false;
         }else{
-            message = "Lesser than -3 index: "+heightForAge.getMinusThreeScore()+"cms";
+            message = "Lesser than -3 ZScore";
             isHealthy = false;
         }
         heightResult.setHealthy(isHealthy);
@@ -99,26 +99,26 @@ public class HealthChecker {
         String message = null;
         boolean isHealthy;
         if(height > heightForAge.getThreeScore() ){
-            message = "Greater than 3 index: "+ heightForAge.getThreeScore()+"cms";
+            message = "Greater than 3 ZScore";
             isHealthy = false;
 
         }else if(height <= heightForAge.getThreeScore() && height >= heightForAge.getTwoScore()){
-            message = "Inbetween 3 index: "+heightForAge.getThreeScore()+"cms and 2 index: "+heightForAge.getTwoScore()+"cms";
+            message = "Between 2 and 3 ZScore ";
             isHealthy = false;
 
         }else if(height < heightForAge.getTwoScore() && height >= heightForAge.getZeroScore()){
-            message = "Inbetween 2 index: "+heightForAge.getTwoScore()+"cms and 0 index: "+heightForAge.getZeroScore()+"cms";
+            message = "Between 0 and 2 ZScore ";
             isHealthy = true;
 
         }else if(height < heightForAge.getZeroScore() && height >= heightForAge.getMinusTwoScore()){
-            message = "Inbetween 0 index: "+heightForAge.getZeroScore()+"cms and -2 index: "+heightForAge.getMinusTwoScore()+"cms";
+            message = "Between -2 and 0 ZScore ";
             isHealthy = true;
 
         }else if(height < heightForAge.getMinusTwoScore() && height >= heightForAge.getMinusThreeScore()){
-            message = "Inbetween -2 index: "+heightForAge.getMinusTwoScore()+"cms and -3 index: "+heightForAge.getMinusThreeScore()+"cms";
+            message = "Between -3 and -2 ZScore ";
             isHealthy = false;
         }else{
-            message = "Lesser than -3 index: "+heightForAge.getMinusThreeScore()+"cms";
+            message = "Lesser than -3 ZScore";
             isHealthy = false;
         }
         heightResult.setHealthy(isHealthy);
@@ -132,26 +132,26 @@ public class HealthChecker {
         String message = null;
         boolean isHealthy;
         if(weight > weightForAge.getThreeScore() ){
-            message = "Greater than 3 index: "+ weightForAge.getThreeScore()+"kg";
+            message = "Greater than 3 ZScore ";
             isHealthy = false;
 
         }else if(weight <= weightForAge.getThreeScore() && weight >= weightForAge.getTwoScore()){
-            message = "Inbetween 3 index: "+weightForAge.getThreeScore()+"kg and 2 index: "+weightForAge.getTwoScore()+"kg";
+            message = "Between 2 and 3 ZScore ";
             isHealthy = false;
 
         }else if(weight < weightForAge.getTwoScore() && weight >= weightForAge.getZeroScore()){
-            message = "Inbetween 2 index: "+weightForAge.getTwoScore()+"kg and 0 index: "+weightForAge.getZeroScore()+"kg";
+            message = "Between 0 and 2 ZScore ";
             isHealthy = true;
 
         }else if(weight < weightForAge.getZeroScore() && weight >= weightForAge.getMinusTwoScore()){
-            message = "Inbetween 0 index: "+weightForAge.getZeroScore()+"kg and -2 index: "+weightForAge.getMinusTwoScore()+"kg";
+            message = "Between -2 and 0 ZScore ";
             isHealthy = true;
 
         }else if(weight < weightForAge.getMinusTwoScore() && weight >= weightForAge.getMinusThreeScore()){
-            message = "Inbetween -2 index: "+weightForAge.getMinusTwoScore()+"kg and -3 index: "+weightForAge.getMinusThreeScore()+"kg";
+            message = "Between -3 and -2 ZScore ";
             isHealthy = false;
         }else{
-            message = "Lesser than -3 index: "+weightForAge.getMinusThreeScore()+"kg";
+            message = "Lesser than -3 ZScore";
             isHealthy = false;
         }
         weightResult.setHealthy(isHealthy);
@@ -165,34 +165,34 @@ public class HealthChecker {
         String message = null;
         boolean isHealthy;
         if(weight > weightForAge.getThreeScore() ){
-            message = "Greater than 3 index : "+ weightForAge.getThreeScore()+"kg";
+            message = "Greater than 3 ZScore ";
             isHealthy = false;
 
         }else if(weight <= weightForAge.getThreeScore() && weight >= weightForAge.getTwoScore()){
-            message = "Inbetween 3 index: "+weightForAge.getThreeScore()+"kg and 2 index: "+weightForAge.getTwoScore()+"kg";
+            message = "Between 2 and 3 ZScore ";
             isHealthy = false;
 
         }else if(weight < weightForAge.getTwoScore() && weight >= weightForAge.getOneScore()){
-            message = "Inbetween 2 index: "+weightForAge.getTwoScore()+"kg and 1 index: "+weightForAge.getOneScore()+"kg";
+            message = "Between 1 and 2 ZScore ";
             isHealthy = true;
 
         }else if(weight < weightForAge.getOneScore() && weight >= weightForAge.getZeroScore()){
-            message = "Inbetween 1 index: "+weightForAge.getOneScore()+"kg and 0 index: "+weightForAge.getZeroScore()+"kg";
+            message = "Between 0 and 1 ZScore ";
             isHealthy = true;
 
         }else if(weight < weightForAge.getZeroScore() && weight >= weightForAge.getMinusOneScore()){
-            message = "Inbetween 0 index: "+weightForAge.getZeroScore()+"kg and -1 index: "+weightForAge.getMinusOneScore()+"kg";
+            message = "Between -1 and 0 ZScore ";
             isHealthy = true;
 
         }else if(weight < weightForAge.getMinusOneScore() && weight >= weightForAge.getMinusTwoScore()){
-            message = "Inbetween -1 index: "+weightForAge.getMinusOneScore()+"kg and -2 index: "+weightForAge.getMinusTwoScore()+"kg";
+            message = "Between -2 and -1 ZScore ";
             isHealthy = true;
 
         }else if(weight < weightForAge.getMinusTwoScore() && weight >= weightForAge.getMinusThreeScore()){
-            message = "Inbetween -2 index: "+weightForAge.getMinusTwoScore()+"kg and -3 index: "+weightForAge.getMinusThreeScore()+"kg";
+            message = "Between -3 and -2 ZScore ";
             isHealthy = false;
         }else{
-            message = "Lesser than -3 index: "+weightForAge.getMinusThreeScore()+"kg";
+            message = "Lesser than -3 ZScore";
             isHealthy = false;
         }
         weightResult.setHealthy(isHealthy);

@@ -5,8 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.WhoZScore.data.MySqliteHelper;
 import com.example.WhoZScore.data.entities.WeightForAge;
+import com.example.WhoZScore.enums.Sex;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -100,6 +103,38 @@ public class WeightForAgeDataSource {
         // make sure to close the cursor
         cursor.close();
         return weightForAge;
+    }
+
+    public List<WeightForAge> getScoreRange(int minWeeks, int maxWeeks, int minMonths, int maxMonths, int minYears, int maxYears, Sex sex){
+        List<WeightForAge> weightForAgeList = new ArrayList<WeightForAge>();
+        String whereClause = COLUMN_WEEKS + " BETWEEN " + "?" + "AND " + "?" + " AND " + COLUMN_MONTHS + " BETWEEN " + "?" + "AND " + "?" + " AND " + COLUMN_YEARS + " BETWEEN " + "?" + "AND " + "?" ;
+
+        String[] whereParameters = new String[]{String.valueOf(minWeeks),String.valueOf(maxWeeks),String.valueOf(minMonths),String.valueOf(maxMonths),String.valueOf(minYears), String.valueOf(maxYears)};
+
+        String tableName;
+        if(Sex.MALE.equals(sex)){
+            tableName = BOYS_WEIGHT_FOR_AGE;
+        }else {
+            tableName = GIRLS_WEIGHT_FOR_AGE;
+        }
+
+        Cursor cursor = dbHelper.myDataBase.query(tableName,
+                scoreColumns, whereClause, whereParameters, null, null, null);
+
+        cursor.moveToFirst();
+        WeightForAge weightForAge = null;
+        while (!cursor.isAfterLast()) {
+            weightForAge = cursorToWeightForAge(cursor);
+            weightForAgeList.add(weightForAge);
+            cursor.moveToNext();
+
+        }
+
+
+        // make sure to close the cursor
+        cursor.close();
+        return weightForAgeList;
+
     }
 
     private WeightForAge cursorToWeightForAge(Cursor cursor) {

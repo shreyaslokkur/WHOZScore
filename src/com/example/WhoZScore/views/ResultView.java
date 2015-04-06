@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.WhoZScore.R;
 import com.example.WhoZScore.WhoZScore;
+import com.example.WhoZScore.enums.Sex;
+import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
 
@@ -22,22 +24,26 @@ import com.example.WhoZScore.model.Result;
  */
 public class ResultView extends Fragment {
 
-    private TextView ageText, weightText, heightText, zScoreWeightMessageText, zScoreHeightMessageText;
+    private TextView ageText, weightText, heightText, zScoreWeightMessageText, zScoreHeightMessageText, weightHeader, heightHeader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.result_view, container, false);
+        final Fragment graphView = new GraphView();
         ageText = (TextView) view.findViewById(R.id.ageResultTextId);
         weightText = (TextView) view.findViewById(R.id.weightResultTextId);
         heightText = (TextView) view.findViewById(R.id.heightResultTextId);
+        weightHeader = (TextView) view.findViewById(R.id.weightHeader);
+        heightHeader = (TextView) view.findViewById(R.id.heightHeader);
         zScoreWeightMessageText = (TextView) view.findViewById(R.id.zScoreWeightResultTextId);
         zScoreHeightMessageText = (TextView) view.findViewById(R.id.zScoreHeightResultTextId);
 
 
+
         Result result = ((WhoZScore) getActivity()).getResult();
-        Patient patient = ((WhoZScore) getActivity()).getPatient();
+        final Patient patient = ((WhoZScore) getActivity()).getPatient();
         if(patient.getHeight() == 0){
             View heightHeader = view.findViewById(R.id.heightHeader);
             View heightResultLayout = view.findViewById(R.id.heightResultLayout);
@@ -66,6 +72,17 @@ public class ResultView extends Fragment {
         ageText.setText(getAge(patient));
 
 
+        heightHeader.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if(Sex.FEMALE.equals(patient.getSex()))
+                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEIGHT_FOR_AGE_GIRLS);
+                else
+                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEIGHT_FOR_AGE_BOYS);
+
+                ((WhoZScore)getActivity()).replaceFragment(graphView);
+
+            }
+        });
 
 
         // Inflate the layout for this fragment

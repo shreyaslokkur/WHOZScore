@@ -3,9 +3,10 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:fillViewport="true">
 
-    <TextView
+    <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:textStyle="bold"
@@ -23,7 +24,7 @@
             android:textColor="#122e4d"
             android:layout_gravity="left"
             android:textSize="16dp"
-            android:textIsSelectable="false" />
+            android:textIsSelectable="false" />-->
 
     <LinearLayout
             android:id="@+id/chart"
@@ -32,7 +33,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/graph_header_text"
-            tools:ignore="Orientation" >
+           >
 
     </LinearLayout>
 </ScrollView>

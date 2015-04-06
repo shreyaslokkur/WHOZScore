@@ -13,6 +13,7 @@ import com.example.WhoZScore.R;
 import com.example.WhoZScore.WhoZScore;
 import com.example.WhoZScore.core.Calculator;
 
+import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.GraphModel;
 import com.example.WhoZScore.model.Patient;
 import org.achartengine.ChartFactory;
@@ -36,7 +37,8 @@ public class GraphView extends Fragment {
 
     private View mChart;
     private Calculator calculator = new Calculator();
-    private LinearLayout chartLayout;
+
+    private ZScoreGraphTypes scoreGraphTypes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,21 +46,21 @@ public class GraphView extends Fragment {
 
         View view = inflater.inflate(R.layout.graph_view, container, false);
         Patient patient = ((WhoZScore) getActivity()).getPatient();
-        chartLayout = (LinearLayout) view.findViewById(R.id.chart);
-        openChart(calculator.getGraphModel(patient,null));
+        LinearLayout chartLayout = (LinearLayout) view.findViewById(R.id.chart);
+        openChart(calculator.getGraphModel(patient,getScoreGraphTypes(), getActivity()), chartLayout);
         return view;
     }
 
 
-    public void openChart(GraphModel graphModel){
+    public void openChart(GraphModel graphModel, LinearLayout chartLayout){
         int[] x = toIntArray(graphModel.getxAxis());
-        int[] minusThreeScore = toIntArray(graphModel.getMinusThreeScore());
-        int[] minusTwoScore = toIntArray(graphModel.getMinusTwoScore());
-        int[] minusOneScore = toIntArray(graphModel.getMinusOneScore());
-        int[] zeroScore = toIntArray(graphModel.getZeroScore());
-        int[] oneScore = toIntArray(graphModel.getOneScore());
-        int[] twoScore = toIntArray(graphModel.getTwoScore());
-        int[] threeScore = toIntArray(graphModel.getThreeScore());
+        double[] minusThreeScore = toDoubleArray(graphModel.getMinusThreeScore());
+        double[] minusTwoScore = toDoubleArray(graphModel.getMinusTwoScore());
+        double[] minusOneScore = toDoubleArray(graphModel.getMinusOneScore());
+        double[] zeroScore = toDoubleArray(graphModel.getZeroScore());
+        double[] oneScore = toDoubleArray(graphModel.getOneScore());
+        double[] twoScore = toDoubleArray(graphModel.getTwoScore());
+        double[] threeScore = toDoubleArray(graphModel.getThreeScore());
 
 
         XYSeries minusThreeXYSeries = new XYSeries("-3");
@@ -135,13 +137,14 @@ public class GraphView extends Fragment {
 //setting displaying line on grid
         multiRenderer.setShowGrid(true);
 //setting zoom to false
-        multiRenderer.setZoomEnabled(false);
+        multiRenderer.setZoomEnabled(true);
+
 //setting external zoom functions to false
         multiRenderer.setExternalZoomEnabled(false);
 //setting displaying lines on graph to be formatted(like using graphics)
         multiRenderer.setAntialiasing(true);
 //setting to in scroll to false
-        multiRenderer.setInScroll(false);
+        multiRenderer.setInScroll(true);
 //setting to set legend height of the graph
         multiRenderer.setLegendHeight(30);
 //setting x axis label align
@@ -154,7 +157,7 @@ public class GraphView extends Fragment {
         multiRenderer.setYLabels(10);
 // setting y axis max value, Since i'm using static values inside the graph so i'm setting y max value to 4000.
 // if you use dynamic values then get the max y value and set here
-        multiRenderer.setYAxisMax(4000);
+        multiRenderer.setYAxisMax(70);
 //setting used to move the graph on xaxiz to .5 to the right
         multiRenderer.setXAxisMin(-0.5);
 //setting used to move the graph on xaxiz to .5 to the right
@@ -172,6 +175,9 @@ public class GraphView extends Fragment {
 //setting the margin size for the graph in the order top, left, bottom, right
         multiRenderer.setMargins(new int[]{30, 30, 30, 30});
 
+        for(int i=0; i< x.length;i++){
+            multiRenderer.addXTextLabel(i, String.valueOf(x[i]));
+        }
 
 
 // Note: The order of adding dataseries to dataset and renderers to multipleRenderer
@@ -230,4 +236,20 @@ public class GraphView extends Fragment {
             ret[i] = list.get(i);
         return ret;
     }
+
+    double[] toDoubleArray(List<Double> list){
+        double[] ret = new double[list.size()];
+        for(int i = 0;i < ret.length;i++)
+            ret[i] = list.get(i);
+        return ret;
+    }
+
+    public ZScoreGraphTypes getScoreGraphTypes() {
+        return scoreGraphTypes;
+    }
+
+    public void setScoreGraphTypes(ZScoreGraphTypes scoreGraphTypes) {
+        this.scoreGraphTypes = scoreGraphTypes;
+    }
 }
+

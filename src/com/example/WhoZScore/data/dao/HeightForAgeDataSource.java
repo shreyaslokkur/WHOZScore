@@ -7,6 +7,8 @@ import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.enums.Sex;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -150,6 +152,38 @@ public class HeightForAgeDataSource {
         // make sure to close the cursor
         cursor.close();
         return heightForAge;
+    }
+
+    public List<HeightForAge> getScoreRange(int minWeeks, int maxWeeks, int minMonths, int maxMonths, int minYears, int maxYears, Sex sex){
+        List<HeightForAge> heightForAgeList = new ArrayList<HeightForAge>();
+        String whereClause = COLUMN_WEEKS + " BETWEEN " + "?" + "AND " + "?" + " AND " + COLUMN_MONTHS + " BETWEEN " + "?" + "AND " + "?" + " AND " + COLUMN_YEARS + " BETWEEN " + "?" + "AND " + "?" ;
+
+        String[] whereParameters = new String[]{String.valueOf(minWeeks),String.valueOf(maxWeeks),String.valueOf(minMonths),String.valueOf(maxMonths),String.valueOf(minYears), String.valueOf(maxYears)};
+
+        String tableName;
+        if(Sex.MALE.equals(sex)){
+            tableName = BOYS_HEIGHT_FOR_AGE;
+        }else {
+            tableName = GIRLS_HEIGHT_FOR_AGE;
+        }
+
+        Cursor cursor = dbHelper.myDataBase.query(tableName,
+                scoreColumns, whereClause, whereParameters, null, null, null);
+
+        cursor.moveToFirst();
+        HeightForAge heightForAge = null;
+        while (!cursor.isAfterLast()) {
+            heightForAge = cursorToHeightForAge(cursor);
+            heightForAgeList.add(heightForAge);
+            cursor.moveToNext();
+
+        }
+
+
+        // make sure to close the cursor
+        cursor.close();
+        return heightForAgeList;
+
     }
 
     private HeightForAge cursorToHeightForAge(Cursor cursor) {
