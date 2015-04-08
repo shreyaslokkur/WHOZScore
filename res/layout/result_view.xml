@@ -132,6 +132,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left"
+                    android:textSize="14dp"
                     android:id="@+id/zScoreWeightResultTextId"
 
                     />
@@ -175,6 +178,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left"
+                    android:textSize="14dp"
                     android:id="@+id/zScoreHeightResultTextId"
 
                     />

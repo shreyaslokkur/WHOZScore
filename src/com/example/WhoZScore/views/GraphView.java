@@ -13,6 +13,7 @@ import com.example.WhoZScore.R;
 import com.example.WhoZScore.WhoZScore;
 import com.example.WhoZScore.core.Calculator;
 
+import com.example.WhoZScore.enums.AgeGroup;
 import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.GraphModel;
 import com.example.WhoZScore.model.Patient;
@@ -45,9 +46,34 @@ public class GraphView extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.graph_view, container, false);
-        Patient patient = ((WhoZScore) getActivity()).getPatient();
-        LinearLayout chartLayout = (LinearLayout) view.findViewById(R.id.chart);
+        final Patient patient = ((WhoZScore) getActivity()).getPatient();
+        final LinearLayout chartLayout = (LinearLayout) view.findViewById(R.id.chart);
         openChart(calculator.getGraphModel(patient,getScoreGraphTypes(), getActivity()), chartLayout);
+        View chart = chartLayout.findViewById(100);
+        chart.setOnClickListener(new DoubleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            @Override
+            public void onDoubleClick(View v) {
+                /*((LinearLayout)v).removeAllViews();
+                openChart(calculator.getGraphModel(patient, getScoreGraphTypes(), getActivity()), chartLayout);*/
+                v.invalidate();
+            }
+        });
+        /*chart.setOnClickListener(new DoubleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                //Do nothing
+            }
+
+            @Override
+            public void onDoubleClick(View v) {
+
+            }
+        });*/
         return view;
     }
 
@@ -70,6 +96,7 @@ public class GraphView extends Fragment {
         XYSeries oneXYSeries = new XYSeries("1");
         XYSeries twoXYSeries = new XYSeries("2");
         XYSeries threeXYSeries = new XYSeries("3");
+        XYSeries patientSeries = new XYSeries("X");
         for(int i=0;i<x.length;i++){
             minusThreeXYSeries.add(i, minusThreeScore[i]);
             minusTwoXYSeries.add(i, minusTwoScore[i]);
@@ -80,6 +107,11 @@ public class GraphView extends Fragment {
             threeXYSeries.add(i, threeScore[i]);
 
         }
+        if(ZScoreGraphTypes.WEIGHT_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.WEIGHT_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes()))
+            patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientWeight() );
+        else
+            patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientHeight());
+
 
 // Creating a dataset to hold each series
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
@@ -90,6 +122,7 @@ public class GraphView extends Fragment {
         dataset.addSeries(oneXYSeries);
         dataset.addSeries(twoXYSeries);
         dataset.addSeries(threeXYSeries);
+        dataset.addSeries(patientSeries);
 
 // Creating XYSeriesRenderer to customize renderers
 
@@ -100,6 +133,7 @@ public class GraphView extends Fragment {
         XYSeriesRenderer oneRenderer = createXYSeriesRenderer(1);
         XYSeriesRenderer twoRenderer = createXYSeriesRenderer(2);
         XYSeriesRenderer threeRenderer = createXYSeriesRenderer(3);
+        XYSeriesRenderer patientRenderer = createPatientRenderer();
 
 
 
@@ -114,6 +148,7 @@ public class GraphView extends Fragment {
 /***
  * Customizing graphs
  */
+
 //setting text size of the title
         multiRenderer.setChartTitleTextSize(28);
 //setting text size of the axis title
@@ -123,11 +158,11 @@ public class GraphView extends Fragment {
 //setting zoom buttons visiblity
         multiRenderer.setZoomButtonsVisible(false);
 //setting pan enablity which uses graph to move on both axis
-        multiRenderer.setPanEnabled(false, false);
+        multiRenderer.setPanEnabled(true, true);
 //setting click false on graph
-        multiRenderer.setClickEnabled(false);
+        multiRenderer.setClickEnabled(true);
 //setting zoom to false on both axis
-        multiRenderer.setZoomEnabled(false, false);
+        multiRenderer.setZoomEnabled(true, true);
 //setting lines to display on y axis
         multiRenderer.setShowGridY(true);
 //setting lines to display on x axis
@@ -155,13 +190,14 @@ public class GraphView extends Fragment {
         multiRenderer.setTextTypeface("sans_serif", Typeface.NORMAL);
 //setting no of values to display in y axis
         multiRenderer.setYLabels(10);
-// setting y axis max value, Since i'm using static values inside the graph so i'm setting y max value to 4000.
-// if you use dynamic values then get the max y value and set here
-        multiRenderer.setYAxisMax(70);
+
+        multiRenderer.setYAxisMin(graphModel.getyMin());
+
+        multiRenderer.setYAxisMax(graphModel.getyMax());
 //setting used to move the graph on xaxiz to .5 to the right
         multiRenderer.setXAxisMin(-0.5);
 //setting used to move the graph on xaxiz to .5 to the right
-        multiRenderer.setXAxisMax(11);
+        multiRenderer.setXAxisMax(x[x.length - 1]);
 //setting bar size or space between two bars
 //multiRenderer.setBarSpacing(0.5);
 //Setting background color of the graph to transparent
@@ -189,14 +225,40 @@ public class GraphView extends Fragment {
         multiRenderer.addSeriesRenderer(oneRenderer);
         multiRenderer.addSeriesRenderer(twoRenderer);
         multiRenderer.addSeriesRenderer(threeRenderer);
+        multiRenderer.addSeriesRenderer(patientRenderer);
 
 
 //remove any views before u paint the chart
         chartLayout.removeAllViews();
 //drawing bar chart
         mChart = ChartFactory.getLineChartView(getActivity(), dataset, multiRenderer);
+        mChart.setId(100);
 //adding the view to the linearlayout
         chartLayout.addView(mChart);
+
+    }
+
+    private int getXAxisPointForPatient(GraphModel graphModel) {
+        if(AgeGroup.WEEKS.equals(graphModel.getAgeGroup())){
+            return graphModel.getAgeInWeeks() - 1;
+        }else if(AgeGroup.TILLONEYEAR.equals(graphModel.getAgeGroup())){
+            return graphModel.getAgeInMonths() - 3;
+        }else {
+            return graphModel.getAgeInMonths() - 1;
+        }
+    }
+
+    private XYSeriesRenderer createPatientRenderer(){
+        XYSeriesRenderer renderer = new XYSeriesRenderer();
+        renderer.setColor(Color.BLACK);
+        renderer.setFillPoints(false);
+        renderer.setPointStrokeWidth(4f);
+        renderer.setDisplayChartValues(false);
+//setting line graph point style to x
+        renderer.setPointStyle(PointStyle.X);
+//setting stroke of the line chart to solid
+        renderer.setStroke(BasicStroke.SOLID);
+        return renderer;
 
     }
 
@@ -218,9 +280,9 @@ public class GraphView extends Fragment {
             case 1 : renderer.setColor(17170457);
                      break;
         }
-        renderer.setFillPoints(true);
+        renderer.setFillPoints(false);
         renderer.setLineWidth(2f);
-        renderer.setDisplayChartValues(true);
+        renderer.setDisplayChartValues(false);
 //setting chart value distance
         renderer.setDisplayChartValuesDistance(10);
 //setting line graph point style to circle

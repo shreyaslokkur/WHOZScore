@@ -114,7 +114,12 @@ public class HeightForAgeDataSource {
 
             return averageHeightForAge(scoreForMinMonth, scoreForMaxMonth);
         }else {
-            return getScoreForBoys(weeks,months,years);
+            if(Sex.FEMALE.equals(sex)){
+                return getScoreForGirls(weeks,months,years);
+            }else {
+                return getScoreForBoys(weeks,months,years);
+            }
+
         }
 
     }

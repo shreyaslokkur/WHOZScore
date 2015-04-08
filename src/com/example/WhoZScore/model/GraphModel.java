@@ -1,6 +1,7 @@
 package com.example.WhoZScore.model;
 
 import com.example.WhoZScore.enums.Age;
+import com.example.WhoZScore.enums.AgeGroup;
 import com.example.WhoZScore.enums.ZScoreGraphTypes;
 
 import java.util.ArrayList;
@@ -24,6 +25,16 @@ public class GraphModel {
     private List<Integer> xAxis = new ArrayList<Integer>();
     private Age age;
     private ZScoreGraphTypes zScoreGraphTypes;
+    private double patientWeight;
+    private double patientHeight;
+    private int ageInWeeks;
+    private int ageInMonths;
+    private int ageInYears;
+
+    private int yMin;
+    private int yMax;
+
+    private AgeGroup ageGroup;
 
     public List<Double> getMinusThreeScore() {
         return minusThreeScore;
@@ -103,5 +114,70 @@ public class GraphModel {
 
     public void setzScoreGraphTypes(ZScoreGraphTypes zScoreGraphTypes) {
         this.zScoreGraphTypes = zScoreGraphTypes;
+    }
+
+    public double getPatientWeight() {
+        return patientWeight;
+    }
+
+    public void setPatientWeight(double patientWeight) {
+        this.patientWeight = patientWeight;
+    }
+
+    public double getPatientHeight() {
+        return patientHeight;
+    }
+
+    public void setPatientHeight(double patientHeight) {
+        this.patientHeight = patientHeight;
+    }
+
+    public int getyMin() {
+        return yMin;
+    }
+
+    public void setyMin(int yMin) {
+        this.yMin = yMin;
+    }
+
+    public int getyMax() {
+        return yMax;
+    }
+
+    public void setyMax(int yMax) {
+        this.yMax = yMax;
+    }
+
+
+    public int getAgeInWeeks() {
+        return ageInWeeks;
+    }
+
+    public void setAgeInWeeks(int ageInWeeks) {
+        this.ageInWeeks = ageInWeeks;
+    }
+
+    public int getAgeInMonths() {
+        return ageInMonths;
+    }
+
+    public void setAgeInMonths(int ageInMonths) {
+        this.ageInMonths = ageInMonths;
+    }
+
+    public int getAgeInYears() {
+        return ageInYears;
+    }
+
+    public void setAgeInYears(int ageInYears) {
+        this.ageInYears = ageInYears;
+    }
+
+    public AgeGroup getAgeGroup() {
+        return ageGroup;
+    }
+
+    public void setAgeGroup(AgeGroup ageGroup) {
+        this.ageGroup = ageGroup;
     }
 }

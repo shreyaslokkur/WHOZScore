@@ -3,15 +3,16 @@ package com.example.WhoZScore.core;
 import android.content.Context;
 import com.example.WhoZScore.data.dao.HeightForAgeDataSource;
 import com.example.WhoZScore.data.dao.WeightForAgeDataSource;
-import com.example.WhoZScore.data.entities.AbstractZScoreForAge;
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.enums.Age;
+import com.example.WhoZScore.enums.AgeGroup;
 import com.example.WhoZScore.enums.Sex;
 import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.GraphModel;
 import com.example.WhoZScore.model.Patient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,14 +28,9 @@ public class Calculator {
     HeightForAgeDataSource heightForAgeDataSource;
 
     public WeightForAge calculateWeightForAgeZScore(Patient patient, Context context){
-        WeightForAge weightForAge;
-        weightForAgeDataSource = new WeightForAgeDataSource(context);
-        if(Sex.FEMALE.equals(patient.getSex())){
-            weightForAge = weightForAgeDataSource.getScoreForGirls(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears());
 
-        }else {
-            weightForAge = weightForAgeDataSource.getScoreForBoys(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears());
-        }
+        weightForAgeDataSource = new WeightForAgeDataSource(context);
+        WeightForAge weightForAge = weightForAgeDataSource.getScore(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears(), patient.getSex());
         return weightForAge;
 
     }
@@ -48,35 +44,82 @@ public class Calculator {
 
     }
 
+
     public GraphModel getGraphModel(Patient patient, ZScoreGraphTypes zScoreGraphTypes, Context context){
         heightForAgeDataSource = new HeightForAgeDataSource(context);
         weightForAgeDataSource = new WeightForAgeDataSource(context);
-        int minWeeks = 0;
-        int maxWeeks = 0;
-        int minMonths = 0;
-        int maxMonths = 0;
-        int minYears = 0;
+
         int maxYears = 0;
-        Age age= null;
+        Age age= Age.MONTHS;
+        AgeGroup ageGroup = null;
         GraphModel graphModel = null;
         if(patient.getAgeInWeeks() > 0)  {
-            maxWeeks = 12;
+            ageGroup = AgeGroup.WEEKS;
             age = Age.WEEKS;
-        }else if(patient.getAgeInMonths() > 0 && (patient.getAgeInYears() >= 0 && patient.getAgeInYears() <= 2)){
-            maxMonths = 11;
-            maxYears = 2;
-            age = Age.MONTHS;
-        }else if(patient.getAgeInYears() >2 && patient.getAgeInYears() <=5){
-            maxMonths = 11;
-            minYears = 2;
-            maxYears = 5;
-            age = Age.MONTHS;
+        }else if(patient.getAgeInMonths() > 0 && (patient.getAgeInYears() >= 0 && patient.getAgeInYears() < 1)){
+            ageGroup = AgeGroup.TILLONEYEAR;
+        }else if(patient.getAgeInMonths() >= 0 && (patient.getAgeInYears() >=1 && patient.getAgeInYears() <2)){
+            ageGroup = AgeGroup.TILLTWOYEARS;
+        }else if(patient.getAgeInMonths() >= 0 && (patient.getAgeInYears() >= 2 && patient.getAgeInYears() < 3)){
+            ageGroup = AgeGroup.TILLTHREEYEARS;
+        }else if(patient.getAgeInMonths() >= 0 && (patient.getAgeInYears() >= 3 && patient.getAgeInYears() < 4)){
+            ageGroup = AgeGroup.TILLFOURYEARS;
         }else {
-            maxMonths = 11;
-            minYears = 5;
-            maxYears = 10;
-            age = Age.MONTHS;
+            ageGroup = AgeGroup.TILLFIVEYEARS;
         }
+
+        List<Integer> xAxis = createXAxis(age, ageGroup.getMaxYears());
+        List<HeightForAge> scoreRangeForHeight = null;
+        List<WeightForAge> scoreRangeForWeight = null;
+
+        switch (zScoreGraphTypes){
+            case HEIGHT_FOR_AGE_BOYS:
+                scoreRangeForHeight = getScoreRange(ageGroup, patient.getSex(), zScoreGraphTypes);
+                break;
+            case HEIGHT_FOR_AGE_GIRLS:
+                scoreRangeForHeight = getScoreRange(ageGroup, patient.getSex(), zScoreGraphTypes);
+                break;
+            case WEIGHT_FOR_AGE_BOYS:
+                scoreRangeForWeight = getScoreRange(ageGroup, patient.getSex(), zScoreGraphTypes);
+                break;
+            case WEIGHT_FOR_AGE_GIRLS:
+                scoreRangeForWeight = getScoreRange(ageGroup, patient.getSex(), zScoreGraphTypes);
+                break;
+        }
+        if(scoreRangeForHeight != null){
+            graphModel = createGraphModelForHeight(scoreRangeForHeight, zScoreGraphTypes, age, patient);
+        }else {
+            graphModel = createGraphModelForWeight(scoreRangeForWeight, zScoreGraphTypes, age, patient);
+        }
+        graphModel.setxAxis(xAxis);
+        graphModel.setAgeInWeeks(patient.getAgeInWeeks());
+        graphModel.setAgeInMonths(patient.getAgeInMonths());
+        graphModel.setAgeInYears(patient.getAgeInYears());
+        graphModel.setAgeGroup(ageGroup);
+
+
+        return graphModel;
+    }
+
+    private List getScoreRange(AgeGroup ageGroup, Sex sex, ZScoreGraphTypes zScoreGraphTypes){
+        List scoreRange = new ArrayList();
+        if(AgeGroup.WEEKS.equals(ageGroup)){
+            scoreRange.addAll(getScoreRange(0, 12, 0, 0, 0, 0, sex, zScoreGraphTypes ));
+        }else if(AgeGroup.TILLONEYEAR.equals(ageGroup)){
+            scoreRange.addAll(getScoreRange(0, 0, 3, 11, 0, 0, sex, zScoreGraphTypes));
+        }else if(AgeGroup.TILLTWOYEARS.equals(ageGroup)){
+            scoreRange.addAll(getScoreRange(0, 0, 0, 11, 1, 1,sex,zScoreGraphTypes));
+        }else if(AgeGroup.TILLTHREEYEARS.equals(ageGroup)){
+            scoreRange.addAll(getScoreRange(0, 0, 0, 11, 2, 2,sex,zScoreGraphTypes));
+        }else if(AgeGroup.TILLFOURYEARS.equals(ageGroup)){
+            scoreRange.addAll(getScoreRange(0,0,0,11,3,3,sex,zScoreGraphTypes));
+        }else if(AgeGroup.TILLFIVEYEARS.equals(ageGroup)){
+            scoreRange.addAll(getScoreRange(0,0,0,11,4,5,sex,zScoreGraphTypes));
+        }
+        return scoreRange;
+    }
+
+    private List getScoreRange(int minWeeks, int maxWeeks, int minMonths, int maxMonths, int minYears, int maxYears, Sex sex, ZScoreGraphTypes zScoreGraphTypes){
         List<HeightForAge> scoreRangeForHeight = null;
         List<WeightForAge> scoreRangeForWeight = null;
         switch (zScoreGraphTypes){
@@ -94,17 +137,21 @@ public class Calculator {
                 break;
         }
         if(scoreRangeForHeight != null){
-            graphModel = createGraphModelForHeight(scoreRangeForHeight, zScoreGraphTypes, age);
+            return scoreRangeForHeight;
         }else {
-            graphModel = createGraphModelForWeight(scoreRangeForWeight, zScoreGraphTypes, age);
+            return scoreRangeForWeight;
         }
-        return graphModel;
+
     }
 
-    private GraphModel createGraphModelForWeight(List<WeightForAge> scoreRangeForWeight, ZScoreGraphTypes zScoreGraphTypes, Age age) {
+    private GraphModel createGraphModelForWeight(List<WeightForAge> scoreRangeForWeight, ZScoreGraphTypes zScoreGraphTypes, Age age, Patient patient) {
         GraphModel graphModel = new GraphModel();
         graphModel.setzScoreGraphTypes(zScoreGraphTypes);
         graphModel.setAge(age);
+        Double minusThreeScoreDoubleValue = new Double(scoreRangeForWeight.get(0).getMinusThreeScore());
+        Double maxThreeScoreDoubleValue = new Double(scoreRangeForWeight.get(scoreRangeForWeight.size() - 1).getThreeScore());
+        graphModel.setyMin( minusThreeScoreDoubleValue.intValue() - 10);
+        graphModel.setyMax(maxThreeScoreDoubleValue.intValue() + 10);
         for(WeightForAge weightForAge : scoreRangeForWeight){
             graphModel.getMinusThreeScore().add(weightForAge.getMinusThreeScore());
             graphModel.getMinusTwoScore().add(weightForAge.getMinusTwoScore());
@@ -116,13 +163,18 @@ public class Calculator {
 
         }
 
+        graphModel.setPatientWeight(patient.getWeight());
         return graphModel;
     }
 
-    private GraphModel createGraphModelForHeight(List<HeightForAge> scoreRangeForHeight, ZScoreGraphTypes zScoreGraphTypes, Age age) {
+    private GraphModel createGraphModelForHeight(List<HeightForAge> scoreRangeForHeight, ZScoreGraphTypes zScoreGraphTypes, Age age, Patient patient) {
         GraphModel graphModel = new GraphModel();
         graphModel.setzScoreGraphTypes(zScoreGraphTypes);
         graphModel.setAge(age);
+        Double minusThreeScoreDoubleValue = new Double(scoreRangeForHeight.get(0).getMinusThreeScore());
+        Double maxThreeScoreDoubleValue = new Double(scoreRangeForHeight.get(scoreRangeForHeight.size() - 1).getThreeScore());
+        graphModel.setyMin( minusThreeScoreDoubleValue.intValue() - 10);
+        graphModel.setyMax(maxThreeScoreDoubleValue.intValue() + 10);
         for(HeightForAge heightForAge : scoreRangeForHeight){
             graphModel.getMinusThreeScore().add(heightForAge.getMinusThreeScore());
             graphModel.getMinusTwoScore().add(heightForAge.getMinusTwoScore());
@@ -134,7 +186,47 @@ public class Calculator {
 
         }
 
+        graphModel.setPatientHeight(patient.getHeight());
+
         return graphModel;
+    }
+
+    private List<Integer> createXAxis(Age age, int maxYears){
+        List<Integer> xAxis = new ArrayList<Integer>();
+        if(Age.WEEKS.equals(age)){
+            for(int i=0; i<=12; i++){
+                xAxis.add(i);
+            }
+
+        }
+        if(Age.MONTHS.equals(age)){
+            if(maxYears == 1){
+                for(int i = 3; i< 12; i++){
+                    xAxis.add(i);
+                }
+            }else if(maxYears == 2){
+                for(int i = 12; i <24; i++){
+                    xAxis.add(i);
+                }
+            }else if(maxYears == 3){
+                for(int i = 24; i <36; i++){
+                    xAxis.add(i);
+                }
+            }else if(maxYears == 4){
+                for(int i = 36; i <48; i++){
+                    xAxis.add(i);
+                }
+            }else if(maxYears == 5){
+                for(int i = 48; i< 60; i++){
+                    xAxis.add(i);
+                }
+            }
+        }
+        return xAxis;
+    }
+
+    private int calculateAgeInMonths(int months, int years){
+        return ((years * 12) + months);
     }
 
 

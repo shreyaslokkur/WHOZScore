@@ -7,11 +7,9 @@ package com.example.WhoZScore.data.entities;
  * Time: 10:14 AM
  * To change this template use File | Settings | File Templates.
  */
-public class AbstractZScoreForAge {
+public class AbstractZScore {
     private int id;
-    private int weeks;
-    private int months;
-    private int years;
+
     private double threeScore;
     private double twoScore;
     private double oneScore;
@@ -28,29 +26,6 @@ public class AbstractZScoreForAge {
         this.id = id;
     }
 
-    public int getWeeks() {
-        return weeks;
-    }
-
-    public void setWeeks(int weeks) {
-        this.weeks = weeks;
-    }
-
-    public int getMonths() {
-        return months;
-    }
-
-    public void setMonths(int months) {
-        this.months = months;
-    }
-
-    public int getYears() {
-        return years;
-    }
-
-    public void setYears(int years) {
-        this.years = years;
-    }
 
     public double getThreeScore() {
         return threeScore;
