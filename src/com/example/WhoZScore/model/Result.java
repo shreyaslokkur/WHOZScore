@@ -10,10 +10,12 @@ package com.example.WhoZScore.model;
 public class Result {
 
     private boolean isHealthy;
-    private String zScoreWeightMessage;
-    private String healthyWeightMessage;
-    private String zScoreHeightMessage;
-    private String healthyHeightMessage;
+    private String zScoreWeightForAgeMessage;
+    private String healthyWeightForAgeMessage;
+    private String zScoreHeightForAgeMessage;
+    private String healthyHeightForAgeMessage;
+    private String zScoreWeightForHeightMessage;
+    private String healthyWeightForHeightMessage;
 
     public boolean isHealthy() {
         return isHealthy;
@@ -23,35 +25,51 @@ public class Result {
         isHealthy = healthy;
     }
 
-    public String getzScoreWeightMessage() {
-        return zScoreWeightMessage;
+    public String getzScoreWeightForAgeMessage() {
+        return zScoreWeightForAgeMessage;
     }
 
-    public void setzScoreWeightMessage(String zScoreWeightMessage) {
-        this.zScoreWeightMessage = zScoreWeightMessage;
+    public void setzScoreWeightForAgeMessage(String zScoreWeightForAgeMessage) {
+        this.zScoreWeightForAgeMessage = zScoreWeightForAgeMessage;
     }
 
-    public String getHealthyWeightMessage() {
-        return healthyWeightMessage;
+    public String getHealthyWeightForAgeMessage() {
+        return healthyWeightForAgeMessage;
     }
 
-    public void setHealthyWeightMessage(String healthyWeightMessage) {
-        this.healthyWeightMessage = healthyWeightMessage;
+    public void setHealthyWeightForAgeMessage(String healthyWeightForAgeMessage) {
+        this.healthyWeightForAgeMessage = healthyWeightForAgeMessage;
     }
 
-    public String getzScoreHeightMessage() {
-        return zScoreHeightMessage;
+    public String getzScoreHeightForAgeMessage() {
+        return zScoreHeightForAgeMessage;
     }
 
-    public void setzScoreHeightMessage(String zScoreHeightMessage) {
-        this.zScoreHeightMessage = zScoreHeightMessage;
+    public void setzScoreHeightForAgeMessage(String zScoreHeightForAgeMessage) {
+        this.zScoreHeightForAgeMessage = zScoreHeightForAgeMessage;
     }
 
-    public String getHealthyHeightMessage() {
-        return healthyHeightMessage;
+    public String getHealthyHeightForAgeMessage() {
+        return healthyHeightForAgeMessage;
     }
 
-    public void setHealthyHeightMessage(String healthyHeightMessage) {
-        this.healthyHeightMessage = healthyHeightMessage;
+    public void setHealthyHeightForAgeMessage(String healthyHeightForAgeMessage) {
+        this.healthyHeightForAgeMessage = healthyHeightForAgeMessage;
+    }
+
+    public String getzScoreWeightForHeightMessage() {
+        return zScoreWeightForHeightMessage;
+    }
+
+    public void setzScoreWeightForHeightMessage(String zScoreWeightForHeightMessage) {
+        this.zScoreWeightForHeightMessage = zScoreWeightForHeightMessage;
+    }
+
+    public String getHealthyWeightForHeightMessage() {
+        return healthyWeightForHeightMessage;
+    }
+
+    public void setHealthyWeightForHeightMessage(String healthyWeightForHeightMessage) {
+        this.healthyWeightForHeightMessage = healthyWeightForHeightMessage;
     }
 }

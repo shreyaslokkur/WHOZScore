@@ -12,7 +12,9 @@ public enum ZScoreGraphTypes {
     WEIGHT_FOR_AGE_BOYS("Weight for Age Boys","Weight (kg)"),
     WEIGHT_FOR_AGE_GIRLS("Weight for Age Girls","Weight (kg)"),
     HEIGHT_FOR_AGE_BOYS("Height for Age Boys","Height (cms)"),
-    HEIGHT_FOR_AGE_GIRLS("Height for Age Girls","Height (cms)");
+    HEIGHT_FOR_AGE_GIRLS("Height for Age Girls","Height (cms)"),
+    WEIGHT_FOR_HEIGHT_BOYS("Weight for Height Boys","Weight (kg)"),
+    WEIGHT_FOR_HEIGHT_GIRLS("Weight for Height Girls","Weight (kg)");
 
     private String graphNames;
     private String yAxis;

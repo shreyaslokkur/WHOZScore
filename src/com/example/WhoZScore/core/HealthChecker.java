@@ -2,10 +2,10 @@ package com.example.WhoZScore.core;
 
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.WeightForAge;
-import com.example.WhoZScore.model.HeightResult;
+import com.example.WhoZScore.model.HeightForAgeResult;
 import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
-import com.example.WhoZScore.model.WeightResult;
+import com.example.WhoZScore.model.WeightForAgeResult;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,8 +18,8 @@ public class HealthChecker {
 
     public Result checkIfHealthy(Patient patient, WeightForAge weightForAge, HeightForAge heightForAge){
         Result result = null;
-        WeightResult resultForWeight = null;
-        HeightResult resultForHeight = null;
+        WeightForAgeResult resultForWeight = null;
+        HeightForAgeResult resultForHeight = null;
         if(weightForAge != null){
            resultForWeight = getResultForWeight(patient, weightForAge);
         }
@@ -30,29 +30,29 @@ public class HealthChecker {
         return result;
     }
 
-    private WeightResult getResultForWeight(Patient patient, WeightForAge weightForAge){
-        WeightResult weightResult;
+    private WeightForAgeResult getResultForWeight(Patient patient, WeightForAge weightForAge){
+        WeightForAgeResult weightForAgeResult;
         if(patient.getAgeInYears() < 5){
-            weightResult = calculateWeightResultForAgeLessThanFiveYears(patient, weightForAge);
+            weightForAgeResult = calculateWeightResultForAgeLessThanFiveYears(patient, weightForAge);
         }else {
-            weightResult = calculateWeightResultForAgeGreaterThanFiveYears(patient, weightForAge);
+            weightForAgeResult = calculateWeightResultForAgeGreaterThanFiveYears(patient, weightForAge);
         }
-        return weightResult;
+        return weightForAgeResult;
 
     }
 
-    private HeightResult getResultForHeight(Patient patient, HeightForAge heightForAge){
-        HeightResult heightResult;
+    private HeightForAgeResult getResultForHeight(Patient patient, HeightForAge heightForAge){
+        HeightForAgeResult heightForAgeResult;
         if(patient.getAgeInYears() < 5){
-            heightResult = calculateHeightResultForAgeLessThanFiveYears(patient, heightForAge);
+            heightForAgeResult = calculateHeightResultForAgeLessThanFiveYears(patient, heightForAge);
         }else {
-            heightResult = calculateHeightResultForAgeGreaterThanFiveYears(patient, heightForAge);
+            heightForAgeResult = calculateHeightResultForAgeGreaterThanFiveYears(patient, heightForAge);
         }
-        return heightResult;
+        return heightForAgeResult;
     }
 
-    private HeightResult calculateHeightResultForAgeGreaterThanFiveYears(Patient patient, HeightForAge heightForAge) {
-        HeightResult heightResult = new HeightResult();
+    private HeightForAgeResult calculateHeightResultForAgeGreaterThanFiveYears(Patient patient, HeightForAge heightForAge) {
+        HeightForAgeResult heightForAgeResult = new HeightForAgeResult();
         double height = patient.getHeight();
         String message = null;
         boolean isHealthy;
@@ -87,14 +87,14 @@ public class HealthChecker {
             message = "Lesser than -3 ZScore";
             isHealthy = false;
         }
-        heightResult.setHealthy(isHealthy);
-        heightResult.setzScoreHeightMessage(message);
-        return heightResult;
+        heightForAgeResult.setHealthy(isHealthy);
+        heightForAgeResult.setzScoreHeightMessage(message);
+        return heightForAgeResult;
 
     }
 
-    private HeightResult calculateHeightResultForAgeLessThanFiveYears(Patient patient, HeightForAge heightForAge) {
-        HeightResult heightResult = new HeightResult();
+    private HeightForAgeResult calculateHeightResultForAgeLessThanFiveYears(Patient patient, HeightForAge heightForAge) {
+        HeightForAgeResult heightForAgeResult = new HeightForAgeResult();
         double height = patient.getHeight();
         String message = null;
         boolean isHealthy;
@@ -121,13 +121,13 @@ public class HealthChecker {
             message = "Lesser than -3 ZScore";
             isHealthy = false;
         }
-        heightResult.setHealthy(isHealthy);
-        heightResult.setzScoreHeightMessage(message);
-        return heightResult;
+        heightForAgeResult.setHealthy(isHealthy);
+        heightForAgeResult.setzScoreHeightMessage(message);
+        return heightForAgeResult;
     }
 
-    private WeightResult calculateWeightResultForAgeLessThanFiveYears(Patient patient, WeightForAge weightForAge){
-        WeightResult weightResult = new WeightResult();
+    private WeightForAgeResult calculateWeightResultForAgeLessThanFiveYears(Patient patient, WeightForAge weightForAge){
+        WeightForAgeResult weightForAgeResult = new WeightForAgeResult();
         double weight = patient.getWeight();
         String message = null;
         boolean isHealthy;
@@ -154,13 +154,13 @@ public class HealthChecker {
             message = "Lesser than -3 ZScore";
             isHealthy = false;
         }
-        weightResult.setHealthy(isHealthy);
-        weightResult.setzScoreWeightMessage(message);
-        return weightResult;
+        weightForAgeResult.setHealthy(isHealthy);
+        weightForAgeResult.setzScoreWeightMessage(message);
+        return weightForAgeResult;
     }
 
-    private WeightResult calculateWeightResultForAgeGreaterThanFiveYears(Patient patient, WeightForAge weightForAge){
-        WeightResult weightResult = new WeightResult();
+    private WeightForAgeResult calculateWeightResultForAgeGreaterThanFiveYears(Patient patient, WeightForAge weightForAge){
+        WeightForAgeResult weightForAgeResult = new WeightForAgeResult();
         double weight = patient.getWeight();
         String message = null;
         boolean isHealthy;
@@ -195,20 +195,20 @@ public class HealthChecker {
             message = "Lesser than -3 ZScore";
             isHealthy = false;
         }
-        weightResult.setHealthy(isHealthy);
-        weightResult.setzScoreWeightMessage(message);
-        return weightResult;
+        weightForAgeResult.setHealthy(isHealthy);
+        weightForAgeResult.setzScoreWeightMessage(message);
+        return weightForAgeResult;
 
     }
 
-    private Result setResult(WeightResult weightResult, HeightResult heightResult){
+    private Result setResult(WeightForAgeResult weightForAgeResult, HeightForAgeResult heightForAgeResult){
         Result result = new Result();
-        if(weightResult != null){
-            result.setzScoreWeightMessage(weightResult.getzScoreWeightMessage());
+        if(weightForAgeResult != null){
+            result.setzScoreWeightForAgeMessage(weightForAgeResult.getzScoreWeightMessage());
 
         }
-        if(heightResult != null){
-            result.setzScoreHeightMessage(heightResult.getzScoreHeightMessage());
+        if(heightForAgeResult != null){
+            result.setzScoreHeightForAgeMessage(heightForAgeResult.getzScoreHeightMessage());
         }
         return result;
     }

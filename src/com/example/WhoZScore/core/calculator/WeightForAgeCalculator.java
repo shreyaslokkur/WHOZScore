@@ -1,6 +1,7 @@
 package com.example.WhoZScore.core.calculator;
 
 import android.content.Context;
+import com.example.WhoZScore.data.dao.IZScoreDataSource;
 import com.example.WhoZScore.data.dao.WeightForAgeDataSource;
 import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.data.entities.WeightForAge;
@@ -22,12 +23,12 @@ import java.util.List;
  */
 public class WeightForAgeCalculator extends AbstractCalculator implements ICalculator {
 
-    WeightForAgeDataSource weightForAgeDataSource;
+    IZScoreDataSource weightForAgeDataSource;
 
     @Override
     public IZScoreEntity calculateZScore(Patient patient, Context context) {
         weightForAgeDataSource = new WeightForAgeDataSource(context);
-        WeightForAge weightForAge = weightForAgeDataSource.getScore(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears(), patient.getSex());
+        WeightForAge weightForAge = (WeightForAge) weightForAgeDataSource.getScore(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears(), patient.getSex());
         return weightForAge;
     }
 

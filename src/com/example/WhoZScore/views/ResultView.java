@@ -53,7 +53,7 @@ public class ResultView extends Fragment {
         }else {
             heightText.setText(String.valueOf(patient.getHeight()) + "cms");
             heightText.setTextColor(Color.BLACK);
-            zScoreHeightMessageText.setText(result.getzScoreHeightMessage());
+            zScoreHeightMessageText.setText(result.getzScoreHeightForAgeMessage());
         }
 
         if(patient.getWeight() == 0){
@@ -65,7 +65,7 @@ public class ResultView extends Fragment {
         }else {
             weightText.setText(String.valueOf(patient.getWeight()) + "kg");
             weightText.setTextColor(Color.BLACK);
-            zScoreWeightMessageText.setText(result.getzScoreWeightMessage());
+            zScoreWeightMessageText.setText(result.getzScoreWeightForAgeMessage());
         }
 
 

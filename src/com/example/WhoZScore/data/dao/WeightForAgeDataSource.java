@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.WhoZScore.data.MySqliteHelper;
+import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.enums.Sex;
 
@@ -18,32 +19,13 @@ import java.util.List;
  * Time: 6:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WeightForAgeDataSource {
+public class WeightForAgeDataSource extends AbstractZScoreDataSource implements IZScoreDataSource {
 
     private SQLiteDatabase database;
     private MySqliteHelper dbHelper;
 
     public static final String BOYS_WEIGHT_FOR_AGE = "BoysWeightForAge";
     public static final String GIRLS_WEIGHT_FOR_AGE = "GirlsWeightForAge";
-
-    private final int THREE_SCORE_COLUMN_INDEX = 0;
-    private final int TWO_SCORE_COLUMN_INDEX = 1;
-    private final int ONE_SCORE_COLUMN_INDEX = 2;
-    private final int ZERO_SCORE_COLUMN_INDEX = 3;
-    private final int MINUS_ONE_SCORE_COLUMN_INDEX = 4;
-    private final int MINUS_TWO_SCORE_COLUMN_INDEX = 5;
-    private final int MINUS_THREE_SCORE_COLUMN_INDEX = 6;
-
-    private final String COLUMN_WEEKS = "weeks";
-    private final String COLUMN_MONTHS = "months";
-    private final String COLUMN_YEARS = "years";
-    private final String COLUMN_THREE_SCORE = "threeScore";
-    private final String COLUMN_TWO_SCORE = "twoScore";
-    private final String COLUMN_ONE_SCORE = "oneScore";
-    private final String COLUMN_ZERO_SCORE = "zeroScore";
-    private final String COLUMN_MINUS_ONE_SCORE = "minusOneScore";
-    private final String COLUMN_MINUS_TWO_SCORE = "minusTwoScore";
-    private final String COLUMN_MINUS_THREE_SCORE = "minusThreeScore";
 
 
     private String[] scoreColumns = { COLUMN_THREE_SCORE,COLUMN_TWO_SCORE,COLUMN_ONE_SCORE,COLUMN_ZERO_SCORE,COLUMN_MINUS_ONE_SCORE,COLUMN_MINUS_TWO_SCORE,COLUMN_MINUS_THREE_SCORE };
@@ -61,7 +43,7 @@ public class WeightForAgeDataSource {
     }
 
 
-    public WeightForAge getScoreForBoys(int weeks, int months, int years) {
+    private WeightForAge getScoreForBoys(int weeks, int months, int years) {
         WeightForAge weightForAge = null;
         String whereClaue = COLUMN_WEEKS + "=?" + " and " + COLUMN_MONTHS + "=?" + " and " + COLUMN_YEARS + "=?" ;
         String[] whereParameters = new String[]{String.valueOf(weeks),String.valueOf(months),String.valueOf(years)};
@@ -83,7 +65,7 @@ public class WeightForAgeDataSource {
         return weightForAge;
     }
 
-    public WeightForAge getScore(int weeks, int months, int years, Sex sex){
+    public IZScoreEntity getScore(int weeks, int months, int years, Sex sex){
         if(years >= 5){
             int minMonth=months;
             int maxMonth = months;
@@ -139,7 +121,7 @@ public class WeightForAgeDataSource {
     }
 
 
-    public WeightForAge getScoreForGirls(int weeks, int months, int years) {
+    private WeightForAge getScoreForGirls(int weeks, int months, int years) {
         WeightForAge weightForAge = null;
         String whereClaue = COLUMN_WEEKS + "=?" + " and " + COLUMN_MONTHS + "=?" + " and " + COLUMN_YEARS + "=?" ;
         String[] whereParameters = new String[]{String.valueOf(weeks),String.valueOf(months),String.valueOf(years)};

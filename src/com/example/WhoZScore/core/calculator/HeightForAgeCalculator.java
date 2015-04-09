@@ -2,6 +2,7 @@ package com.example.WhoZScore.core.calculator;
 
 import android.content.Context;
 import com.example.WhoZScore.data.dao.HeightForAgeDataSource;
+import com.example.WhoZScore.data.dao.IZScoreDataSource;
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.enums.Age;
@@ -22,12 +23,12 @@ import java.util.List;
  */
 public class HeightForAgeCalculator extends AbstractCalculator implements ICalculator {
 
-    HeightForAgeDataSource heightForAgeDataSource;
+    IZScoreDataSource heightForAgeDataSource;
 
     @Override
     public IZScoreEntity calculateZScore(Patient patient, Context context) {
         heightForAgeDataSource = new HeightForAgeDataSource(context);
-        HeightForAge heightForAge = heightForAgeDataSource.getScore(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears(), patient.getSex());
+        HeightForAge heightForAge = (HeightForAge) heightForAgeDataSource.getScore(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears(), patient.getSex());
 
         return heightForAge;
     }
