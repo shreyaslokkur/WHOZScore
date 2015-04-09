@@ -7,24 +7,25 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import com.example.WhoZScore.core.Calculator;
+import com.example.WhoZScore.core.calculator.AbstractCalculator;
 import com.example.WhoZScore.core.HealthChecker;
+import com.example.WhoZScore.core.calculator.HeightForAgeCalculator;
+import com.example.WhoZScore.core.calculator.ICalculator;
+import com.example.WhoZScore.core.calculator.WeightForAgeCalculator;
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.enums.Age;
 import com.example.WhoZScore.enums.Sex;
 import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
-import com.example.WhoZScore.model.WeightResult;
 import com.example.WhoZScore.views.FragmentChangeListener;
 import com.example.WhoZScore.views.HomeView;
 
 public class WhoZScore extends Activity implements FragmentChangeListener {
 
     private Patient patient = null;
-    private Calculator calculator = new Calculator();
+    private ICalculator calculator;
     private HealthChecker healthChecker = new HealthChecker();
     private Result result = null;
 
@@ -82,10 +83,12 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
         HeightForAge heightForAge = null;
 
         if(patient.getWeight() > 0.0){
-            weightForAge = calculator.calculateWeightForAgeZScore(patient, this);
+            calculator = new WeightForAgeCalculator();
+            weightForAge = (WeightForAge) calculator.calculateZScore(patient, this);
         }
         if(patient.getHeight() > 0){
-            heightForAge = calculator.calculateHeightForAgeZScore(patient,this);
+            calculator = new HeightForAgeCalculator();
+            heightForAge = (HeightForAge) calculator.calculateZScore(patient, this);
         }
 
         result = healthChecker.checkIfHealthy(patient, weightForAge, heightForAge);

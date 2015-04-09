@@ -7,7 +7,7 @@ package com.example.WhoZScore.data.entities;
  * Time: 11:47 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WeightForHeight extends AbstractZScore {
+public class WeightForHeight extends AbstractZScoreEntity implements IZScoreEntity {
 
     private int height;
 

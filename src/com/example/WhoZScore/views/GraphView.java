@@ -11,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import com.example.WhoZScore.R;
 import com.example.WhoZScore.WhoZScore;
-import com.example.WhoZScore.core.Calculator;
+import com.example.WhoZScore.core.calculator.AbstractCalculator;
 
+import com.example.WhoZScore.core.calculator.HeightForAgeCalculator;
+import com.example.WhoZScore.core.calculator.ICalculator;
+import com.example.WhoZScore.core.calculator.WeightForAgeCalculator;
 import com.example.WhoZScore.enums.AgeGroup;
 import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.GraphModel;
@@ -37,7 +40,7 @@ import java.util.List;
 public class GraphView extends Fragment {
 
     private View mChart;
-    private Calculator calculator = new Calculator();
+    private ICalculator calculator ;
 
     private ZScoreGraphTypes scoreGraphTypes;
 
@@ -48,6 +51,7 @@ public class GraphView extends Fragment {
         View view = inflater.inflate(R.layout.graph_view, container, false);
         final Patient patient = ((WhoZScore) getActivity()).getPatient();
         final LinearLayout chartLayout = (LinearLayout) view.findViewById(R.id.chart);
+        calculator = createCalculatorInstance(getScoreGraphTypes());
         openChart(calculator.getGraphModel(patient,getScoreGraphTypes(), getActivity()), chartLayout);
         View chart = chartLayout.findViewById(100);
         chart.setOnClickListener(new DoubleClickListener() {
@@ -75,6 +79,15 @@ public class GraphView extends Fragment {
             }
         });*/
         return view;
+    }
+
+    private ICalculator createCalculatorInstance(ZScoreGraphTypes scoreGraphTypes) {
+        if(ZScoreGraphTypes.WEIGHT_FOR_AGE_BOYS.equals(scoreGraphTypes) || ZScoreGraphTypes.WEIGHT_FOR_AGE_GIRLS.equals(scoreGraphTypes)){
+            return new WeightForAgeCalculator();
+        }else if(ZScoreGraphTypes.HEIGHT_FOR_AGE_BOYS.equals(scoreGraphTypes) || ZScoreGraphTypes.HEIGHT_FOR_AGE_GIRLS.equals(scoreGraphTypes)){
+            return new HeightForAgeCalculator();
+        }
+        return null;
     }
 
 

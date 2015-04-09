@@ -84,6 +84,18 @@ public class ResultView extends Fragment {
             }
         });
 
+        weightHeader.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if(Sex.FEMALE.equals(patient.getSex()))
+                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_AGE_GIRLS);
+                else
+                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_AGE_BOYS);
+
+                ((WhoZScore)getActivity()).replaceFragment(graphView);
+
+            }
+        });
+
 
         // Inflate the layout for this fragment
         return view;

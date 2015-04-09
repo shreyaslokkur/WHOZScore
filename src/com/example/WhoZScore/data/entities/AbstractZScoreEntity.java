@@ -7,7 +7,7 @@ package com.example.WhoZScore.data.entities;
  * Time: 10:14 AM
  * To change this template use File | Settings | File Templates.
  */
-public class AbstractZScore {
+public class AbstractZScoreEntity {
     private int id;
 
     private double threeScore;
