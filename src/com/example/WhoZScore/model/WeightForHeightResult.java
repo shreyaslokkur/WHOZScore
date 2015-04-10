@@ -7,7 +7,7 @@ package com.example.WhoZScore.model;
  * Time: 3:57 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WeightForHeightResult {
+public class WeightForHeightResult implements IResult{
     private boolean isHealthy;
     private String zScoreWeightForHeightMessage;
     private String healthyWeightForHeightMessage;

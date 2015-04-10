@@ -24,7 +24,7 @@ import com.example.WhoZScore.model.Result;
  */
 public class ResultView extends Fragment {
 
-    private TextView ageText, weightText, heightText, zScoreWeightMessageText, zScoreHeightMessageText, weightHeader, heightHeader;
+    private TextView ageText, weightText, heightText, zScoreWeightMessageText, zScoreHeightMessageText, zScoreWeightForHeightMessageText, weightHeader, heightHeader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,6 +39,7 @@ public class ResultView extends Fragment {
         heightHeader = (TextView) view.findViewById(R.id.heightHeader);
         zScoreWeightMessageText = (TextView) view.findViewById(R.id.zScoreWeightResultTextId);
         zScoreHeightMessageText = (TextView) view.findViewById(R.id.zScoreHeightResultTextId);
+        zScoreWeightForHeightMessageText = (TextView) view.findViewById(R.id.zScoreWeightForHeightResultTextId);
 
 
 
@@ -47,9 +48,12 @@ public class ResultView extends Fragment {
         if(patient.getHeight() == 0){
             View heightHeader = view.findViewById(R.id.heightHeader);
             View heightResultLayout = view.findViewById(R.id.heightResultLayout);
-
+            View weightForHeightHeader = view.findViewById(R.id.weightForHeightHeader);
+            View weightForHeightLayout = view.findViewById(R.id.weightForHeightResultLayout);
             ((LinearLayout)heightHeader.getParent()).removeView(heightHeader);
+            ((LinearLayout)weightForHeightHeader.getParent()).removeView(weightForHeightHeader);
             ((LinearLayout)heightResultLayout.getParent()).removeView(heightResultLayout);
+            ((LinearLayout)weightForHeightLayout.getParent()).removeView(weightForHeightLayout);
         }else {
             heightText.setText(String.valueOf(patient.getHeight()) + "cms");
             heightText.setTextColor(Color.BLACK);
@@ -59,14 +63,23 @@ public class ResultView extends Fragment {
         if(patient.getWeight() == 0){
             View weightHeader = view.findViewById(R.id.weightHeader);
             View weightResultLayout = view.findViewById(R.id.weightResultLayout);
-
+            View weightForHeightHeader = view.findViewById(R.id.weightForHeightHeader);
+            View weightForHeightLayout = view.findViewById(R.id.weightForHeightResultLayout);
             ((LinearLayout)weightHeader.getParent()).removeView(weightHeader);
+            ((LinearLayout)weightForHeightHeader.getParent()).removeView(weightForHeightHeader);
             ((LinearLayout)weightResultLayout.getParent()).removeView(weightResultLayout);
+            ((LinearLayout)weightForHeightLayout.getParent()).removeView(weightForHeightLayout);
         }else {
             weightText.setText(String.valueOf(patient.getWeight()) + "kg");
             weightText.setTextColor(Color.BLACK);
             zScoreWeightMessageText.setText(result.getzScoreWeightForAgeMessage());
         }
+
+        if(patient.getHeight() > 0 && patient.getWeight() > 0){
+            zScoreWeightForHeightMessageText.setText(result.getzScoreWeightForHeightMessage());
+        }
+
+
 
 
         ageText.setText(getAge(patient));

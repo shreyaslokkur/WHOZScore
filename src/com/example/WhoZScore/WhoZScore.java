@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Spinner;
 import com.example.WhoZScore.core.calculator.*;
-import com.example.WhoZScore.core.HealthChecker;
+import com.example.WhoZScore.core.checker.HealthCheckerDelegator;
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.data.entities.WeightForHeight;
@@ -24,7 +24,7 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
 
     private Patient patient = null;
     private ICalculator calculator;
-    private HealthChecker healthChecker = new HealthChecker();
+    private HealthCheckerDelegator healthChecker = new HealthCheckerDelegator();
     private Result result = null;
 
 
@@ -95,7 +95,7 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
             System.out.println(weightForHeight);
         }
 
-        result = healthChecker.checkIfHealthy(patient, weightForAge, heightForAge);
+        result = healthChecker.getHealthResult(patient, weightForAge, heightForAge, weightForHeight);
 
     }
 
