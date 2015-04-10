@@ -2,7 +2,8 @@ package com.example.WhoZScore.core.calculator;
 
 import android.content.Context;
 import com.example.WhoZScore.data.dao.IZScoreDataSource;
-import com.example.WhoZScore.data.dao.WeightForHeightDataSource;
+import com.example.WhoZScore.data.dao.WeightForHeightAboveTwoYearsDataSource;
+import com.example.WhoZScore.data.dao.WeightForHeightBelowTwoYearsDataSource;
 import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.data.entities.WeightForHeight;
 import com.example.WhoZScore.enums.Age;
@@ -26,7 +27,12 @@ public class WeightForHeightCalculator extends AbstractCalculator  {
     IZScoreDataSource weightForHeightDataSource;
     @Override
     public IZScoreEntity calculateZScore(Patient patient, Context context) {
-        weightForHeightDataSource = new WeightForHeightDataSource(context);
+        if(patient.getAgeInYears() > 2){
+            weightForHeightDataSource = new WeightForHeightAboveTwoYearsDataSource(context);
+        }else {
+            weightForHeightDataSource = new WeightForHeightBelowTwoYearsDataSource(context);
+        }
+
         WeightForHeight weightForHeight = (WeightForHeight) weightForHeightDataSource.getScore(new Double(patient.getHeight()).intValue(), patient.getSex());
 
         return weightForHeight;
@@ -34,7 +40,11 @@ public class WeightForHeightCalculator extends AbstractCalculator  {
 
     @Override
     public GraphModel getGraphModel(Patient patient, ZScoreGraphTypes zScoreGraphTypes, Context context) {
-        weightForHeightDataSource = new WeightForHeightDataSource(context);
+        if(patient.getAgeInYears() > 2){
+            weightForHeightDataSource = new WeightForHeightAboveTwoYearsDataSource(context);
+        }else {
+            weightForHeightDataSource = new WeightForHeightBelowTwoYearsDataSource(context);
+        }
 
         Age age= Age.MONTHS;
         AgeGroup ageGroup = null;

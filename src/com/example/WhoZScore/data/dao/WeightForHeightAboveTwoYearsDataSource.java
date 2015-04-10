@@ -18,18 +18,18 @@ import java.util.List;
  * Time: 6:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WeightForHeightDataSource extends AbstractZScoreDataSource {
+public class WeightForHeightAboveTwoYearsDataSource extends AbstractZScoreDataSource {
 
 
     private MySqliteHelper dbHelper;
 
-    public static final String BOYS_WEIGHT_FOR_HEIGHT = "BoysWeightForHeight";
-    public static final String GIRLS_WEIGHT_FOR_HEIGHT = "GirlsWeightForHeight";
+    public static final String BOYS_WEIGHT_FOR_HEIGHT = "BoysWeightForHeightAboveTwoYears";
+    public static final String GIRLS_WEIGHT_FOR_HEIGHT = "GirlsWeightForHeightAboveTwoYears";
 
 
     private String[] scoreColumns = { COLUMN_MINUS_THREE_SCORE,COLUMN_MINUS_TWO_SCORE,COLUMN_MINUS_ONE_SCORE,COLUMN_ZERO_SCORE,COLUMN_ONE_SCORE,COLUMN_TWO_SCORE,COLUMN_THREE_SCORE };
 
-    public WeightForHeightDataSource(Context context) {
+    public WeightForHeightAboveTwoYearsDataSource(Context context) {
 
         try {
             dbHelper = new MySqliteHelper(context);

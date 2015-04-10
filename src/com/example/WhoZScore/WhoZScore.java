@@ -89,10 +89,9 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
             calculator = new HeightForAgeCalculator();
             heightForAge = (HeightForAge) calculator.calculateZScore(patient, this);
         }
-        if(patient.getAgeInYears() >= 2 && patient.getWeight() > 0.0 && patient.getHeight() > 0.0){
+        if(patient.getWeight() > 0.0 && patient.getHeight() > 0.0){
             calculator = new WeightForHeightCalculator();
             weightForHeight = (WeightForHeight) calculator.calculateZScore(patient, this);
-            System.out.println(weightForHeight);
         }
 
         result = healthChecker.getHealthResult(patient, weightForAge, heightForAge, weightForHeight);
