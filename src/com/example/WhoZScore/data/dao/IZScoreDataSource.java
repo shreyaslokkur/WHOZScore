@@ -15,5 +15,7 @@ import java.util.List;
 public interface IZScoreDataSource {
 
     IZScoreEntity getScore(int weeks, int months, int years, Sex sex);
+    IZScoreEntity getScore(int height, Sex sex);
     List getScoreRange(int minWeeks, int maxWeeks, int minMonths, int maxMonths, int minYears, int maxYears, Sex sex);
+    List getScoreRange(int minHeight, int maxHeight, Sex sex);
 }

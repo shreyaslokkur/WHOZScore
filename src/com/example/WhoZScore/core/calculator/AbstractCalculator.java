@@ -4,6 +4,7 @@ import android.content.Context;
 import com.example.WhoZScore.data.dao.HeightForAgeDataSource;
 import com.example.WhoZScore.data.dao.WeightForAgeDataSource;
 import com.example.WhoZScore.data.entities.HeightForAge;
+import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.enums.Age;
 import com.example.WhoZScore.enums.AgeGroup;
@@ -22,7 +23,7 @@ import java.util.List;
  * Time: 3:05 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class AbstractCalculator  {
+public class AbstractCalculator implements ICalculator  {
 
 
 
@@ -44,7 +45,14 @@ public abstract class AbstractCalculator  {
         return scoreRange;
     }
 
-    public abstract List getScoreRange(int minWeeks, int maxWeeks, int minMonths, int maxMonths, int minYears, int maxYears, Sex sex, ZScoreGraphTypes zScoreGraphTypes);
+    public List getScoreRange(int minWeeks, int maxWeeks, int minMonths, int maxMonths, int minYears, int maxYears, Sex sex, ZScoreGraphTypes zScoreGraphTypes){
+        System.out.println("Method not supported by:"+ this.getClass());
+        return null;
+    }
+    public List getScoreRange(int minHeight, int maxHeight, Sex sex, ZScoreGraphTypes zScoreGraphTypes){
+        System.out.println("Method not supported by:"+ this.getClass());
+        return null;
+    }
 
 
 
@@ -83,6 +91,15 @@ public abstract class AbstractCalculator  {
     }
 
 
+    @Override
+    public IZScoreEntity calculateZScore(Patient patient, Context context) {
+        System.out.println("Method not supported by:"+ this.getClass());
+        return null;
+    }
 
-
+    @Override
+    public GraphModel getGraphModel(Patient patient, ZScoreGraphTypes zScoreGraphTypes, Context context) {
+        System.out.println("Method not supported by:"+ this.getClass());
+        return null;
+    }
 }

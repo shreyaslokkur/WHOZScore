@@ -19,7 +19,7 @@ import java.util.List;
  * Time: 6:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WeightForAgeDataSource extends AbstractZScoreDataSource implements IZScoreDataSource {
+public class WeightForAgeDataSource extends AbstractZScoreDataSource {
 
     private SQLiteDatabase database;
     private MySqliteHelper dbHelper;
@@ -66,44 +66,14 @@ public class WeightForAgeDataSource extends AbstractZScoreDataSource implements 
     }
 
     public IZScoreEntity getScore(int weeks, int months, int years, Sex sex){
-        if(years >= 5){
-            int minMonth=months;
-            int maxMonth = months;
-            int maxYear = years;
-            WeightForAge scoreForMinMonth = null;
-            WeightForAge scoreForMaxMonth = null;
-            if(months > 0 && months < 3 ){
-                minMonth = 0;
-                maxMonth = 3;
-            }else if(months > 3 && months <6){
-                minMonth = 3;
-                maxMonth = 6;
-            }else if(months > 6 && months <9){
-                minMonth = 6;
-                maxMonth = 9;
-            }else if(months > 9) {
-                minMonth = 9;
-                maxMonth = 0;
-                maxYear = maxYear + 1;
-            }
-            if(Sex.FEMALE.equals(sex)){
-                scoreForMinMonth = getScoreForGirls(weeks, minMonth, years);
-                scoreForMaxMonth = getScoreForGirls(weeks, maxMonth, maxYear);
 
-            }else {
-                scoreForMinMonth = getScoreForBoys(weeks, minMonth, years);
-                scoreForMaxMonth = getScoreForBoys(weeks, maxMonth, maxYear);
-            }
-
-            return averageWeightForAge(scoreForMinMonth, scoreForMaxMonth);
-        }else {
             if(Sex.FEMALE.equals(sex)){
                 return getScoreForGirls(weeks,months,years);
             }else {
                 return getScoreForBoys(weeks,months,years);
             }
 
-        }
+
 
     }
 

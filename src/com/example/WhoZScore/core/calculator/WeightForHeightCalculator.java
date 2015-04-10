@@ -21,13 +21,13 @@ import java.util.List;
  * Time: 12:09 AM
  * To change this template use File | Settings | File Templates.
  */
-public class WeightForHeightCalculator extends AbstractCalculator implements ICalculator {
+public class WeightForHeightCalculator extends AbstractCalculator  {
 
     IZScoreDataSource weightForHeightDataSource;
     @Override
     public IZScoreEntity calculateZScore(Patient patient, Context context) {
         weightForHeightDataSource = new WeightForHeightDataSource(context);
-        WeightForHeight weightForHeight = (WeightForHeight) weightForHeightDataSource.getScore(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears(), patient.getSex());
+        WeightForHeight weightForHeight = (WeightForHeight) weightForHeightDataSource.getScore(new Double(patient.getHeight()).intValue(), patient.getSex());
 
         return weightForHeight;
     }
@@ -103,15 +103,15 @@ public class WeightForHeightCalculator extends AbstractCalculator implements ICa
 
 
     @Override
-    public List getScoreRange(int minWeeks, int maxWeeks, int minMonths, int maxMonths, int minYears, int maxYears, Sex sex, ZScoreGraphTypes zScoreGraphTypes) {
+    public List getScoreRange(int minHeight, int maxHeight, Sex sex, ZScoreGraphTypes zScoreGraphTypes) {
         List<WeightForHeight> scoreRangeForWeightForHeight = null;
         switch (zScoreGraphTypes){
 
             case WEIGHT_FOR_HEIGHT_BOYS:
-                scoreRangeForWeightForHeight = weightForHeightDataSource.getScoreRange(minWeeks, maxWeeks, minMonths, maxMonths, minYears, maxYears, Sex.MALE);
+                scoreRangeForWeightForHeight = weightForHeightDataSource.getScoreRange(minHeight, maxHeight, Sex.MALE);
                 break;
             case WEIGHT_FOR_HEIGHT_GIRLS:
-                scoreRangeForWeightForHeight = weightForHeightDataSource.getScoreRange(minWeeks, maxWeeks, minMonths, maxMonths, minYears, maxYears, Sex.FEMALE);
+                scoreRangeForWeightForHeight = weightForHeightDataSource.getScoreRange(minHeight, maxHeight, Sex.FEMALE);
                 break;
         }
 

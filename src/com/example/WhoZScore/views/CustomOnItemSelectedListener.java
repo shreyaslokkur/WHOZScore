@@ -36,7 +36,7 @@ public class CustomOnItemSelectedListener implements OnItemSelectedListener  {
             }else if(spinner.getId() == R.id.yearsId){
                 int years = Integer.parseInt((String) parent.getSelectedItem());
                 whoZScore.setPatientAgeInYears(years);
-                if(years == 10){
+                if(years == 5){
                     whoZScore.toggleSpinners(Age.MONTHS, false);
                     whoZScore.toggleSpinners(Age.WEEKS, false);
                 }

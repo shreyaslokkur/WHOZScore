@@ -21,7 +21,7 @@ import java.util.List;
  * Time: 12:08 AM
  * To change this template use File | Settings | File Templates.
  */
-public class WeightForAgeCalculator extends AbstractCalculator implements ICalculator {
+public class WeightForAgeCalculator extends AbstractCalculator {
 
     IZScoreDataSource weightForAgeDataSource;
 

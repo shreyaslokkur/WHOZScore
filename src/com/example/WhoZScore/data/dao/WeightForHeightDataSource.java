@@ -18,7 +18,7 @@ import java.util.List;
  * Time: 6:32 PM
  * To change this template use File | Settings | File Templates.
  */
-public class WeightForHeightDataSource extends AbstractZScoreDataSource implements IZScoreDataSource {
+public class WeightForHeightDataSource extends AbstractZScoreDataSource {
 
 
     private MySqliteHelper dbHelper;
@@ -42,10 +42,10 @@ public class WeightForHeightDataSource extends AbstractZScoreDataSource implemen
     }
 
 
-    private WeightForHeight getScoreForBoys(int weeks, int months, int years) {
+    private WeightForHeight getScoreForBoys(int height) {
         WeightForHeight weightForHeight = null;
-        String whereClaue = COLUMN_WEEKS + "=?" + " and " + COLUMN_MONTHS + "=?" + " and " + COLUMN_YEARS + "=?" ;
-        String[] whereParameters = new String[]{String.valueOf(weeks),String.valueOf(months),String.valueOf(years)};
+        String whereClaue = COLUMN_HEIGHT + "=?"  ;
+        String[] whereParameters = new String[]{String.valueOf(height)};
 
 
         Cursor cursor = dbHelper.myDataBase.query(BOYS_WEIGHT_FOR_HEIGHT,
@@ -64,65 +64,24 @@ public class WeightForHeightDataSource extends AbstractZScoreDataSource implemen
         return weightForHeight;
     }
 
-    public IZScoreEntity getScore(int weeks, int months, int years, Sex sex){
-        if(years >= 5){
-            int minMonth=months;
-            int maxMonth = months;
-            int maxYear = years;
-            WeightForHeight scoreForMinMonth = null;
-            WeightForHeight scoreForMaxMonth = null;
-            if(months > 0 && months < 3 ){
-                minMonth = 0;
-                maxMonth = 3;
-            }else if(months > 3 && months <6){
-                minMonth = 3;
-                maxMonth = 6;
-            }else if(months > 6 && months <9){
-                minMonth = 6;
-                maxMonth = 9;
-            }else if(months > 9) {
-                minMonth = 9;
-                maxMonth = 0;
-                maxYear = maxYear + 1;
-            }
-            if(Sex.FEMALE.equals(sex)){
-                scoreForMinMonth = getScoreForGirls(weeks, minMonth, years);
-                scoreForMaxMonth = getScoreForGirls(weeks, maxMonth, maxYear);
+    public IZScoreEntity getScore(int height, Sex sex){
 
-            }else {
-                scoreForMinMonth = getScoreForBoys(weeks, minMonth, years);
-                scoreForMaxMonth = getScoreForBoys(weeks, maxMonth, maxYear);
-            }
-
-            return averageWeightForHeight(scoreForMinMonth, scoreForMaxMonth);
+        if(Sex.FEMALE.equals(sex)){
+            return getScoreForGirls(height);
         }else {
-            if(Sex.FEMALE.equals(sex)){
-                return getScoreForGirls(weeks,months,years);
-            }else {
-                return getScoreForBoys(weeks,months,years);
-            }
-
+            return getScoreForBoys(height);
         }
 
+
+
     }
 
-    private WeightForHeight averageWeightForHeight(WeightForHeight scoreForBoysForMinMonth, WeightForHeight scoreForBoysForMaxMonth) {
-        WeightForHeight weightForHeight = new WeightForHeight();
-        weightForHeight.setMinusOneScore(scoreForBoysForMinMonth.getMinusOneScore());
-        weightForHeight.setMinusTwoScore(scoreForBoysForMinMonth.getMinusTwoScore());
-        weightForHeight.setMinusThreeScore(scoreForBoysForMinMonth.getMinusThreeScore());
-        weightForHeight.setOneScore(scoreForBoysForMaxMonth.getOneScore());
-        weightForHeight.setTwoScore(scoreForBoysForMaxMonth.getTwoScore());
-        weightForHeight.setThreeScore(scoreForBoysForMaxMonth.getThreeScore());
-        double averageZeroScore = (scoreForBoysForMaxMonth.getZeroScore() + scoreForBoysForMinMonth.getZeroScore()) / 2;
-        weightForHeight.setZeroScore(averageZeroScore);
-        return weightForHeight;
-    }
 
-    private WeightForHeight getScoreForGirls(int weeks, int months, int years) {
+
+    private WeightForHeight getScoreForGirls(int height) {
         WeightForHeight weightForHeight = null;
-        String whereClaue = COLUMN_WEEKS + "=?" + " and " + COLUMN_MONTHS + "=?" + " and " + COLUMN_YEARS + "=?" ;
-        String[] whereParameters = new String[]{String.valueOf(weeks),String.valueOf(months),String.valueOf(years)};
+        String whereClaue = COLUMN_HEIGHT + "=?"  ;
+        String[] whereParameters = new String[]{String.valueOf(height)};
 
 
         Cursor cursor = dbHelper.myDataBase.query(GIRLS_WEIGHT_FOR_HEIGHT,
@@ -141,11 +100,11 @@ public class WeightForHeightDataSource extends AbstractZScoreDataSource implemen
         return weightForHeight;
     }
 
-    public List<WeightForHeight> getScoreRange(int minWeeks, int maxWeeks, int minMonths, int maxMonths, int minYears, int maxYears, Sex sex){
+    public List<WeightForHeight> getScoreRange(int minHeight, int maxHeight, Sex sex){
         List<WeightForHeight> weightForHeightList = new ArrayList<WeightForHeight>();
-        String whereClause = COLUMN_WEEKS + " BETWEEN " + "?" + "AND " + "?" + " AND " + COLUMN_MONTHS + " BETWEEN " + "?" + "AND " + "?" + " AND " + COLUMN_YEARS + " BETWEEN " + "?" + "AND " + "?" ;
+        String whereClause = COLUMN_HEIGHT + " BETWEEN " + "?" + "AND " + "?" ;
 
-        String[] whereParameters = new String[]{String.valueOf(minWeeks),String.valueOf(maxWeeks),String.valueOf(minMonths),String.valueOf(maxMonths),String.valueOf(minYears), String.valueOf(maxYears)};
+        String[] whereParameters = new String[]{String.valueOf(minHeight),String.valueOf(maxHeight)};
 
         String tableName;
         if(Sex.MALE.equals(sex)){
