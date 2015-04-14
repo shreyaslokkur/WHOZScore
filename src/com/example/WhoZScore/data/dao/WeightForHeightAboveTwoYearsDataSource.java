@@ -134,13 +134,13 @@ public class WeightForHeightAboveTwoYearsDataSource extends AbstractZScoreDataSo
 
     private WeightForHeight cursorToWeightForHeight(Cursor cursor) {
         WeightForHeight weightForHeight = new WeightForHeight();
-        weightForHeight.setThreeScore(cursor.getDouble(THREE_SCORE_COLUMN_INDEX));
-        weightForHeight.setTwoScore(cursor.getDouble(TWO_SCORE_COLUMN_INDEX));
-        weightForHeight.setOneScore(cursor.getDouble(ONE_SCORE_COLUMN_INDEX));
-        weightForHeight.setZeroScore(cursor.getDouble(ZERO_SCORE_COLUMN_INDEX));
-        weightForHeight.setMinusOneScore(cursor.getDouble(MINUS_ONE_SCORE_COLUMN_INDEX));
-        weightForHeight.setMinusTwoScore(cursor.getDouble(MINUS_TWO_SCORE_COLUMN_INDEX));
-        weightForHeight.setMinusThreeScore(cursor.getDouble(MINUS_THREE_SCORE_COLUMN_INDEX));
+        weightForHeight.setThreeScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_THREE_SCORE)));
+        weightForHeight.setTwoScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_TWO_SCORE)));
+        weightForHeight.setOneScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_ONE_SCORE)));
+        weightForHeight.setZeroScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_ZERO_SCORE)));
+        weightForHeight.setMinusOneScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_ONE_SCORE)));
+        weightForHeight.setMinusTwoScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_TWO_SCORE)));
+        weightForHeight.setMinusThreeScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_THREE_SCORE)));
         return weightForHeight;
     }
 }

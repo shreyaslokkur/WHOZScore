@@ -69,25 +69,54 @@ public class AbstractCalculator implements ICalculator  {
                 for(int i = 3; i< 12; i++){
                     xAxis.add(i);
                 }
-            }else if(maxYears == 2){
-                for(int i = 12; i <24; i++){
-                    xAxis.add(i);
-                }
-            }else if(maxYears == 3){
-                for(int i = 24; i <36; i++){
-                    xAxis.add(i);
-                }
-            }else if(maxYears == 4){
-                for(int i = 36; i <48; i++){
-                    xAxis.add(i);
-                }
             }else if(maxYears == 5){
-                for(int i = 48; i< 60; i++){
+                for(int i = 0; i<= 12; i++){
+                    xAxis.add(i);
+                }
+            }else{
+                for(int i = 0; i <12; i++){
                     xAxis.add(i);
                 }
             }
         }
         return xAxis;
+    }
+
+    public List<String> createXTextLabels(AgeGroup ageGroup){
+        List<String> xTextLabels = new ArrayList<String>();
+        if(AgeGroup.WEEKS.equals(ageGroup)){
+            for(int i = 0; i<= 12; i++){
+                xTextLabels.add(String.valueOf(i));
+            }
+        }else if(AgeGroup.TILLONEYEAR.equals(ageGroup)){
+            xTextLabels.add("3 months");
+            for(int i = 4; i< 12; i++){
+                xTextLabels.add(String.valueOf(i));
+            }
+        }else if(AgeGroup.TILLTWOYEARS.equals(ageGroup)){
+            xTextLabels.add("1 year");
+            for(int i = 1; i< 12; i++){
+                xTextLabels.add(String.valueOf(i));
+            }
+        }else if(AgeGroup.TILLTHREEYEARS.equals(ageGroup)){
+            xTextLabels.add("2 years");
+            for(int i = 1; i< 12; i++){
+                xTextLabels.add(String.valueOf(i));
+            }
+        }else if(AgeGroup.TILLFOURYEARS.equals(ageGroup)){
+            xTextLabels.add("3 years");
+            for(int i = 1; i< 12; i++){
+                xTextLabels.add(String.valueOf(i));
+            }
+        }else if(AgeGroup.TILLFIVEYEARS.equals(ageGroup)){
+            xTextLabels.add("4 years");
+            for(int i = 1; i< 12; i++){
+                xTextLabels.add(String.valueOf(i));
+            }
+            xTextLabels.add("5 years");
+        }
+
+        return xTextLabels;
     }
 
 

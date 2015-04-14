@@ -56,6 +56,7 @@ public class HeightForAgeCalculator extends AbstractCalculator  {
         }
 
         List<Integer> xAxis = createXAxis(age, ageGroup.getMaxYears());
+        List<String> xAxisTextLabels = createXTextLabels(ageGroup);
         List<HeightForAge> scoreRangeForHeight = null;
 
 
@@ -71,6 +72,7 @@ public class HeightForAgeCalculator extends AbstractCalculator  {
 
         graphModel = createGraphModelForHeight(scoreRangeForHeight, zScoreGraphTypes, age, patient);
         graphModel.setxAxis(xAxis);
+        graphModel.setxAxisTextLabels(xAxisTextLabels);
         graphModel.setAgeInWeeks(patient.getAgeInWeeks());
         graphModel.setAgeInMonths(patient.getAgeInMonths());
         graphModel.setAgeInYears(patient.getAgeInYears());

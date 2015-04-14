@@ -23,6 +23,7 @@ public class GraphModel {
     private List<Double> twoScore = new ArrayList<Double>();
     private List<Double> threeScore = new ArrayList<Double>();
     private List<Integer> xAxis = new ArrayList<Integer>();
+    private List<String> xAxisTextLabels = new ArrayList<String>();
     private Age age;
     private ZScoreGraphTypes zScoreGraphTypes;
     private double patientWeight;
@@ -99,6 +100,14 @@ public class GraphModel {
 
     public void setxAxis(List<Integer> xAxis) {
         this.xAxis = xAxis;
+    }
+
+    public List<String> getxAxisTextLabels() {
+        return xAxisTextLabels;
+    }
+
+    public void setxAxisTextLabels(List<String> xAxisTextLabels) {
+        this.xAxisTextLabels = xAxisTextLabels;
     }
 
     public Age getAge() {

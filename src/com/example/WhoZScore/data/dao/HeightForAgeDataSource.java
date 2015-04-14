@@ -147,13 +147,13 @@ public class HeightForAgeDataSource extends AbstractZScoreDataSource {
 
     private HeightForAge cursorToHeightForAge(Cursor cursor) {
         HeightForAge heightForAge = new HeightForAge();
-        heightForAge.setThreeScore(cursor.getDouble(THREE_SCORE_COLUMN_INDEX));
-        heightForAge.setTwoScore(cursor.getDouble(TWO_SCORE_COLUMN_INDEX));
-        heightForAge.setOneScore(cursor.getDouble(ONE_SCORE_COLUMN_INDEX));
-        heightForAge.setZeroScore(cursor.getDouble(ZERO_SCORE_COLUMN_INDEX));
-        heightForAge.setMinusOneScore(cursor.getDouble(MINUS_ONE_SCORE_COLUMN_INDEX));
-        heightForAge.setMinusTwoScore(cursor.getDouble(MINUS_TWO_SCORE_COLUMN_INDEX));
-        heightForAge.setMinusThreeScore(cursor.getDouble(MINUS_THREE_SCORE_COLUMN_INDEX));
+        heightForAge.setThreeScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_THREE_SCORE)));
+        heightForAge.setTwoScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_TWO_SCORE)));
+        heightForAge.setOneScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_ONE_SCORE)));
+        heightForAge.setZeroScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_ZERO_SCORE)));
+        heightForAge.setMinusOneScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_ONE_SCORE)));
+        heightForAge.setMinusTwoScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_TWO_SCORE)));
+        heightForAge.setMinusThreeScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_THREE_SCORE)));
         return heightForAge;
     }
 }

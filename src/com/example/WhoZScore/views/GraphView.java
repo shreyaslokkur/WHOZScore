@@ -225,7 +225,7 @@ public class GraphView extends Fragment {
         multiRenderer.setMargins(new int[]{30, 30, 30, 30});
 
         for(int i=0; i< x.length;i++){
-            multiRenderer.addXTextLabel(i, String.valueOf(x[i]));
+            multiRenderer.addXTextLabel(i, graphModel.getxAxisTextLabels().get(i));
         }
 
 

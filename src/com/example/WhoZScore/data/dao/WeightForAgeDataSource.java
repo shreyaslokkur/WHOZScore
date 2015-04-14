@@ -147,13 +147,13 @@ public class WeightForAgeDataSource extends AbstractZScoreDataSource {
 
     private WeightForAge cursorToWeightForAge(Cursor cursor) {
         WeightForAge weightForAge = new WeightForAge();
-        weightForAge.setThreeScore(cursor.getDouble(THREE_SCORE_COLUMN_INDEX));
-        weightForAge.setTwoScore(cursor.getDouble(TWO_SCORE_COLUMN_INDEX));
-        weightForAge.setOneScore(cursor.getDouble(ONE_SCORE_COLUMN_INDEX));
-        weightForAge.setZeroScore(cursor.getDouble(ZERO_SCORE_COLUMN_INDEX));
-        weightForAge.setMinusOneScore(cursor.getDouble(MINUS_ONE_SCORE_COLUMN_INDEX));
-        weightForAge.setMinusTwoScore(cursor.getDouble(MINUS_TWO_SCORE_COLUMN_INDEX));
-        weightForAge.setMinusThreeScore(cursor.getDouble(MINUS_THREE_SCORE_COLUMN_INDEX));
+        weightForAge.setThreeScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_THREE_SCORE)));
+        weightForAge.setTwoScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_TWO_SCORE)));
+        weightForAge.setOneScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_ONE_SCORE)));
+        weightForAge.setZeroScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_ZERO_SCORE)));
+        weightForAge.setMinusOneScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_ONE_SCORE)));
+        weightForAge.setMinusTwoScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_TWO_SCORE)));
+        weightForAge.setMinusThreeScore(cursor.getDouble(cursor.getColumnIndex(COLUMN_MINUS_THREE_SCORE)));
         return weightForAge;
     }
 }
