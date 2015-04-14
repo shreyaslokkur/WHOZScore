@@ -27,6 +27,7 @@ public class GraphModel {
     private ZScoreGraphTypes zScoreGraphTypes;
     private double patientWeight;
     private double patientHeight;
+    private double patientHeadCircumference;
     private int ageInWeeks;
     private int ageInMonths;
     private int ageInYears;
@@ -130,6 +131,14 @@ public class GraphModel {
 
     public void setPatientHeight(double patientHeight) {
         this.patientHeight = patientHeight;
+    }
+
+    public double getPatientHeadCircumference() {
+        return patientHeadCircumference;
+    }
+
+    public void setPatientHeadCircumference(double patientHeadCircumference) {
+        this.patientHeadCircumference = patientHeadCircumference;
     }
 
     public int getyMin() {

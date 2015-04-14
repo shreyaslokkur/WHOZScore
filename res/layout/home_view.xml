@@ -26,6 +26,7 @@
                       android:background="#ffffff"
                       android:layout_weight="12">
             <ImageButton android:background="@drawable/boy_button_image"
+                         android:contentDescription="Boy"
                          android:layout_height="match_parent"
                          android:layout_width="fill_parent"
                          android:layout_weight="10"
@@ -36,6 +37,7 @@
                          android:id="@+id/boy_image"
                          android:onClick="onBoyImageClickHandler"/>
             <ImageButton android:background="@drawable/girl_button_image"
+                         android:contentDescription="Girl"
                          android:layout_height="match_parent"
                          android:layout_width="fill_parent"
                          android:layout_weight="10"

@@ -24,8 +24,11 @@ import com.example.WhoZScore.model.Result;
  */
 public class ResultView extends Fragment {
 
-    private TextView ageText, weightText, heightText, zScoreWeightMessageText, zScoreHeightMessageText, zScoreWeightForHeightMessageText, weightHeader, heightHeader;
+    private TextView ageText, weightText, heightText, headCircumferenceText, zScoreWeightMessageText, zScoreHeightMessageText, zScoreWeightForHeightMessageText, zScoreHeadCircumferenceForAgeMessageText, weightHeader, heightHeader, weightForHeightHeader, headCircumferenceHeader;
 
+    private LinearLayout heightResultLayout, weightForHeightLayout, weightResultLayout, headCircumferenceResultLayout;
+
+    private LinearLayout heightHeaderLayout, weightHeaderLayout, weightForHeightHeaderLayout, headCircumferenceHeaderLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,48 +38,67 @@ public class ResultView extends Fragment {
         ageText = (TextView) view.findViewById(R.id.ageResultTextId);
         weightText = (TextView) view.findViewById(R.id.weightResultTextId);
         heightText = (TextView) view.findViewById(R.id.heightResultTextId);
+        headCircumferenceText = (TextView) view.findViewById(R.id.headCircumferenceResultTextId);
         weightHeader = (TextView) view.findViewById(R.id.weightHeader);
         heightHeader = (TextView) view.findViewById(R.id.heightHeader);
+        headCircumferenceHeader = (TextView) view.findViewById(R.id.headCircumferenceForAgeHeader);
         zScoreWeightMessageText = (TextView) view.findViewById(R.id.zScoreWeightResultTextId);
         zScoreHeightMessageText = (TextView) view.findViewById(R.id.zScoreHeightResultTextId);
         zScoreWeightForHeightMessageText = (TextView) view.findViewById(R.id.zScoreWeightForHeightResultTextId);
+        zScoreHeadCircumferenceForAgeMessageText = (TextView) view.findViewById(R.id.zScoreHeadCircumferenceForAgeResultTextId);
+        weightResultLayout = (LinearLayout) view.findViewById(R.id.weightResultLayout);
+        heightResultLayout = (LinearLayout) view.findViewById(R.id.heightResultLayout);
+        weightForHeightHeader = (TextView) view.findViewById(R.id.weightForHeightHeader);
+        weightForHeightLayout = (LinearLayout) view.findViewById(R.id.weightForHeightResultLayout);
+        headCircumferenceResultLayout = (LinearLayout) view.findViewById(R.id.headCircumferenceForAgeResultLayout);
 
-
+        heightHeaderLayout = (LinearLayout) view.findViewById(R.id.heightHeaderLayout);
+        weightHeaderLayout = (LinearLayout) view.findViewById(R.id.weightHeaderLayout);
+        weightForHeightHeaderLayout = (LinearLayout) view.findViewById(R.id.weightForHeightHeaderLayout);
+        headCircumferenceHeaderLayout = (LinearLayout) view.findViewById(R.id.headCircumferenceForAgeHeaderLayout);
 
         Result result = ((WhoZScore) getActivity()).getResult();
         final Patient patient = ((WhoZScore) getActivity()).getPatient();
         if(patient.getHeight() == 0){
-            View heightHeader = view.findViewById(R.id.heightHeader);
-            View heightResultLayout = view.findViewById(R.id.heightResultLayout);
-            View weightForHeightHeader = view.findViewById(R.id.weightForHeightHeader);
-            View weightForHeightLayout = view.findViewById(R.id.weightForHeightResultLayout);
-            ((LinearLayout)heightHeader.getParent()).removeView(heightHeader);
-            ((LinearLayout)weightForHeightHeader.getParent()).removeView(weightForHeightHeader);
+
+            ((LinearLayout)heightHeaderLayout.getParent()).removeView(heightHeaderLayout);
+            ((LinearLayout)weightForHeightHeaderLayout.getParent()).removeView(weightForHeightHeaderLayout);
             ((LinearLayout)heightResultLayout.getParent()).removeView(heightResultLayout);
             ((LinearLayout)weightForHeightLayout.getParent()).removeView(weightForHeightLayout);
         }else {
             heightText.setText(String.valueOf(patient.getHeight()) + "cms");
             heightText.setTextColor(Color.BLACK);
-            zScoreHeightMessageText.setText(result.getzScoreHeightForAgeMessage());
+            zScoreHeightMessageText.setText(setMessage(result.getzScoreHeightForAgeMessage(), result.getHealthyHeightForAgeMessage()));
         }
 
         if(patient.getWeight() == 0){
-            View weightHeader = view.findViewById(R.id.weightHeader);
-            View weightResultLayout = view.findViewById(R.id.weightResultLayout);
-            View weightForHeightHeader = view.findViewById(R.id.weightForHeightHeader);
-            View weightForHeightLayout = view.findViewById(R.id.weightForHeightResultLayout);
-            ((LinearLayout)weightHeader.getParent()).removeView(weightHeader);
-            ((LinearLayout)weightForHeightHeader.getParent()).removeView(weightForHeightHeader);
+
+            ((LinearLayout)weightHeaderLayout.getParent()).removeView(weightHeaderLayout);
+            ((LinearLayout)weightForHeightHeaderLayout.getParent()).removeView(weightForHeightHeaderLayout);
             ((LinearLayout)weightResultLayout.getParent()).removeView(weightResultLayout);
             ((LinearLayout)weightForHeightLayout.getParent()).removeView(weightForHeightLayout);
         }else {
             weightText.setText(String.valueOf(patient.getWeight()) + "kg");
             weightText.setTextColor(Color.BLACK);
-            zScoreWeightMessageText.setText(result.getzScoreWeightForAgeMessage());
+            zScoreWeightMessageText.setText(setMessage(result.getzScoreWeightForAgeMessage(), result.getHealthyWeightForAgeMessage()));
         }
 
         if(patient.getHeight() > 0 && patient.getWeight() > 0){
-            zScoreWeightForHeightMessageText.setText(result.getzScoreWeightForHeightMessage());
+            zScoreWeightForHeightMessageText.setText(setMessage(result.getzScoreWeightForHeightMessage(), result.getHealthyWeightForHeightMessage()));
+        }
+
+        if(patient.getHeadCircumference() == 0){
+
+
+            ((LinearLayout)headCircumferenceHeaderLayout.getParent()).removeView(headCircumferenceHeaderLayout);
+
+            ((LinearLayout)headCircumferenceResultLayout.getParent()).removeView(headCircumferenceResultLayout);
+
+
+        }else {
+            headCircumferenceText.setText(String.valueOf(patient.getHeadCircumference()) + "cms");
+            headCircumferenceText.setTextColor(Color.BLACK);
+            zScoreHeadCircumferenceForAgeMessageText.setText(result.getzScoreHeadCircumferenceForAgeMessage());
         }
 
 
@@ -118,6 +140,13 @@ public class ResultView extends Fragment {
     private String getAge(Patient patient){
         String age = patient.getAgeInYears() + " years, "+patient.getAgeInMonths()+" months and "+patient.getAgeInWeeks() +" weeks";
         return age;
+    }
+
+    private String setMessage(String zScore, String healthyMessage){
+        StringBuilder message = new StringBuilder(zScore);
+        message.append(" ( ").append(healthyMessage).append(" )");
+
+        return message.toString();
     }
 
 

@@ -14,7 +14,9 @@ public enum ZScoreGraphTypes {
     HEIGHT_FOR_AGE_BOYS("Height for Age Boys","Height (cms)"),
     HEIGHT_FOR_AGE_GIRLS("Height for Age Girls","Height (cms)"),
     WEIGHT_FOR_HEIGHT_BOYS("Weight for Height Boys","Weight (kg)"),
-    WEIGHT_FOR_HEIGHT_GIRLS("Weight for Height Girls","Weight (kg)");
+    WEIGHT_FOR_HEIGHT_GIRLS("Weight for Height Girls","Weight (kg)"),
+    HEAD_CIRCUMFERENCE_FOR_AGE_BOYS("Head circumference for Age Boys", "Height (cms)"),
+    HEAD_CIRCUMFERENCE_FOR_AGE_GIRLS("Head circumference for Age Girls", "Height (cms)");
 
     private String graphNames;
     private String yAxis;

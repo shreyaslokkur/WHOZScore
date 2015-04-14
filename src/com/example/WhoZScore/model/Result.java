@@ -16,6 +16,8 @@ public class Result implements IResult {
     private String healthyHeightForAgeMessage;
     private String zScoreWeightForHeightMessage;
     private String healthyWeightForHeightMessage;
+    private String zScoreHeadCircumferenceForAgeMessage;
+    private String healthyHeadCircumferenceForAgeMessage;
 
     public boolean isHealthy() {
         return isHealthy;
@@ -71,5 +73,21 @@ public class Result implements IResult {
 
     public void setHealthyWeightForHeightMessage(String healthyWeightForHeightMessage) {
         this.healthyWeightForHeightMessage = healthyWeightForHeightMessage;
+    }
+
+    public String getzScoreHeadCircumferenceForAgeMessage() {
+        return zScoreHeadCircumferenceForAgeMessage;
+    }
+
+    public void setzScoreHeadCircumferenceForAgeMessage(String zScoreHeadCircumferenceForAgeMessage) {
+        this.zScoreHeadCircumferenceForAgeMessage = zScoreHeadCircumferenceForAgeMessage;
+    }
+
+    public String getHealthyHeadCircumferenceForAgeMessage() {
+        return healthyHeadCircumferenceForAgeMessage;
+    }
+
+    public void setHealthyHeadCircumferenceForAgeMessage(String healthyHeadCircumferenceForAgeMessage) {
+        this.healthyHeadCircumferenceForAgeMessage = healthyHeadCircumferenceForAgeMessage;
     }
 }

@@ -135,6 +135,18 @@
                     android:textColor="#122e4d"
                     android:textIsSelectable="true"/>
         </LinearLayout>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height"
+                android:textStyle="bold"
+                android:textColor="#122e4d"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginBottom="20dp"
+                android:textSize="18dp"
+                android:textIsSelectable="false"
+                />
         <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -162,6 +174,46 @@
                     android:textColor="#122e4d"
                     android:textIsSelectable="true"/>
         </LinearLayout>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Head Circumference"
+                android:textStyle="bold"
+                android:textColor="#122e4d"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginBottom="20dp"
+                android:textSize="18dp"
+                android:textIsSelectable="false"
+                />
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#ffffff"
+                android:layout_marginBottom="10dp">
+
+
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="10"
+                    android:id="@+id/headCircumferenceId"
+                    android:inputType="numberDecimal|none"
+                    android:digits="0123456789."
+                    android:hint="40"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cm"
+                    android:layout_gravity="center"
+                    android:layout_weight="10"
+                    android:textColor="#122e4d"
+                    android:textIsSelectable="true"/>
+        </LinearLayout>
+
         <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

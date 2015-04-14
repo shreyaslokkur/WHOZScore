@@ -1,5 +1,6 @@
 package com.example.WhoZScore.core.checker;
 
+import android.content.Context;
 import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.model.IResult;
 import com.example.WhoZScore.model.Patient;
@@ -14,5 +15,5 @@ import com.example.WhoZScore.model.Result;
  */
 public interface IHealthChecker {
 
-    IResult getHealthResult(Patient patient, IZScoreEntity zScoreEntity);
+    IResult getHealthResult(Patient patient, IZScoreEntity zScoreEntity, Context context);
 }

@@ -1,5 +1,8 @@
 package com.example.WhoZScore.core.checker;
 
+import android.content.Context;
+import com.example.WhoZScore.R;
+import com.example.WhoZScore.WhoZScore;
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.model.HeightForAgeResult;
@@ -17,43 +20,51 @@ public class HeightForAgeHealthChecker implements IHealthChecker {
 
 
 
-    public IResult getHealthResult(Patient patient, IZScoreEntity zScoreEntity){
+    public IResult getHealthResult(Patient patient, IZScoreEntity zScoreEntity, Context context){
         IResult heightForAgeResult;
-        heightForAgeResult = calculateHeightResultForAge(patient, zScoreEntity);
+        heightForAgeResult = calculateHeightResultForAge(patient, zScoreEntity, context);
         return heightForAgeResult;
     }
 
-    private IResult calculateHeightResultForAge(Patient patient, IZScoreEntity zScoreEntity) {
+    private IResult calculateHeightResultForAge(Patient patient, IZScoreEntity zScoreEntity, Context context) {
         HeightForAgeResult heightForAgeResult = new HeightForAgeResult();
         HeightForAge heightForAge = (HeightForAge) zScoreEntity;
         double height = patient.getHeight();
-        String message = null;
+        String zScoreMessage = null;
+        String indicatorMessage = null;
         boolean isHealthy;
         if(height > heightForAge.getThreeScore() ){
-            message = "Greater than 3 ZScore";
+            zScoreMessage = context.getString(R.string.greater_than_three);
+            indicatorMessage = context.getString(R.string.height_for_age_more_than_three);
             isHealthy = false;
 
         }else if(height <= heightForAge.getThreeScore() && height >= heightForAge.getTwoScore()){
-            message = "Between 2 and 3 ZScore ";
+            zScoreMessage = context.getString(R.string.between_two_and_three);
+            indicatorMessage = context.getString(R.string.height_for_age_more_than_two);
             isHealthy = false;
 
         }else if(height < heightForAge.getTwoScore() && height >= heightForAge.getZeroScore()){
-            message = "Between 0 and 2 ZScore ";
+            zScoreMessage = context.getString(R.string.between_zero_and_two);
+            indicatorMessage = context.getString(R.string.normal_parameters);
             isHealthy = true;
 
         }else if(height < heightForAge.getZeroScore() && height >= heightForAge.getMinusTwoScore()){
-            message = "Between -2 and 0 ZScore ";
+            zScoreMessage = context.getString(R.string.between_minus_two_and_zero);
+            indicatorMessage = context.getString(R.string.normal_parameters);
             isHealthy = true;
 
         }else if(height < heightForAge.getMinusTwoScore() && height >= heightForAge.getMinusThreeScore()){
-            message = "Between -3 and -2 ZScore ";
+            zScoreMessage = context.getString(R.string.between_minus_three_and_minus_two);
+            indicatorMessage = context.getString(R.string.height_for_age_less_than_minus_two);
             isHealthy = false;
         }else{
-            message = "Lesser than -3 ZScore";
+            zScoreMessage = context.getString(R.string.lesser_than_minus_three);
+            indicatorMessage = context.getString(R.string.height_for_age_less_than_minus_three);
             isHealthy = false;
         }
         heightForAgeResult.setHealthy(isHealthy);
-        heightForAgeResult.setzScoreHeightMessage(message);
+        heightForAgeResult.setzScoreHeightMessage(zScoreMessage);
+        heightForAgeResult.setHealthyHeightMessage(indicatorMessage);
         return heightForAgeResult;
     }
 

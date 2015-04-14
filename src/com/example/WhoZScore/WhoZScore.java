@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.widget.Spinner;
 import com.example.WhoZScore.core.calculator.*;
 import com.example.WhoZScore.core.checker.HealthCheckerDelegator;
+import com.example.WhoZScore.data.entities.HeadCircumferenceForAge;
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.data.entities.WeightForHeight;
@@ -76,10 +77,15 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
         patient.setHeight(height);
     }
 
+    public void setPatientHeadCircumference(double headCircumference){
+        patient.setHeadCircumference(headCircumference);
+    }
+
     public void onFormSubmit(){
         WeightForAge weightForAge = null;
         HeightForAge heightForAge = null;
         WeightForHeight weightForHeight = null;
+        HeadCircumferenceForAge headCircumferenceForAge = null;
 
         if(patient.getWeight() > 0.0){
             calculator = new WeightForAgeCalculator();
@@ -93,8 +99,12 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
             calculator = new WeightForHeightCalculator();
             weightForHeight = (WeightForHeight) calculator.calculateZScore(patient, this);
         }
+        if(patient.getHeadCircumference() > 0.0){
+            calculator = new HeadCircumferenceForAgeCalculator();
+            headCircumferenceForAge = (HeadCircumferenceForAge) calculator.calculateZScore(patient,this);
+        }
 
-        result = healthChecker.getHealthResult(patient, weightForAge, heightForAge, weightForHeight);
+        result = healthChecker.getHealthResult(patient, weightForAge, heightForAge, weightForHeight, headCircumferenceForAge, this);
 
     }
 

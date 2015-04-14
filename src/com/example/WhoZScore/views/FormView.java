@@ -32,6 +32,7 @@ public class FormView extends Fragment {
     private Button submitButton;
     private EditText weightText;
     private EditText heightText;
+    private EditText headCircumferenceText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +52,8 @@ public class FormView extends Fragment {
         submitButton = (Button) view.findViewById(R.id.submitButton);
 
         heightText = (EditText) view.findViewById(R.id.heightId);
+
+        headCircumferenceText = (EditText) view.findViewById(R.id.headCircumferenceId);
 
         weightText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,6 +96,29 @@ public class FormView extends Fragment {
                     toggleSubmitButton();
                 }else {
                     ((WhoZScore)getActivity()).setPatientHeight(0.0);
+                    toggleSubmitButton();
+                }
+            }
+        });
+
+        headCircumferenceText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()> 0){
+                    ((WhoZScore)getActivity()).setPatientHeadCircumference(Double.parseDouble(headCircumferenceText.getText().toString()));
+                    toggleSubmitButton();
+                }else {
+                    ((WhoZScore)getActivity()).setPatientHeadCircumference(0.0);
                     toggleSubmitButton();
                 }
             }

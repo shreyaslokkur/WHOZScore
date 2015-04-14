@@ -17,6 +17,7 @@ public class Patient {
     private int ageInWeeks;
     private double weight;
     private double height;
+    private double headCircumference;
     private int zScore;
 
     public Sex getSex() {
@@ -65,6 +66,14 @@ public class Patient {
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    public double getHeadCircumference() {
+        return headCircumference;
+    }
+
+    public void setHeadCircumference(double headCircumference) {
+        this.headCircumference = headCircumference;
     }
 
     public int getzScore() {

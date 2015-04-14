@@ -91,11 +91,45 @@
 
         </LinearLayout>
 
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:background="#ffffff"
+                      android:layout_marginBottom="10dp"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Head Circumference: "
+                    android:textStyle="bold"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left"
+                    android:textSize="14dp"
+                    android:textIsSelectable="false"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:id="@+id/headCircumferenceResultTextId"
+                    android:text="Head Circumference not entered"
+                    android:textColor="#4D4F50"
+
+                    />
+
+        </LinearLayout>
+
         <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
 
+
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:background="#ffffff"
+                  android:id="@+id/weightHeaderLayout"
+            >
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,9 +142,14 @@
                 android:layout_marginBottom="20dp"
                 android:textSize="18dp"
                 android:clickable="true" android:singleLine="false"/>
+        <ImageButton
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:id="@+id/weightForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph" android:contentDescription="weightforAgeGraph"
+                android:layout_marginLeft="30dp"/>
 
 
-
+    </LinearLayout>
 
 
         <LinearLayout android:layout_width="fill_parent"
@@ -141,19 +180,34 @@
 
         </LinearLayout>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Height For Age "
-                android:id="@+id/heightHeader"
-                android:textStyle="bold"
-                android:textColor="#122e4d"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:textSize="18dp"
-                android:clickable="true"
-                android:singleLine="false"/>
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:background="#ffffff"
+                      android:id="@+id/heightHeaderLayout"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Height For Age "
+                    android:id="@+id/heightHeader"
+                    android:textStyle="bold"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="18dp"
+                    android:clickable="true"
+                    android:singleLine="false"/>
+            <ImageButton
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/heightForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph" android:contentDescription="heightForAgeGraph"
+                    android:layout_marginLeft="30dp"/>
+
+
+        </LinearLayout>
+
 
 
 
@@ -187,19 +241,34 @@
 
         </LinearLayout>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Weight For Height "
-                android:id="@+id/weightForHeightHeader"
-                android:textStyle="bold"
-                android:textColor="#122e4d"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:textSize="18dp"
-                android:clickable="true"
-                android:singleLine="false"/>
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:background="#ffffff"
+                      android:id="@+id/weightForHeightHeaderLayout"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight For Height "
+                    android:id="@+id/weightForHeightHeader"
+                    android:textStyle="bold"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="18dp"
+                    android:clickable="true"
+                    android:singleLine="false"/>
+            <ImageButton
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/weightForHeightGraph" android:layout_gravity="center" android:background="@drawable/graph"  android:contentDescription="weightForHeightGraph"
+                    android:layout_marginLeft="30dp"/>
+
+
+        </LinearLayout>
+
 
         <LinearLayout android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
@@ -224,6 +293,64 @@
                     android:layout_gravity="left"
                     android:textSize="14dp"
                     android:id="@+id/zScoreWeightForHeightResultTextId"
+
+                    />
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:background="#ffffff"
+                      android:id="@+id/headCircumferenceForAgeHeaderLayout"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Head Circumference For Age"
+                    android:id="@+id/headCircumferenceForAgeHeader"
+                    android:textStyle="bold"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="18dp"
+                    android:clickable="true"
+                    android:singleLine="false"/>
+            <ImageButton
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:id="@+id/headCircumferenceForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph" android:contentDescription="headCircumferenceGraph"
+                    android:layout_marginLeft="30dp"
+                    />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:background="#ffffff"
+                      android:id="@+id/headCircumferenceForAgeResultLayout"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Z Score: "
+                    android:textStyle="bold"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left"
+                    android:textSize="14dp"
+                    android:textIsSelectable="false"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:textColor="#122e4d"
+                    android:layout_gravity="left"
+                    android:textSize="14dp"
+                    android:id="@+id/zScoreHeadCircumferenceForAgeResultTextId"
 
                     />
 
