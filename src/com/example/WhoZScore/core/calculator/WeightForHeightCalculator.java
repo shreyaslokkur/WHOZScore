@@ -13,6 +13,7 @@ import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.GraphModel;
 import com.example.WhoZScore.model.Patient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,54 +47,42 @@ public class WeightForHeightCalculator extends AbstractCalculator  {
             weightForHeightDataSource = new WeightForHeightBelowTwoYearsDataSource(context);
         }
 
-        Age age= Age.MONTHS;
-        AgeGroup ageGroup = null;
         GraphModel graphModel = null;
-        if(patient.getAgeInWeeks() > 0)  {
-            ageGroup = AgeGroup.WEEKS;
-            age = Age.WEEKS;
-        }else if(patient.getAgeInMonths() > 0 && (patient.getAgeInYears() >= 0 && patient.getAgeInYears() < 1)){
-            ageGroup = AgeGroup.TILLONEYEAR;
-        }else if(patient.getAgeInMonths() >= 0 && (patient.getAgeInYears() >=1 && patient.getAgeInYears() <2)){
-            ageGroup = AgeGroup.TILLTWOYEARS;
-        }else if(patient.getAgeInMonths() >= 0 && (patient.getAgeInYears() >= 2 && patient.getAgeInYears() < 3)){
-            ageGroup = AgeGroup.TILLTHREEYEARS;
-        }else if(patient.getAgeInMonths() >= 0 && (patient.getAgeInYears() >= 3 && patient.getAgeInYears() < 4)){
-            ageGroup = AgeGroup.TILLFOURYEARS;
-        }else {
-            ageGroup = AgeGroup.TILLFIVEYEARS;
-        }
 
-        List<Integer> xAxis = createXAxis(age, ageGroup.getMaxYears());
-        List<String> xAxisTextLabels = createXTextLabels(ageGroup);
+
+
         List<WeightForHeight> scoreRangeForWeightForHeight = null;
+
+        Double minGraphXAxis = patient.getHeight() - 5;
+        Double maxGraphXAxis = patient.getHeight() + 5;
+
+        List<Integer> xAxis = createXAxis(minGraphXAxis.intValue(), maxGraphXAxis.intValue());
+        List<String> xAxisTextLabels = createXTextLabels(minGraphXAxis.intValue(), maxGraphXAxis.intValue());
 
         switch (zScoreGraphTypes){
 
             case WEIGHT_FOR_HEIGHT_BOYS:
-                scoreRangeForWeightForHeight = getScoreRange(ageGroup, patient.getSex(), zScoreGraphTypes);
+                scoreRangeForWeightForHeight = getScoreRange(minGraphXAxis.intValue(), maxGraphXAxis.intValue(), patient.getSex(), zScoreGraphTypes);
                 break;
             case WEIGHT_FOR_HEIGHT_GIRLS:
-                scoreRangeForWeightForHeight = getScoreRange(ageGroup, patient.getSex(), zScoreGraphTypes);
+                scoreRangeForWeightForHeight = getScoreRange(minGraphXAxis.intValue(), maxGraphXAxis.intValue(), patient.getSex(), zScoreGraphTypes);
                 break;
         }
 
-        graphModel = createGraphModelForWeightForHeight(scoreRangeForWeightForHeight, zScoreGraphTypes, age, patient);
+        graphModel = createGraphModelForWeightForHeight(scoreRangeForWeightForHeight, zScoreGraphTypes, patient);
         graphModel.setxAxis(xAxis);
         graphModel.setxAxisTextLabels(xAxisTextLabels);
         graphModel.setAgeInWeeks(patient.getAgeInWeeks());
         graphModel.setAgeInMonths(patient.getAgeInMonths());
         graphModel.setAgeInYears(patient.getAgeInYears());
-        graphModel.setAgeGroup(ageGroup);
 
 
         return graphModel;
     }
 
-    private GraphModel createGraphModelForWeightForHeight(List<WeightForHeight> scoreRangeForWeightForHeight, ZScoreGraphTypes zScoreGraphTypes, Age age, Patient patient) {
+    private GraphModel createGraphModelForWeightForHeight(List<WeightForHeight> scoreRangeForWeightForHeight, ZScoreGraphTypes zScoreGraphTypes, Patient patient) {
         GraphModel graphModel = new GraphModel();
         graphModel.setzScoreGraphTypes(zScoreGraphTypes);
-        graphModel.setAge(age);
         Double minusThreeScoreDoubleValue = new Double(scoreRangeForWeightForHeight.get(0).getMinusThreeScore());
         Double maxThreeScoreDoubleValue = new Double(scoreRangeForWeightForHeight.get(scoreRangeForWeightForHeight.size() - 1).getThreeScore());
         graphModel.setyMin( minusThreeScoreDoubleValue.intValue() - 10);
@@ -128,5 +117,22 @@ public class WeightForHeightCalculator extends AbstractCalculator  {
         }
 
         return scoreRangeForWeightForHeight;
+    }
+
+    public List<Integer> createXAxis(int minHeight, int maxHeight){
+        List<Integer> xAxis = new ArrayList<Integer>();
+        for(int i = minHeight; i<=maxHeight; i++){
+            xAxis.add(minHeight);
+        }
+        return xAxis;
+    }
+
+    public List<String> createXTextLabels(int minHeight, int maxHeight){
+        List<String> xAxis = new ArrayList<String>();
+        for(int i = minHeight; i<=maxHeight; i++){
+            xAxis.add(String.valueOf(minHeight));
+        }
+        return xAxis;
+
     }
 }
