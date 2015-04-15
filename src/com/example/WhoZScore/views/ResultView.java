@@ -131,6 +131,30 @@ public class ResultView extends Fragment {
             }
         });
 
+        weightForHeightHeader.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if(Sex.FEMALE.equals(patient.getSex()))
+                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_GIRLS);
+                else
+                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS);
+
+                ((WhoZScore)getActivity()).replaceFragment(graphView);
+
+            }
+        });
+
+        headCircumferenceHeader.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if(Sex.FEMALE.equals(patient.getSex()))
+                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_GIRLS);
+                else
+                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_BOYS);
+
+                ((WhoZScore)getActivity()).replaceFragment(graphView);
+
+            }
+        });
+
 
         // Inflate the layout for this fragment
         return view;

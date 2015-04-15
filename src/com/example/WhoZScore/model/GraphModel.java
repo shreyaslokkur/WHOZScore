@@ -36,6 +36,9 @@ public class GraphModel {
     private int yMin;
     private int yMax;
 
+    private int xMin;
+    private int xMax;
+
     private AgeGroup ageGroup;
 
     public List<Double> getMinusThreeScore() {
@@ -166,6 +169,21 @@ public class GraphModel {
         this.yMax = yMax;
     }
 
+    public int getxMin() {
+        return xMin;
+    }
+
+    public void setxMin(int xMin) {
+        this.xMin = xMin;
+    }
+
+    public int getxMax() {
+        return xMax;
+    }
+
+    public void setxMax(int xMax) {
+        this.xMax = xMax;
+    }
 
     public int getAgeInWeeks() {
         return ageInWeeks;

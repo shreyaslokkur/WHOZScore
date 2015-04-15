@@ -9,20 +9,27 @@ package com.example.WhoZScore.enums;
  */
 public enum AgeGroup {
 
-    WEEKS(0),
-    TILLONEYEAR(1),
-    TILLTWOYEARS(2),
-    TILLTHREEYEARS(3),
-    TILLFOURYEARS(4),
-    TILLFIVEYEARS(5);
+    WEEKS(0,"Age in Weeks"),
+    TILLONEYEAR(1,"Age in Months"),
+    TILLTWOYEARS(2,"Age in Months"),
+    TILLTHREEYEARS(3,"Age in Months"),
+    TILLFOURYEARS(4,"Age in Months"),
+    TILLFIVEYEARS(5,"Age in Months");
 
     private int maxYears;
+    private String xAxis;
 
-    private AgeGroup(int maxYears) {
+
+    private AgeGroup(int maxYears, String xAxis) {
         this.maxYears = maxYears;
+        this.xAxis = xAxis;
     }
 
     public int getMaxYears() {
         return maxYears;
+    }
+
+    public String getxAxis() {
+        return xAxis;
     }
 }

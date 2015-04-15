@@ -58,7 +58,8 @@ public class HeightForAgeCalculator extends AbstractCalculator  {
         List<Integer> xAxis = createXAxis(age, ageGroup.getMaxYears());
         List<String> xAxisTextLabels = createXTextLabels(ageGroup);
         List<HeightForAge> scoreRangeForHeight = null;
-
+        int minGraphXAxis = createXMin(patient);
+        int maxGraphXAxis = createXMax(patient);
 
         switch (zScoreGraphTypes){
             case HEIGHT_FOR_AGE_BOYS:
@@ -72,6 +73,8 @@ public class HeightForAgeCalculator extends AbstractCalculator  {
 
         graphModel = createGraphModelForHeight(scoreRangeForHeight, zScoreGraphTypes, age, patient);
         graphModel.setxAxis(xAxis);
+        graphModel.setxMax(maxGraphXAxis);
+        graphModel.setxMin(minGraphXAxis);
         graphModel.setxAxisTextLabels(xAxisTextLabels);
         graphModel.setAgeInWeeks(patient.getAgeInWeeks());
         graphModel.setAgeInMonths(patient.getAgeInMonths());
@@ -121,5 +124,18 @@ public class HeightForAgeCalculator extends AbstractCalculator  {
         graphModel.setPatientHeight(patient.getHeight());
 
         return graphModel;
+    }
+
+    private int createXMax(Patient patient) {
+        if(patient.getAgeInWeeks() > 0 || patient.getAgeInYears() > 4 ){
+            return 13;
+        }else {
+            return 12;
+        }
+    }
+
+    private int createXMin(Patient patient) {
+
+        return 0;
     }
 }

@@ -59,6 +59,8 @@ public class HeadCircumferenceForAgeCalculator extends AbstractCalculator  {
         List<String> xAxisTextLabels = createXTextLabels(ageGroup);
         List<HeadCircumferenceForAge> headCircumferenceForAgeList = null;
 
+        int minGraphXAxis = createXMin(patient);
+        int maxGraphXAxis = createXMax(patient);
 
         switch (zScoreGraphTypes){
             case HEAD_CIRCUMFERENCE_FOR_AGE_BOYS:
@@ -72,6 +74,8 @@ public class HeadCircumferenceForAgeCalculator extends AbstractCalculator  {
 
         graphModel = createGraphModelForHeadCircumference(headCircumferenceForAgeList, zScoreGraphTypes, age, patient);
         graphModel.setxAxis(xAxis);
+        graphModel.setxMax(maxGraphXAxis);
+        graphModel.setxMin(minGraphXAxis);
         graphModel.setxAxisTextLabels(xAxisTextLabels);
         graphModel.setAgeInWeeks(patient.getAgeInWeeks());
         graphModel.setAgeInMonths(patient.getAgeInMonths());
@@ -121,5 +125,18 @@ public class HeadCircumferenceForAgeCalculator extends AbstractCalculator  {
         graphModel.setPatientHeadCircumference(patient.getHeadCircumference());
 
         return graphModel;
+    }
+
+    private int createXMax(Patient patient) {
+        if(patient.getAgeInWeeks() > 0 || patient.getAgeInYears() > 4 ){
+            return 13;
+        }else {
+            return 12;
+        }
+    }
+
+    private int createXMin(Patient patient) {
+
+        return -1;
     }
 }

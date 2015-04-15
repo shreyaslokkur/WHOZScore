@@ -57,6 +57,8 @@ public class WeightForAgeCalculator extends AbstractCalculator {
         List<Integer> xAxis = createXAxis(age, ageGroup.getMaxYears());
         List<String> xAxisTextLabels = createXTextLabels(ageGroup);
         List<WeightForAge> scoreRangeForWeight = null;
+        int minGraphXAxis = createXMin(patient);
+        int maxGraphXAxis = createXMax(patient);
 
         switch (zScoreGraphTypes){
 
@@ -70,6 +72,8 @@ public class WeightForAgeCalculator extends AbstractCalculator {
 
         graphModel = createGraphModelForWeight(scoreRangeForWeight, zScoreGraphTypes, age, patient);
         graphModel.setxAxis(xAxis);
+        graphModel.setxMax(maxGraphXAxis);
+        graphModel.setxMin(minGraphXAxis);
         graphModel.setxAxisTextLabels(xAxisTextLabels);
         graphModel.setAgeInWeeks(patient.getAgeInWeeks());
         graphModel.setAgeInMonths(patient.getAgeInMonths());
@@ -117,5 +121,18 @@ public class WeightForAgeCalculator extends AbstractCalculator {
         }
 
         return scoreRangeForWeight;
+    }
+
+    private int createXMax(Patient patient) {
+        if(patient.getAgeInWeeks() > 0 || patient.getAgeInYears() > 4 ){
+            return 13;
+        }else {
+            return 12;
+        }
+    }
+
+    private int createXMin(Patient patient) {
+
+        return 0;
     }
 }

@@ -11,11 +11,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import com.example.WhoZScore.R;
 import com.example.WhoZScore.WhoZScore;
-import com.example.WhoZScore.core.calculator.AbstractCalculator;
+import com.example.WhoZScore.core.calculator.*;
 
-import com.example.WhoZScore.core.calculator.HeightForAgeCalculator;
-import com.example.WhoZScore.core.calculator.ICalculator;
-import com.example.WhoZScore.core.calculator.WeightForAgeCalculator;
 import com.example.WhoZScore.enums.AgeGroup;
 import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.GraphModel;
@@ -86,6 +83,10 @@ public class GraphView extends Fragment {
             return new WeightForAgeCalculator();
         }else if(ZScoreGraphTypes.HEIGHT_FOR_AGE_BOYS.equals(scoreGraphTypes) || ZScoreGraphTypes.HEIGHT_FOR_AGE_GIRLS.equals(scoreGraphTypes)){
             return new HeightForAgeCalculator();
+        }else if (ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS.equals(scoreGraphTypes) || ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_GIRLS.equals(scoreGraphTypes)){
+            return new WeightForHeightCalculator();
+        }else if (ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_BOYS.equals(scoreGraphTypes) || ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_BOYS.equals(scoreGraphTypes)){
+            return new HeadCircumferenceForAgeCalculator();
         }
         return null;
     }
@@ -122,8 +123,15 @@ public class GraphView extends Fragment {
         }
         if(ZScoreGraphTypes.WEIGHT_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.WEIGHT_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes()))
             patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientWeight() );
-        else
-            patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientHeight());
+        else if(ZScoreGraphTypes.HEIGHT_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.HEIGHT_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes())){
+            patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientHeight() );
+        }
+        else if(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS.equals(graphModel.getzScoreGraphTypes())){
+            patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientWeight());
+        }else if(ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes())){
+            patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientHeadCircumference());
+        }
+
 
 
 // Creating a dataset to hold each series
@@ -155,7 +163,12 @@ public class GraphView extends Fragment {
         XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
         multiRenderer.setXLabels(0);
         multiRenderer.setChartTitle(graphModel.getzScoreGraphTypes().getGraphNames());
-        multiRenderer.setXTitle("Age in "+ graphModel.getAge().getName());
+        if(scoreGraphTypes.getxAxisType().equals("age")){
+            multiRenderer.setXTitle(graphModel.getAgeGroup().getxAxis());
+        }else if(scoreGraphTypes.getxAxisType().equals("height")){
+            multiRenderer.setXTitle("Height in cms");
+        }
+
         multiRenderer.setYTitle(graphModel.getzScoreGraphTypes().getyAxis());
 
 /***
@@ -210,7 +223,7 @@ public class GraphView extends Fragment {
 //setting used to move the graph on xaxiz to .5 to the right
         multiRenderer.setXAxisMin(-0.5);
 //setting used to move the graph on xaxiz to .5 to the right
-        multiRenderer.setXAxisMax(x[x.length - 1]);
+        multiRenderer.setXAxisMax(12);
 //setting bar size or space between two bars
 //multiRenderer.setBarSpacing(0.5);
 //Setting background color of the graph to transparent

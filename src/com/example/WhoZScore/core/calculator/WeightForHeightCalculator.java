@@ -53,24 +53,29 @@ public class WeightForHeightCalculator extends AbstractCalculator  {
 
         List<WeightForHeight> scoreRangeForWeightForHeight = null;
 
-        Double minGraphXAxis = patient.getHeight() - 5;
-        Double maxGraphXAxis = patient.getHeight() + 5;
 
-        List<Integer> xAxis = createXAxis(minGraphXAxis.intValue(), maxGraphXAxis.intValue());
-        List<String> xAxisTextLabels = createXTextLabels(minGraphXAxis.intValue(), maxGraphXAxis.intValue());
+
+
+        int minGraphXAxis = createXMin(patient);
+        int maxGraphXAxis = createXMax(patient);
+
+        List<Integer> xAxis = createXAxis(minGraphXAxis, maxGraphXAxis);
+        List<String> xAxisTextLabels = createXTextLabels(minGraphXAxis, maxGraphXAxis);
 
         switch (zScoreGraphTypes){
 
             case WEIGHT_FOR_HEIGHT_BOYS:
-                scoreRangeForWeightForHeight = getScoreRange(minGraphXAxis.intValue(), maxGraphXAxis.intValue(), patient.getSex(), zScoreGraphTypes);
+                scoreRangeForWeightForHeight = getScoreRange(minGraphXAxis, maxGraphXAxis, patient.getSex(), zScoreGraphTypes);
                 break;
             case WEIGHT_FOR_HEIGHT_GIRLS:
-                scoreRangeForWeightForHeight = getScoreRange(minGraphXAxis.intValue(), maxGraphXAxis.intValue(), patient.getSex(), zScoreGraphTypes);
+                scoreRangeForWeightForHeight = getScoreRange(minGraphXAxis, maxGraphXAxis, patient.getSex(), zScoreGraphTypes);
                 break;
         }
 
         graphModel = createGraphModelForWeightForHeight(scoreRangeForWeightForHeight, zScoreGraphTypes, patient);
         graphModel.setxAxis(xAxis);
+        graphModel.setxMax(maxGraphXAxis);
+        graphModel.setxMin(minGraphXAxis);
         graphModel.setxAxisTextLabels(xAxisTextLabels);
         graphModel.setAgeInWeeks(patient.getAgeInWeeks());
         graphModel.setAgeInMonths(patient.getAgeInMonths());
@@ -78,6 +83,46 @@ public class WeightForHeightCalculator extends AbstractCalculator  {
 
 
         return graphModel;
+    }
+
+    public int createXMax(Patient patient) {
+        int height = new Double(patient.getHeight()).intValue();
+
+        if(patient.getAgeInYears() < 2){
+            if(height + 5 > 110){
+                return 110;
+            }else {
+                return height + 5;
+            }
+
+        } else if (patient.getAgeInYears() > 2){
+            if(height + 5 > 120){
+                return 120;
+            }else {
+                return height + 5;
+            }
+        }
+        return 0;
+    }
+
+    private int createXMin(Patient patient) {
+        int height = new Double(patient.getHeight()).intValue();
+
+        if(patient.getAgeInYears() < 2){
+            if(height - 5 < 45){
+                return 45;
+            }else {
+                return height - 5;
+            }
+
+        } else if (patient.getAgeInYears() > 2){
+            if(height - 5 < 65){
+                return 120;
+            }else {
+                return height - 5;
+            }
+        }
+        return 0;
     }
 
     private GraphModel createGraphModelForWeightForHeight(List<WeightForHeight> scoreRangeForWeightForHeight, ZScoreGraphTypes zScoreGraphTypes, Patient patient) {
@@ -122,7 +167,7 @@ public class WeightForHeightCalculator extends AbstractCalculator  {
     public List<Integer> createXAxis(int minHeight, int maxHeight){
         List<Integer> xAxis = new ArrayList<Integer>();
         for(int i = minHeight; i<=maxHeight; i++){
-            xAxis.add(minHeight);
+            xAxis.add(i);
         }
         return xAxis;
     }
@@ -130,7 +175,7 @@ public class WeightForHeightCalculator extends AbstractCalculator  {
     public List<String> createXTextLabels(int minHeight, int maxHeight){
         List<String> xAxis = new ArrayList<String>();
         for(int i = minHeight; i<=maxHeight; i++){
-            xAxis.add(String.valueOf(minHeight));
+            xAxis.add(String.valueOf(i));
         }
         return xAxis;
 
