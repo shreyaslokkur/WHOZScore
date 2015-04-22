@@ -21,6 +21,9 @@ import com.example.WhoZScore.model.Result;
 import com.example.WhoZScore.views.FragmentChangeListener;
 import com.example.WhoZScore.views.HomeView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WhoZScore extends Activity implements FragmentChangeListener {
 
     private Patient patient = null;
@@ -59,14 +62,17 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
 
     public void setPatientAgeInYears(int years){
         patient.setAgeInYears(years);
+        patient.setDisplayAgeInYears(years);
     }
 
     public void setPatientAgeInMonths(int months){
         patient.setAgeInMonths(months);
+        patient.setDisplayAgeInMonths(months);
     }
 
     public void setPatientAgeInWeeks(int weeks){
         patient.setAgeInWeeks(weeks);
+        patient.setDisplayAgeInWeeks(weeks);
     }
 
     public void setPatientWeight(double weight){
@@ -86,6 +92,8 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
         HeightForAge heightForAge = null;
         WeightForHeight weightForHeight = null;
         HeadCircumferenceForAge headCircumferenceForAge = null;
+
+        restructureAge(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears());
 
         if(patient.getWeight() > 0.0){
             calculator = new WeightForAgeCalculator();
@@ -150,6 +158,19 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
                         }
                         break;
         }
+    }
+
+    public void restructureAge(int weeks, int months, int years){
+
+        if(years == 0 && weeks == 0 && months <=3){
+
+            patient.setAgeInMonths(0);
+            if(months == 1) patient.setAgeInWeeks(4);
+            else if(months == 2) patient.setAgeInWeeks(8);
+            else if(months == 3) patient.setAgeInWeeks(12);
+        }
+
+
     }
 
 }

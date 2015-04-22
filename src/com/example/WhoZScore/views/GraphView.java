@@ -266,11 +266,11 @@ public class GraphView extends Fragment {
 
     private int getXAxisPointForPatient(GraphModel graphModel) {
         if(AgeGroup.WEEKS.equals(graphModel.getAgeGroup())){
-            return graphModel.getAgeInWeeks() - 1;
+            return graphModel.getAgeInWeeks();
         }else if(AgeGroup.TILLONEYEAR.equals(graphModel.getAgeGroup())){
             return graphModel.getAgeInMonths() - 3;
         }else {
-            return graphModel.getAgeInMonths() - 1;
+            return graphModel.getAgeInMonths();
         }
     }
 

@@ -39,7 +39,10 @@ public class WeightForAgeCalculator extends AbstractCalculator {
         Age age= Age.MONTHS;
         AgeGroup ageGroup = null;
         GraphModel graphModel = null;
-        if(patient.getAgeInWeeks() > 0)  {
+        if(patient.getAgeInWeeks() == 0 && patient.getAgeInMonths() == 0 && patient.getAgeInYears() == 0){
+            ageGroup = AgeGroup.WEEKS;
+            age = Age.WEEKS;
+        }else if(patient.getAgeInWeeks() > 0)  {
             ageGroup = AgeGroup.WEEKS;
             age = Age.WEEKS;
         }else if(patient.getAgeInMonths() > 0 && (patient.getAgeInYears() >= 0 && patient.getAgeInYears() < 1)){

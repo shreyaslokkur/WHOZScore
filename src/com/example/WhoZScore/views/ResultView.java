@@ -162,13 +162,13 @@ public class ResultView extends Fragment {
     }
 
     private String getAge(Patient patient){
-        String age = patient.getAgeInYears() + " years, "+patient.getAgeInMonths()+" months and "+patient.getAgeInWeeks() +" weeks";
+        String age = patient.getDisplayAgeInYears() + " years, "+patient.getDisplayAgeInMonths()+" months and "+patient.getDisplayAgeInWeeks() +" weeks";
         return age;
     }
 
     private String setMessage(String zScore, String healthyMessage){
         StringBuilder message = new StringBuilder(zScore);
-        message.append(" ( ").append(healthyMessage).append(" )");
+        /*message.append(" ( ").append(healthyMessage).append(" )");*/
 
         return message.toString();
     }

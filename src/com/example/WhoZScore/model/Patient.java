@@ -15,6 +15,9 @@ public class Patient {
     private int ageInYears;
     private int ageInMonths;
     private int ageInWeeks;
+    private int displayAgeInYears;
+    private int displayAgeInMonths;
+    private int displayAgeInWeeks;
     private double weight;
     private double height;
     private double headCircumference;
@@ -50,6 +53,30 @@ public class Patient {
 
     public void setAgeInWeeks(int ageInWeeks) {
         this.ageInWeeks = ageInWeeks;
+    }
+
+    public int getDisplayAgeInYears() {
+        return displayAgeInYears;
+    }
+
+    public void setDisplayAgeInYears(int displayAgeInYears) {
+        this.displayAgeInYears = displayAgeInYears;
+    }
+
+    public int getDisplayAgeInMonths() {
+        return displayAgeInMonths;
+    }
+
+    public void setDisplayAgeInMonths(int displayAgeInMonths) {
+        this.displayAgeInMonths = displayAgeInMonths;
+    }
+
+    public int getDisplayAgeInWeeks() {
+        return displayAgeInWeeks;
+    }
+
+    public void setDisplayAgeInWeeks(int displayAgeInWeeks) {
+        this.displayAgeInWeeks = displayAgeInWeeks;
     }
 
     public double getWeight() {
