@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.WhoZScore.R;
@@ -29,6 +30,8 @@ public class ResultView extends Fragment {
     private LinearLayout heightResultLayout, weightForHeightLayout, weightResultLayout, headCircumferenceResultLayout;
 
     private LinearLayout heightHeaderLayout, weightHeaderLayout, weightForHeightHeaderLayout, headCircumferenceHeaderLayout;
+
+    private ImageButton weightForAgeGraph, heightForAgeGraph, weightForHeightGraph, headCircumferenceForAgeGraph;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,6 +59,11 @@ public class ResultView extends Fragment {
         weightHeaderLayout = (LinearLayout) view.findViewById(R.id.weightHeaderLayout);
         weightForHeightHeaderLayout = (LinearLayout) view.findViewById(R.id.weightForHeightHeaderLayout);
         headCircumferenceHeaderLayout = (LinearLayout) view.findViewById(R.id.headCircumferenceForAgeHeaderLayout);
+
+        weightForAgeGraph = (ImageButton) view.findViewById(R.id.weightForAgeGraph);
+        heightForAgeGraph = (ImageButton) view.findViewById(R.id.heightForAgeGraph);
+        weightForHeightGraph = (ImageButton) view.findViewById(R.id.weightForHeightGraph);
+        headCircumferenceForAgeGraph = (ImageButton) view.findViewById(R.id.headCircumferenceForAgeGraph);
 
         Result result = ((WhoZScore) getActivity()).getResult();
         final Patient patient = ((WhoZScore) getActivity()).getPatient();
@@ -107,54 +115,11 @@ public class ResultView extends Fragment {
         ageText.setText(getAge(patient));
 
 
-        heightHeader.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                if(Sex.FEMALE.equals(patient.getSex()))
-                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEIGHT_FOR_AGE_GIRLS);
-                else
-                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEIGHT_FOR_AGE_BOYS);
 
-                ((WhoZScore)getActivity()).replaceFragment(graphView);
-
-            }
-        });
-
-        weightHeader.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                if(Sex.FEMALE.equals(patient.getSex()))
-                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_AGE_GIRLS);
-                else
-                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_AGE_BOYS);
-
-                ((WhoZScore)getActivity()).replaceFragment(graphView);
-
-            }
-        });
-
-        weightForHeightHeader.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                if(Sex.FEMALE.equals(patient.getSex()))
-                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_GIRLS);
-                else
-                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS);
-
-                ((WhoZScore)getActivity()).replaceFragment(graphView);
-
-            }
-        });
-
-        headCircumferenceHeader.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                if(Sex.FEMALE.equals(patient.getSex()))
-                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_GIRLS);
-                else
-                    ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_BOYS);
-
-                ((WhoZScore)getActivity()).replaceFragment(graphView);
-
-            }
-        });
-
+        weightForHeightGraph.setOnClickListener(new GraphButtonClickedListener());
+        weightForAgeGraph.setOnClickListener(new GraphButtonClickedListener());
+        heightForAgeGraph.setOnClickListener(new GraphButtonClickedListener());
+        headCircumferenceForAgeGraph.setOnClickListener(new GraphButtonClickedListener());
 
         // Inflate the layout for this fragment
         return view;
