@@ -145,7 +145,7 @@
         <ImageButton
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:id="@+id/weightForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph" android:contentDescription="weightforAgeGraph" android:layout_marginLeft="30dp"
+                android:id="@+id/weightForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph2" android:contentDescription="weightforAgeGraph" android:layout_marginLeft="30dp"
                 />
 
 
@@ -202,7 +202,7 @@
             <ImageButton
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:id="@+id/heightForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph" android:contentDescription="heightForAgeGraph"
+                    android:id="@+id/heightForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph2" android:contentDescription="heightForAgeGraph"
                     android:layout_marginLeft="30dp"/>
 
 
@@ -263,7 +263,7 @@
             <ImageButton
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:id="@+id/weightForHeightGraph" android:layout_gravity="center" android:background="@drawable/graph"  android:contentDescription="weightForHeightGraph"
+                    android:id="@+id/weightForHeightGraph" android:layout_gravity="center" android:background="@drawable/graph2"  android:contentDescription="weightForHeightGraph"
                     android:layout_marginLeft="30dp"/>
 
 
@@ -320,7 +320,7 @@
             <ImageButton
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:id="@+id/headCircumferenceForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph" android:contentDescription="headCircumferenceGraph"
+                    android:id="@+id/headCircumferenceForAgeGraph" android:layout_gravity="center" android:background="@drawable/graph2" android:contentDescription="headCircumferenceGraph"
                     android:layout_marginLeft="30dp"
                     />
 
