@@ -16,6 +16,7 @@ import com.example.WhoZScore.data.entities.WeightForAge;
 import com.example.WhoZScore.data.entities.WeightForHeight;
 import com.example.WhoZScore.enums.Age;
 import com.example.WhoZScore.enums.Sex;
+import com.example.WhoZScore.exceptions.WHOZScoreException;
 import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
 import com.example.WhoZScore.views.FragmentChangeListener;
@@ -93,26 +94,34 @@ public class WhoZScore extends Activity implements FragmentChangeListener {
         WeightForHeight weightForHeight = null;
         HeadCircumferenceForAge headCircumferenceForAge = null;
 
-        restructureAge(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears());
+        try{
 
-        if(patient.getWeight() > 0.0){
-            calculator = new WeightForAgeCalculator();
-            weightForAge = (WeightForAge) calculator.calculateZScore(patient, this);
-        }
-        if(patient.getHeight() > 0.0){
-            calculator = new HeightForAgeCalculator();
-            heightForAge = (HeightForAge) calculator.calculateZScore(patient, this);
-        }
-        if(patient.getWeight() > 0.0 && patient.getHeight() > 0.0){
-            calculator = new WeightForHeightCalculator();
-            weightForHeight = (WeightForHeight) calculator.calculateZScore(patient, this);
-        }
-        if(patient.getHeadCircumference() > 0.0){
-            calculator = new HeadCircumferenceForAgeCalculator();
-            headCircumferenceForAge = (HeadCircumferenceForAge) calculator.calculateZScore(patient,this);
+            restructureAge(patient.getAgeInWeeks(), patient.getAgeInMonths(), patient.getAgeInYears());
+
+            if(patient.getWeight() > 0.0){
+                calculator = new WeightForAgeCalculator();
+                weightForAge = (WeightForAge) calculator.calculateZScore(patient, this);
+            }
+            if(patient.getHeight() > 0.0){
+                calculator = new HeightForAgeCalculator();
+                heightForAge = (HeightForAge) calculator.calculateZScore(patient, this);
+            }
+            if(patient.getWeight() > 0.0 && patient.getHeight() > 0.0){
+                calculator = new WeightForHeightCalculator();
+                weightForHeight = (WeightForHeight) calculator.calculateZScore(patient, this);
+            }
+            if(patient.getHeadCircumference() > 0.0){
+                calculator = new HeadCircumferenceForAgeCalculator();
+                headCircumferenceForAge = (HeadCircumferenceForAge) calculator.calculateZScore(patient,this);
+            }
+
+            result = healthChecker.getHealthResult(patient, weightForAge, heightForAge, weightForHeight, headCircumferenceForAge, this);
+
+        }catch (WHOZScoreException e){
+            //TODO : Show the exception in a message box
         }
 
-        result = healthChecker.getHealthResult(patient, weightForAge, heightForAge, weightForHeight, headCircumferenceForAge, this);
+
 
     }
 

@@ -121,12 +121,11 @@ public class GraphView extends Fragment {
             threeXYSeries.add(i, threeScore[i]);
 
         }
-        if(ZScoreGraphTypes.WEIGHT_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.WEIGHT_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes()))
+        if(ZScoreGraphTypes.WEIGHT_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.WEIGHT_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes())){
             patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientWeight() );
-        else if(ZScoreGraphTypes.HEIGHT_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.HEIGHT_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes())){
+        }else if(ZScoreGraphTypes.HEIGHT_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.HEIGHT_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes())){
             patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientHeight() );
-        }
-        else if(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS.equals(graphModel.getzScoreGraphTypes())){
+        }else if(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS.equals(graphModel.getzScoreGraphTypes())){
             patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientWeight());
         }else if(ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_GIRLS.equals(graphModel.getzScoreGraphTypes()) || ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_BOYS.equals(graphModel.getzScoreGraphTypes())){
             patientSeries.add(getXAxisPointForPatient(graphModel), graphModel.getPatientHeadCircumference());
@@ -265,13 +264,21 @@ public class GraphView extends Fragment {
     }
 
     private int getXAxisPointForPatient(GraphModel graphModel) {
-        if(AgeGroup.WEEKS.equals(graphModel.getAgeGroup())){
-            return graphModel.getAgeInWeeks();
-        }else if(AgeGroup.TILLONEYEAR.equals(graphModel.getAgeGroup())){
-            return graphModel.getAgeInMonths() - 3;
+        if(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS.equals(graphModel.getzScoreGraphTypes())){
+            int height = new Double(graphModel.getPatientHeight()).intValue();
+            int xAxisBeginningValue = graphModel.getxAxis().get(0);
+            return height - xAxisBeginningValue;
+
         }else {
-            return graphModel.getAgeInMonths();
+            if(AgeGroup.WEEKS.equals(graphModel.getAgeGroup())){
+                return graphModel.getAgeInWeeks();
+            }else if(AgeGroup.TILLONEYEAR.equals(graphModel.getAgeGroup())){
+                return graphModel.getAgeInMonths() - 3;
+            }else {
+                return graphModel.getAgeInMonths();
+            }
         }
+
     }
 
     private XYSeriesRenderer createPatientRenderer(){

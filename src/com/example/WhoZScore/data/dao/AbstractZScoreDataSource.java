@@ -1,8 +1,13 @@
 package com.example.WhoZScore.data.dao;
 
+import android.content.Context;
+import com.example.WhoZScore.data.MySqliteHelper;
 import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.enums.Sex;
+import com.example.WhoZScore.exceptions.ErrorCode;
+import com.example.WhoZScore.exceptions.WHOZScoreException;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,6 +18,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class AbstractZScoreDataSource implements IZScoreDataSource {
+
+    public MySqliteHelper dbHelper;
 
     public final int MINUS_THREE_SCORE_COLUMN_INDEX = 0;
     public final int MINUS_TWO_SCORE_COLUMN_INDEX = 1;
@@ -33,6 +40,16 @@ public class AbstractZScoreDataSource implements IZScoreDataSource {
     public final String COLUMN_MINUS_TWO_SCORE = "minusTwoScore";
     public final String COLUMN_MINUS_THREE_SCORE = "minusThreeScore";
     public final String COLUMN_HEIGHT = "height";
+
+    public AbstractZScoreDataSource(Context context){
+        try {
+            dbHelper = new MySqliteHelper(context);
+            dbHelper.createDataBase();
+            dbHelper.openDataBase();
+        } catch (IOException e) {
+            throw new WHOZScoreException(ErrorCode.ERROR_CONNECTING_TO_DATABASE, e);
+        }
+    }
 
     @Override
     public IZScoreEntity getScore(int weeks, int months, int years, Sex sex) {

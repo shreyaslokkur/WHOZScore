@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import com.example.WhoZScore.exceptions.ErrorCode;
+import com.example.WhoZScore.exceptions.WHOZScoreException;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -61,7 +63,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
 
             } catch (IOException e) {
 
-                throw new Error("Error copying database");
+                throw new WHOZScoreException(ErrorCode.ERROR_CONNECTING_TO_DATABASE, e);
 
             }
         }
@@ -83,6 +85,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         }catch(SQLiteException e){
 
             //database does't exist yet.
+            throw new WHOZScoreException(ErrorCode.ERROR_CONNECTING_TO_DATABASE, e);
 
         }
 

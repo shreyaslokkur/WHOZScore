@@ -22,7 +22,7 @@ import java.util.List;
 public class HeadCircumferenceForAgeDataSource extends AbstractZScoreDataSource {
 
 
-    private MySqliteHelper dbHelper;
+
 
     public static final String BOYS_HEAD_CIRCUMFERENCE_FOR_AGE = "BoysHeadCircumferenceForAge";
     public static final String GIRLS_HEAD_CIRCUMFERENCE_FOR_AGE = "GirlsHeadCircumferenceForAge";
@@ -34,13 +34,7 @@ public class HeadCircumferenceForAgeDataSource extends AbstractZScoreDataSource 
 
     public HeadCircumferenceForAgeDataSource(Context context) {
 
-        try {
-            dbHelper = new MySqliteHelper(context);
-            dbHelper.createDataBase();
-            dbHelper.openDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        super(context);
 
     }
 

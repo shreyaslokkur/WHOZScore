@@ -67,7 +67,7 @@ public class ResultView extends Fragment {
 
         Result result = ((WhoZScore) getActivity()).getResult();
         final Patient patient = ((WhoZScore) getActivity()).getPatient();
-        if(patient.getHeight() == 0){
+        if(result.getzScoreHeightForAgeMessage() == null){
 
             ((LinearLayout)heightHeaderLayout.getParent()).removeView(heightHeaderLayout);
             ((LinearLayout)weightForHeightHeaderLayout.getParent()).removeView(weightForHeightHeaderLayout);
@@ -79,7 +79,7 @@ public class ResultView extends Fragment {
             zScoreHeightMessageText.setText(setMessage(result.getzScoreHeightForAgeMessage(), result.getHealthyHeightForAgeMessage()));
         }
 
-        if(patient.getWeight() == 0){
+        if(result.getHealthyWeightForAgeMessage() == null){
 
             ((LinearLayout)weightHeaderLayout.getParent()).removeView(weightHeaderLayout);
             ((LinearLayout)weightForHeightHeaderLayout.getParent()).removeView(weightForHeightHeaderLayout);
@@ -91,11 +91,14 @@ public class ResultView extends Fragment {
             zScoreWeightMessageText.setText(setMessage(result.getzScoreWeightForAgeMessage(), result.getHealthyWeightForAgeMessage()));
         }
 
-        if(patient.getHeight() > 0 && patient.getWeight() > 0){
+        if(result.getzScoreWeightForHeightMessage() != null){
             zScoreWeightForHeightMessageText.setText(setMessage(result.getzScoreWeightForHeightMessage(), result.getHealthyWeightForHeightMessage()));
+        }else if(result.getzScoreHeightForAgeMessage() != null && result.getzScoreWeightForAgeMessage() != null){
+            zScoreWeightForHeightMessageText.setText(setMessage("Unable to calculate Weight For Height for the given values", null));
+            weightForHeightGraph.setEnabled(false);
         }
 
-        if(patient.getHeadCircumference() == 0){
+        if(result.getzScoreHeadCircumferenceForAgeMessage() == null){
 
 
             ((LinearLayout)headCircumferenceHeaderLayout.getParent()).removeView(headCircumferenceHeaderLayout);

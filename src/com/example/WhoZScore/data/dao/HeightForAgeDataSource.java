@@ -21,7 +21,6 @@ import java.util.List;
 public class HeightForAgeDataSource extends AbstractZScoreDataSource {
 
 
-    private MySqliteHelper dbHelper;
 
     public static final String BOYS_HEIGHT_FOR_AGE = "BoysHeightForAge";
     public static final String GIRLS_HEIGHT_FOR_AGE = "GirlsHeightForAge";
@@ -33,13 +32,7 @@ public class HeightForAgeDataSource extends AbstractZScoreDataSource {
 
     public HeightForAgeDataSource(Context context) {
 
-        try {
-            dbHelper = new MySqliteHelper(context);
-            dbHelper.createDataBase();
-            dbHelper.openDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        super(context);
 
     }
 
