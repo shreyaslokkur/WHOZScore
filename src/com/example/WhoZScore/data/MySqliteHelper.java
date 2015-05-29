@@ -8,10 +8,7 @@ import android.util.Log;
 import com.example.WhoZScore.exceptions.ErrorCode;
 import com.example.WhoZScore.exceptions.WHOZScoreException;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -79,13 +76,15 @@ public class MySqliteHelper extends SQLiteOpenHelper {
         SQLiteDatabase checkDB = null;
 
         try{
-            String myPath = DB_PATH + DATABASE_NAME;
+            String myPath = myContext.getFilesDir().getAbsolutePath().replace("files", "databases")+File.separator + DATABASE_NAME;
+            File dbfile = new File(myPath);
+            System.out.println(dbfile.exists());
             checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
 
         }catch(SQLiteException e){
 
             //database does't exist yet.
-            throw new WHOZScoreException(ErrorCode.ERROR_CONNECTING_TO_DATABASE, e);
+            /*throw new WHOZScoreException(ErrorCode.ERROR_CONNECTING_TO_DATABASE, e);*/
 
         }
 

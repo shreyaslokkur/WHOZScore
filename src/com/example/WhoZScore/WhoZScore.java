@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Spinner;
+import com.example.WhoZScore.core.PatientInterface;
 import com.example.WhoZScore.core.calculator.*;
 import com.example.WhoZScore.core.checker.HealthCheckerDelegator;
 import com.example.WhoZScore.data.entities.HeadCircumferenceForAge;
@@ -22,10 +23,7 @@ import com.example.WhoZScore.model.Result;
 import com.example.WhoZScore.views.FragmentChangeListener;
 import com.example.WhoZScore.views.HomeView;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class WhoZScore extends Activity implements FragmentChangeListener {
+public class WhoZScore extends Activity implements FragmentChangeListener, PatientInterface {
 
     private Patient patient = null;
     private ICalculator calculator;

@@ -8,8 +8,10 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import com.example.WhoZScore.R;
 import com.example.WhoZScore.WhoZScore;
+import com.example.WhoZScore.core.PatientInterface;
 import com.example.WhoZScore.enums.Age;
 import com.example.WhoZScore.enums.Sex;
+import com.example.WhoZScore.enums.ZScoreCalculators;
 import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.Patient;
 
@@ -22,32 +24,39 @@ import com.example.WhoZScore.model.Patient;
  */
 public class GraphButtonClickedListener implements View.OnClickListener {
 
+    ZScoreCalculators zScoreCalculators;
+    PatientInterface patientInterface;
+    public GraphButtonClickedListener(ZScoreCalculators zScoreCalculators, PatientInterface patientInterface) {
+        this.zScoreCalculators = zScoreCalculators;
+        this.patientInterface = patientInterface;
+
+    }
+
     @Override
     public void onClick(View v) {
 
-        ImageButton button = (ImageButton)v;
-        WhoZScore whoZScore = (WhoZScore) v.getContext();
-        Patient patient = whoZScore.getPatient();
+        WhoZScore whoZScore = (WhoZScore) patientInterface;
+        Patient patient = patientInterface.getPatient();
         final Fragment graphView = new GraphView();
-        if(button.getId() == R.id.weightForAgeGraph){
+        if(zScoreCalculators.equals(ZScoreCalculators.WEIGHT_FOR_AGE)){
             if(Sex.FEMALE.equals(patient.getSex()))
                 ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_AGE_GIRLS);
             else
                 ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_AGE_BOYS);
 
-        }else if(button.getId() == R.id.heightForAgeGraph){
+        }else if(zScoreCalculators.equals(ZScoreCalculators.HEIGHT_FOR_AGE)){
             if(Sex.FEMALE.equals(patient.getSex()))
                 ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEIGHT_FOR_AGE_GIRLS);
             else
                 ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEIGHT_FOR_AGE_BOYS);
 
-        }else if(button.getId() == R.id.weightForHeightGraph){
+        }else if(zScoreCalculators.equals(ZScoreCalculators.WEIGHT_FOR_HEIGHT)){
             if(Sex.FEMALE.equals(patient.getSex()))
                 ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_GIRLS);
             else
                 ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.WEIGHT_FOR_HEIGHT_BOYS);
 
-        }else if(button.getId() == R.id.headCircumferenceForAgeGraph){
+        }else if(zScoreCalculators.equals(ZScoreCalculators.HEAD_CIRCUMFERENCE_FOR_AGE)){
             if(Sex.FEMALE.equals(patient.getSex()))
                 ((GraphView)graphView).setScoreGraphTypes(ZScoreGraphTypes.HEAD_CIRCUMFERENCE_FOR_AGE_GIRLS);
             else
