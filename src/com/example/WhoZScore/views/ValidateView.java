@@ -2,16 +2,10 @@ package com.example.WhoZScore.views;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import com.example.WhoZScore.R;
-import com.example.WhoZScore.WhoZScore;
 
 /**
  * Created with IntelliJ IDEA.

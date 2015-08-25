@@ -7,12 +7,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.example.WhoZScore.R;
-import com.example.WhoZScore.WhoZScore;
+import com.example.WhoZScore.WhoZScoreActivity;
 
 /**
  * Created with IntelliJ IDEA.
@@ -69,10 +68,10 @@ public class FormView extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length()> 0){
-                    ((WhoZScore)getActivity()).setPatientWeight(Double.parseDouble(weightText.getText().toString()));
+                    ((WhoZScoreActivity)getActivity()).setPatientWeight(Double.parseDouble(weightText.getText().toString()));
                     toggleSubmitButton();
                 }else {
-                    ((WhoZScore)getActivity()).setPatientWeight(0.0);
+                    ((WhoZScoreActivity)getActivity()).setPatientWeight(0.0);
                     toggleSubmitButton();
                 }
             }
@@ -92,10 +91,10 @@ public class FormView extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length()> 0){
-                    ((WhoZScore)getActivity()).setPatientHeight(Double.parseDouble(heightText.getText().toString()));
+                    ((WhoZScoreActivity)getActivity()).setPatientHeight(Double.parseDouble(heightText.getText().toString()));
                     toggleSubmitButton();
                 }else {
-                    ((WhoZScore)getActivity()).setPatientHeight(0.0);
+                    ((WhoZScoreActivity)getActivity()).setPatientHeight(0.0);
                     toggleSubmitButton();
                 }
             }
@@ -115,10 +114,10 @@ public class FormView extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length()> 0){
-                    ((WhoZScore)getActivity()).setPatientHeadCircumference(Double.parseDouble(headCircumferenceText.getText().toString()));
+                    ((WhoZScoreActivity)getActivity()).setPatientHeadCircumference(Double.parseDouble(headCircumferenceText.getText().toString()));
                     toggleSubmitButton();
                 }else {
-                    ((WhoZScore)getActivity()).setPatientHeadCircumference(0.0);
+                    ((WhoZScoreActivity)getActivity()).setPatientHeadCircumference(0.0);
                     toggleSubmitButton();
                 }
             }
@@ -129,9 +128,9 @@ public class FormView extends Fragment {
             public void onClick(View v) {
                 System.out.println("valuesSubmitted.............................");
 
-                ((WhoZScore)getActivity()).onFormSubmit();
+                ((WhoZScoreActivity)getActivity()).onFormSubmit();
 
-                ((WhoZScore)getActivity()).replaceFragment(resultView);
+                ((WhoZScoreActivity)getActivity()).replaceFragment(resultView);
             }
         });
 

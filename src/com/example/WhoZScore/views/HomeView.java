@@ -7,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import com.example.WhoZScore.R;
-import com.example.WhoZScore.WhoZScore;
-import com.example.WhoZScore.data.dao.WeightForAgeDataSource;
+import com.example.WhoZScore.WhoZScoreActivity;
 import com.example.WhoZScore.enums.Sex;
 
 /**
@@ -38,8 +37,8 @@ public class HomeView extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("boy.............................");
-                ((WhoZScore)getActivity()).setPatientGender(Sex.MALE);
-                ((WhoZScore)getActivity()).replaceFragment(formView);
+                ((WhoZScoreActivity)getActivity()).setPatientGender(Sex.MALE);
+                ((WhoZScoreActivity)getActivity()).replaceFragment(formView);
             }
         });
 
@@ -47,8 +46,8 @@ public class HomeView extends Fragment {
         girlButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 System.out.println("girl............................");
-                ((WhoZScore)getActivity()).setPatientGender(Sex.FEMALE);
-                ((WhoZScore)getActivity()).replaceFragment(formView);
+                ((WhoZScoreActivity)getActivity()).setPatientGender(Sex.FEMALE);
+                ((WhoZScoreActivity)getActivity()).replaceFragment(formView);
             }
         });
         return view;

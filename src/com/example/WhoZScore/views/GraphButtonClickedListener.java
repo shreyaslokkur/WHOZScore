@@ -2,14 +2,8 @@ package com.example.WhoZScore.views;
 
 import android.app.Fragment;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ImageButton;
-import android.widget.Spinner;
-import com.example.WhoZScore.R;
-import com.example.WhoZScore.WhoZScore;
+import com.example.WhoZScore.WhoZScoreActivity;
 import com.example.WhoZScore.core.PatientInterface;
-import com.example.WhoZScore.enums.Age;
 import com.example.WhoZScore.enums.Sex;
 import com.example.WhoZScore.enums.ZScoreCalculators;
 import com.example.WhoZScore.enums.ZScoreGraphTypes;
@@ -35,7 +29,7 @@ public class GraphButtonClickedListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        WhoZScore whoZScore = (WhoZScore) patientInterface;
+        WhoZScoreActivity whoZScore = (WhoZScoreActivity) patientInterface;
         Patient patient = patientInterface.getPatient();
         final Fragment graphView = new GraphView();
         if(zScoreCalculators.equals(ZScoreCalculators.WEIGHT_FOR_AGE)){

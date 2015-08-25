@@ -5,7 +5,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 import com.example.WhoZScore.R;
-import com.example.WhoZScore.WhoZScore;
+import com.example.WhoZScore.WhoZScoreActivity;
 import com.example.WhoZScore.enums.Age;
 
 /**
@@ -19,7 +19,7 @@ public class CustomOnItemSelectedListener implements OnItemSelectedListener  {
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner spinner = (Spinner) parent;
-        WhoZScore whoZScore = (WhoZScore) parent.getContext();
+        WhoZScoreActivity whoZScore = (WhoZScoreActivity) parent.getContext();
         if(parent.getSelectedItem()!= null){
             if(spinner.getId() == R.id.weeksId){
                 whoZScore.setPatientAgeInWeeks(Integer.parseInt((String) parent.getSelectedItem()));

@@ -6,16 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.WhoZScore.R;
-import com.example.WhoZScore.WhoZScore;
+import com.example.WhoZScore.WhoZScoreActivity;
 import com.example.WhoZScore.core.PatientInterface;
-import com.example.WhoZScore.enums.Sex;
 import com.example.WhoZScore.enums.ZScoreCalculators;
-import com.example.WhoZScore.enums.ZScoreGraphTypes;
 import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
 
@@ -52,8 +48,8 @@ public class ResultView extends Fragment {
         cardArrayAdapter = new ResultCardArrayAdapter(getActivity().getApplicationContext(), R.layout.result_list_item_card, (PatientInterface) getActivity());
 
 
-        Result result = ((WhoZScore) getActivity()).getResult();
-        final Patient patient = ((WhoZScore) getActivity()).getPatient();
+        Result result = ((WhoZScoreActivity) getActivity()).getResult();
+        final Patient patient = ((WhoZScoreActivity) getActivity()).getPatient();
 
         if(result.getzScoreWeightForAgeMessage() != null){
             ResultCard resultCard = new ResultCard();

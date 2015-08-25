@@ -20,8 +20,8 @@ import java.io.*;
 public class MySqliteHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
-    private static String DB_PATH = "/data/data/com.example.WhoZScore/databases/";
-    public static final String DATABASE_NAME = "WhoZScore.db";
+    private static String DB_PATH = "/data/data/com.example.WhoZScoreActivity/databases/";
+    public static final String DATABASE_NAME = "WhoZScoreActivity.db";
     public static final int DATABASE_VERSION = 1;
 
     private final Context myContext;

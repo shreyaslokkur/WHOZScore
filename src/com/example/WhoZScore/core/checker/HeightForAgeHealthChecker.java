@@ -2,7 +2,6 @@ package com.example.WhoZScore.core.checker;
 
 import android.content.Context;
 import com.example.WhoZScore.R;
-import com.example.WhoZScore.WhoZScore;
 import com.example.WhoZScore.data.entities.HeightForAge;
 import com.example.WhoZScore.data.entities.IZScoreEntity;
 import com.example.WhoZScore.model.HeightForAgeResult;

@@ -4,8 +4,9 @@
           android:versionCode="1"
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="19"/>
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:theme="@style/Theme.Zscore">
-        <activity android:name="WhoZScore"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application android:name="com.example.WhoZScore.WhoZScoreApplication" android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:theme="@style/Theme.Zscore">
+        <activity android:name=".WhoZScoreActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

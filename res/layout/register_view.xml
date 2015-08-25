@@ -15,7 +15,7 @@
             <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Login"
+                    android:text="New User"
                     android:textColor="#122e4d"
                     android:textSize="18dp"
                     android:textIsSelectable="false" android:layout_marginTop="10dp" android:layout_marginRight="10dp"
@@ -31,7 +31,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="10"
-                    android:id="@+id/username"
+                    android:id="@+id/usernameRegisterId"
                     android:drawableLeft="@drawable/emailicon"
                     android:hint="Email" android:layout_marginTop="10dp" android:layout_marginRight="10dp" />
 
@@ -44,9 +44,21 @@
                     android:layout_gravity="center"
                     android:layout_weight="10"
                     android:password="true"
-                    android:id="@+id/password"
+                    android:id="@+id/passwordRegisterId"
                     android:drawableLeft="@drawable/password"
-                    android:hint=" Password" android:layout_marginTop="10dp" android:layout_marginRight="10dp"/>
+                    android:enabled="true"
+                    android:hint="Password" android:layout_marginTop="10dp" android:layout_marginRight="10dp"/>
+
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="10"
+                android:password="true"
+                android:id="@+id/confirmPasswordRegisterId"
+                android:drawableLeft="@drawable/password"
+                android:enabled="true"
+                android:hint="Confirm Password" android:layout_marginTop="10dp" android:layout_marginRight="10dp"/>
 
 
 
@@ -56,24 +68,12 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit"
-                android:id="@+id/loginButton"
+                android:text="Register"
+                android:id="@+id/registerButton"
                 android:enabled="true"
                 android:textColor="#ffffff" android:textStyle="bold" android:background="@drawable/submit_button"
                 android:layout_marginTop="10dp" android:layout_marginRight="10dp"/>
 
-
-        <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Forgot your password?"
-                android:textColor="#122e4d"
-                android:textSize="14dp"
-                android:id="@+id/forgotPassword"
-                android:layout_marginTop="10dp" android:layout_marginRight="10dp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="Sign Up" android:textColor="#122e4d" android:textSize="14dp"
-                  android:layout_marginTop="10dp" android:layout_marginRight="10dp" android:id="@+id/signUpTextId"/>
 
 
     </LinearLayout>

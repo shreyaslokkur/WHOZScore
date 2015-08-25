@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import com.example.WhoZScore.R;
-import com.example.WhoZScore.WhoZScore;
+import com.example.WhoZScore.WhoZScoreActivity;
 import com.example.WhoZScore.core.calculator.*;
 
 import com.example.WhoZScore.enums.AgeGroup;
@@ -46,7 +46,7 @@ public class GraphView extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.graph_view, container, false);
-        final Patient patient = ((WhoZScore) getActivity()).getPatient();
+        final Patient patient = ((WhoZScoreActivity) getActivity()).getPatient();
         final LinearLayout chartLayout = (LinearLayout) view.findViewById(R.id.chart);
         calculator = createCalculatorInstance(getScoreGraphTypes());
         openChart(calculator.getGraphModel(patient,getScoreGraphTypes(), getActivity()), chartLayout);

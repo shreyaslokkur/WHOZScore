@@ -22,8 +22,11 @@ import com.example.WhoZScore.model.Patient;
 import com.example.WhoZScore.model.Result;
 import com.example.WhoZScore.views.FragmentChangeListener;
 import com.example.WhoZScore.views.HomeView;
+import com.example.WhoZScore.views.LoginView;
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseUser;
 
-public class WhoZScore extends Activity implements FragmentChangeListener, PatientInterface {
+public class WhoZScoreActivity extends Activity implements FragmentChangeListener, PatientInterface {
 
     private Patient patient = null;
     private ICalculator calculator;
@@ -40,12 +43,39 @@ public class WhoZScore extends Activity implements FragmentChangeListener, Patie
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        patient = new Patient();
-        HomeView newFragment = new HomeView();
+        // Determine whether the current user is an anonymous user
+        if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
+            LoginView loginView = new LoginView();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.add(R.id.view, loginView);
+            transaction.commit();
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.add(R.id.view, newFragment);
-        transaction.commit();
+        }
+        else {
+            // If current user is NOT anonymous user
+            // Get current user data from Parse.com
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            if (currentUser != null) {
+
+                patient = new Patient();
+                HomeView newFragment = new HomeView();
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.add(R.id.view, newFragment);
+                transaction.commit();
+            } else {
+                // Send user to LoginSignupActivity.class
+                LoginView loginView = new LoginView();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.add(R.id.view, loginView);
+                transaction.commit();
+
+            }
+        }
+
+
+
+
     }
 
     @Override
