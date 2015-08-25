@@ -51,87 +51,6 @@ public class RegisterView extends Fragment {
 
         signup = (Button) view.findViewById(R.id.registerButton);
 
-        /*username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                EditText email = (EditText) v;
-
-                if (!hasFocus) {
-                    if(email.getText().length()> 0){
-                        if(isValidEmail(email.getText()))
-                            password.setEnabled(true);
-                        else {
-                            email.setError("Not a valid email");
-                        }
-                    }
-                }
-            }
-        });
-
-        username.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(s.length()> 0){
-                    password.setEnabled(true);
-
-                }
-            }
-        });
-
-        password.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(s.length()> 0){
-                    confirmPassword.setEnabled(true);
-                }
-            }
-        });
-
-        confirmPassword.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(s.length()> 0){
-                    if(isPasswordMatch(password.getText().toString(), s.toString()))
-                        signup.setEnabled(true);
-                    else {
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                "Password is not matching",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        });*/
 
         // Sign up Button Click Listener
         signup.setOnClickListener(new View.OnClickListener() {
@@ -151,10 +70,8 @@ public class RegisterView extends Fragment {
                         @Override
                         public void done(ParseException e) {
                             if (e == null) {
-                                // Show a simple Toast message upon successful registration
-                                Toast.makeText(getActivity().getApplicationContext(),
-                                        "Successfully Signed up, please log in.",
-                                        Toast.LENGTH_LONG).show();
+
+                                ((WhoZScoreActivity)getActivity()).replaceFragment(homeView);
                             } else {
                                 Toast.makeText(getActivity().getApplicationContext(),
                                         "Sign up Error", Toast.LENGTH_LONG)
