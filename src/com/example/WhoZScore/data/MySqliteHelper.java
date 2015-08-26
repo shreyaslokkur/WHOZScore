@@ -130,7 +130,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     public void openDataBase() throws SQLiteException{
 
         //Open the database
-        String myPath = DB_PATH + DATABASE_NAME;
+        String myPath = myContext.getFilesDir().getAbsolutePath().replace("files", "databases")+File.separator + DATABASE_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
         System.out.println(myDataBase.isOpen());
         System.out.println(myDataBase.isReadOnly());
