@@ -31,6 +31,7 @@ public class HomeView extends Fragment {
         // Inflate the layout for this fragment
 
         View view =  inflater.inflate(R.layout.home_view, container, false);
+        ((WhoZScoreActivity)getActivity()).showOverflowMenu(false);
         final Fragment formView = new FormView();
         boyButton = (ImageButton) view.findViewById(R.id.boy_image);
         boyButton.setOnClickListener(new View.OnClickListener() {

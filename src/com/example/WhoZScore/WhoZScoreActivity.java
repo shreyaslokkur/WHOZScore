@@ -7,7 +7,9 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Spinner;
+import android.widget.Toast;
 import com.example.WhoZScore.core.PatientInterface;
 import com.example.WhoZScore.core.calculator.*;
 import com.example.WhoZScore.core.checker.HealthCheckerDelegator;
@@ -23,7 +25,9 @@ import com.example.WhoZScore.model.Result;
 import com.example.WhoZScore.views.FragmentChangeListener;
 import com.example.WhoZScore.views.HomeView;
 import com.example.WhoZScore.views.LoginView;
+import com.parse.LogOutCallback;
 import com.parse.ParseAnonymousUtils;
+import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class WhoZScoreActivity extends Activity implements FragmentChangeListener, PatientInterface {
@@ -32,6 +36,7 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
     private ICalculator calculator;
     private HealthCheckerDelegator healthChecker = new HealthCheckerDelegator();
     private Result result = null;
+    Menu menu;
 
 
     /**
@@ -80,9 +85,45 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.mainmenu, menu);
+        inflater.inflate(R.menu.mainmenu, this.menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.logout:
+                logout();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void showOverflowMenu(boolean showMenu){
+        if(this.menu == null)
+            return;
+        menu.setGroupVisible(R.id.main_menu_group, showMenu);
+    }
+
+    private void logout() {
+        ParseUser.logOutInBackground(new LogOutCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+
+                    replaceFragment(new LoginView());
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Encountered an error during logout", Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+        });
     }
 
     public void setPatientGender(Sex sex){

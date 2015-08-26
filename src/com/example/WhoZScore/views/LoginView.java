@@ -2,9 +2,7 @@ package com.example.WhoZScore.views;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,7 +31,6 @@ public class LoginView extends Fragment {
     EditText username;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +38,7 @@ public class LoginView extends Fragment {
         View view = inflater.inflate(R.layout.login_view, container, false);
         final Fragment homeView = new HomeView();
         final Fragment registerView = new RegisterView();
+        ((WhoZScoreActivity)getActivity()).showOverflowMenu(false);
 
         username = (EditText) view.findViewById(R.id.username);
         password = (EditText) view.findViewById(R.id.password);
