@@ -66,7 +66,7 @@ public class LoginView extends Fragment {
                                 } else {
                                     Toast.makeText(
                                             getActivity().getApplicationContext(),
-                                            "No such user exist, please signup",
+                                            "Invalid Username or Password",
                                             Toast.LENGTH_LONG).show();
                                 }
                             }

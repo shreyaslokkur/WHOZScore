@@ -46,6 +46,7 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        patient = new Patient();
 
         setContentView(R.layout.main);
         // Determine whether the current user is an anonymous user
@@ -61,10 +62,7 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
             // Get current user data from Parse.com
             ParseUser currentUser = ParseUser.getCurrentUser();
             if (currentUser != null) {
-
-                patient = new Patient();
                 HomeView newFragment = new HomeView();
-
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.add(R.id.view, newFragment);
                 transaction.commit();
@@ -78,8 +76,7 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
             }
         }
 
-
-
+        
 
     }
 
@@ -98,7 +95,6 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
             case R.id.logout:
                 logout();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }

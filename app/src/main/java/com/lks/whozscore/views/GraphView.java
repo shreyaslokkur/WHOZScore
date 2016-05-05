@@ -3,12 +3,16 @@ package com.lks.whozscore.views;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import com.lks.whozscore.R;
 import com.lks.whozscore.WhoZScoreActivity;
 import com.lks.whozscore.core.calculator.*;
@@ -18,6 +22,8 @@ import com.lks.whozscore.enums.ZScoreGraphTypes;
 import com.lks.whozscore.model.GraphModel;
 import com.lks.whozscore.model.Patient;
 import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+import org.achartengine.chart.LineChart;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
@@ -38,6 +44,7 @@ public class GraphView extends Fragment {
 
     private View mChart;
     private ICalculator calculator ;
+    private int chartId;
 
     private ZScoreGraphTypes scoreGraphTypes;
 
@@ -45,13 +52,14 @@ public class GraphView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.graph_view, container, false);
+        final View view = inflater.inflate(R.layout.graph_view, container, false);
         final Patient patient = ((WhoZScoreActivity) getActivity()).getPatient();
         final LinearLayout chartLayout = (LinearLayout) view.findViewById(R.id.chart);
         ((WhoZScoreActivity)getActivity()).showOverflowMenu(false);
         calculator = createCalculatorInstance(getScoreGraphTypes());
-        openChart(calculator.getGraphModel(patient,getScoreGraphTypes(), getActivity()), chartLayout);
-        View chart = chartLayout.findViewById(100);
+        openChart(calculator.getGraphModel(patient, getScoreGraphTypes(), getActivity()), chartLayout);
+        final GraphicalView chart = (GraphicalView) chartLayout.findViewById(chartId);
+
         chart.setOnClickListener(new DoubleClickListener() {
             @Override
             public void onSingleClick(View v) {
@@ -65,17 +73,7 @@ public class GraphView extends Fragment {
                 v.invalidate();
             }
         });
-        /*chart.setOnClickListener(new DoubleClickListener() {
-            @Override
-            public void onSingleClick(View v) {
-                //Do nothing
-            }
 
-            @Override
-            public void onDoubleClick(View v) {
-
-            }
-        });*/
         return view;
     }
 
@@ -181,6 +179,8 @@ public class GraphView extends Fragment {
         multiRenderer.setAxisTitleTextSize(24);
 //setting text size of the graph lable
         multiRenderer.setLabelsTextSize(24);
+//setting color of graph to black
+        multiRenderer.setLabelsColor(Color.BLACK);
 //setting zoom buttons visiblity
         multiRenderer.setZoomButtonsVisible(false);
 //setting pan enablity which uses graph to move on both axis
@@ -210,6 +210,10 @@ public class GraphView extends Fragment {
         multiRenderer.setLegendHeight(30);
 //setting x axis label align
         multiRenderer.setXLabelsAlign(Paint.Align.CENTER);
+//setting x axis label color
+        multiRenderer.setXAxisColor(Color.DKGRAY);
+//setting y axis label color
+        multiRenderer.setYAxisColor(Color.DKGRAY);
 //setting y axis label to align
         multiRenderer.setYLabelsAlign(Paint.Align.LEFT);
 //setting text style
@@ -233,7 +237,7 @@ public class GraphView extends Fragment {
         multiRenderer.setApplyBackgroundColor(true);
         multiRenderer.setScale(2f);
 //setting x axis point size
-        multiRenderer.setPointSize(4f);
+        multiRenderer.setPointSize(8f);
 //setting the margin size for the graph in the order top, left, bottom, right
         multiRenderer.setMargins(new int[]{30, 30, 30, 30});
 
@@ -254,11 +258,14 @@ public class GraphView extends Fragment {
         multiRenderer.addSeriesRenderer(patientRenderer);
 
 
+
 //remove any views before u paint the chart
         chartLayout.removeAllViews();
+
 //drawing bar chart
         mChart = ChartFactory.getLineChartView(getActivity(), dataset, multiRenderer);
-        mChart.setId(100);
+        chartId = View.generateViewId();
+        mChart.setId(chartId);
 //adding the view to the linearlayout
         chartLayout.addView(mChart);
 
