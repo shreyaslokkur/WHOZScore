@@ -29,10 +29,9 @@ public class RegisterView extends Fragment {
     Button signup;
     String usernametxt;
     String passwordtxt;
-    String confirmPasswordtxt;
     EditText password;
     EditText username;
-    EditText confirmPassword;
+
 
 
 
@@ -45,7 +44,6 @@ public class RegisterView extends Fragment {
 
         username = (EditText) view.findViewById(R.id.usernameRegisterId);
         password = (EditText) view.findViewById(R.id.passwordRegisterId);
-        confirmPassword = (EditText) view.findViewById(R.id.confirmPasswordRegisterId);
         ((WhoZScoreActivity)getActivity()).showOverflowMenu(false);
 
 
@@ -59,8 +57,7 @@ public class RegisterView extends Fragment {
                 // Retrieve the text entered from the EditText
                 usernametxt = username.getText().toString();
                 passwordtxt = password.getText().toString();
-                confirmPasswordtxt = confirmPassword.getText().toString();
-                if(emailAddressIsValid(username, usernametxt) && passwordIsValid(password,passwordtxt) && confirmPasswordIsValid(confirmPassword, confirmPasswordtxt, passwordtxt)){
+                if(emailAddressIsValid(username, usernametxt) && passwordIsValid(password,passwordtxt)){
                     // Save new user data into Parse.com Data Storage
                     ParseUser user = new ParseUser();
                     user.setUsername(usernametxt);
@@ -72,9 +69,13 @@ public class RegisterView extends Fragment {
                             if (e == null) {
                                 ((WhoZScoreActivity)getActivity()).setPatient(new Patient());
                                 ((WhoZScoreActivity)getActivity()).replaceFragment(homeView);
+                            } else if(e.getCode() == ParseException.EMAIL_TAKEN) {
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Username "+usernametxt+" is already taken", Toast.LENGTH_LONG)
+                                        .show();
                             } else {
                                 Toast.makeText(getActivity().getApplicationContext(),
-                                        "Sign up Error", Toast.LENGTH_LONG)
+                                        "Sign up Error: ", Toast.LENGTH_LONG)
                                         .show();
                             }
 
@@ -96,18 +97,6 @@ public class RegisterView extends Fragment {
         // Inflate the layout for this fragment
         return view;
 
-    }
-
-    private boolean confirmPasswordIsValid(EditText confirmPassword, String confirmPasswordtxt, String passwordtxt) {
-        if(confirmPasswordtxt.equals("")){
-            confirmPassword.setError("Please reenter the password");
-            return false;
-        }
-        if(!isPasswordMatch(passwordtxt, confirmPasswordtxt)){
-            confirmPassword.setError("The password does not match");
-            return false;
-        }
-        return true;
     }
 
     private boolean passwordIsValid(EditText password, String passwordtxt) {
@@ -137,15 +126,6 @@ public class RegisterView extends Fragment {
         } else {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
-    }
-
-    private boolean isPasswordMatch(String password, String confirmPassword){
-        if(password == null || confirmPassword == null){
-            return false;
-        }else if(!password.equals(confirmPassword)){
-            return false;
-        }
-        return true;
     }
 
 

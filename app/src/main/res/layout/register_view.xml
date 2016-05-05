@@ -23,10 +23,6 @@
 
 
 
-
-
-
-
             <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -34,8 +30,6 @@
                     android:id="@+id/usernameRegisterId"
                     android:drawableLeft="@drawable/emailicon"
                     android:hint="Email" android:layout_marginTop="10dp" android:layout_marginRight="10dp" />
-
-
 
 
             <EditText
@@ -49,23 +43,7 @@
                     android:enabled="true"
                     android:hint="Password" android:layout_marginTop="10dp" android:layout_marginRight="10dp"/>
 
-        <EditText
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="10"
-                android:password="true"
-                android:id="@+id/confirmPasswordRegisterId"
-                android:drawableLeft="@drawable/password"
-                android:enabled="true"
-                android:hint="Confirm Password" android:layout_marginTop="10dp" android:layout_marginRight="10dp"/>
-
-
-
-
-
-
-            <Button
+        <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Register"
