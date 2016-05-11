@@ -47,6 +47,7 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
 
         super.onCreate(savedInstanceState);
         patient = new Patient();
+        getActionBar().setHomeButtonEnabled(true);
 
         setContentView(R.layout.main);
         // Determine whether the current user is an anonymous user
@@ -93,11 +94,21 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.logout:
+                clearBackStack();
                 logout();
+                return true;
+            case android.R.id.home:
+                clearBackStack();
+                replaceFragment(new HomeView());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void clearBackStack() {
+        FragmentManager fm = getFragmentManager();
+        fm.popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     public void showOverflowMenu(boolean showMenu){

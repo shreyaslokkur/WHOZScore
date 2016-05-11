@@ -38,7 +38,7 @@ public class FormView extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.form_view, container, false);
-        ((WhoZScoreActivity)getActivity()).showOverflowMenu(false);
+        ((WhoZScoreActivity)getActivity()).showOverflowMenu(true);
         final Fragment resultView = new ResultView();
         yearsSpinner = (Spinner) view.findViewById(R.id.yearsId);
         yearsSpinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());

@@ -94,12 +94,17 @@ public class LoginView extends Fragment {
                             if (e == null) {
                                 Toast.makeText(
                                         getActivity().getApplicationContext(),
-                                        "A password reset mail was sent to your email address",
+                                        "A password reset mail was sent to the email address: "+ username.getText(),
+                                        Toast.LENGTH_LONG).show();
+                            } else if(e.getCode() == 205) {
+                                Toast.makeText(
+                                        getActivity().getApplicationContext(),
+                                        "Unable to send password reset email. No user with the email id: "+ username.getText()+" is found.",
                                         Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(
                                         getActivity().getApplicationContext(),
-                                        "Unable to send password reset email. Please try again",
+                                        "Unable to send password reset email. Please try again later.",
                                         Toast.LENGTH_LONG).show();
                             }
                         }

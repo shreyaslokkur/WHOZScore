@@ -55,7 +55,7 @@ public class GraphView extends Fragment {
         final View view = inflater.inflate(R.layout.graph_view, container, false);
         final Patient patient = ((WhoZScoreActivity) getActivity()).getPatient();
         final LinearLayout chartLayout = (LinearLayout) view.findViewById(R.id.chart);
-        ((WhoZScoreActivity)getActivity()).showOverflowMenu(false);
+        ((WhoZScoreActivity)getActivity()).showOverflowMenu(true);
         calculator = createCalculatorInstance(getScoreGraphTypes());
         openChart(calculator.getGraphModel(patient, getScoreGraphTypes(), getActivity()), chartLayout);
         final GraphicalView chart = (GraphicalView) chartLayout.findViewById(chartId);

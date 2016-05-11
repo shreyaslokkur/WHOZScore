@@ -34,7 +34,7 @@ public class ResultView extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.result_view, container, false);
-        ((WhoZScoreActivity)getActivity()).showOverflowMenu(false);
+        ((WhoZScoreActivity)getActivity()).showOverflowMenu(true);
         final Fragment graphView = new GraphView();
         ageText = (TextView) view.findViewById(R.id.ageResultTextId);
         weightText = (TextView) view.findViewById(R.id.weightResultTextId);
