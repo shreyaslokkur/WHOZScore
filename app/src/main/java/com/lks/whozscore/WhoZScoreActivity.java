@@ -108,7 +108,7 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
 
     private void clearBackStack() {
         FragmentManager fm = getFragmentManager();
-        fm.popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        fm.popBackStack(HomeView.class.getSimpleName(),fm.POP_BACK_STACK_INCLUSIVE);
     }
 
     public void showOverflowMenu(boolean showMenu){
