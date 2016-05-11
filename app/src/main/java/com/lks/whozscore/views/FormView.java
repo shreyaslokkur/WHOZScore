@@ -142,7 +142,7 @@ public class FormView extends Fragment {
     }
 
     public void toggleSubmitButton(){
-        if(weightText.getText().length() > 0 || heightText.getText().length() > 0){
+        if(weightText.getText().length() > 0 || heightText.getText().length() > 0 || headCircumferenceText.getText().length() > 0){
             submitButton.setEnabled(true);
         }else {
             submitButton.setEnabled(false);
