@@ -32,6 +32,7 @@ public class ResultCardArrayAdapter extends ArrayAdapter<ResultCard> {
         TextView header;
         TextView zScoreResult;
         ImageButton graph;
+        ImageButton info;
     }
 
     public ResultCardArrayAdapter(Context context, int textViewResourceId, PatientInterface patientInterface) {
@@ -66,6 +67,7 @@ public class ResultCardArrayAdapter extends ArrayAdapter<ResultCard> {
             viewHolder.header = (TextView) row.findViewById(R.id.header);
             viewHolder.zScoreResult = (TextView) row.findViewById(R.id.zScoreResultTextId);
             viewHolder.graph = (ImageButton) row.findViewById(R.id.graph);
+            viewHolder.info = (ImageButton) row.findViewById(R.id.info);
             row.setTag(viewHolder);
         } else {
             viewHolder = (CardViewHolder)row.getTag();
@@ -74,6 +76,7 @@ public class ResultCardArrayAdapter extends ArrayAdapter<ResultCard> {
         viewHolder.header.setText(card.getHeader());
         viewHolder.zScoreResult.setText(card.getzScoreResult());
         viewHolder.graph.setOnClickListener(new GraphButtonClickedListener(card.getzScoreCalculators(), patientInterface));
+        viewHolder.info.setOnClickListener(new InfoButtonClickedListener(card.getzScoreCalculators(),patientInterface));
         return row;
     }
 

@@ -36,6 +36,11 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
     private ICalculator calculator;
     private HealthCheckerDelegator healthChecker = new HealthCheckerDelegator();
     private Result result = null;
+    private WeightForAge weightForAge = null;
+    private HeightForAge heightForAge = null;
+    private WeightForHeight weightForHeight = null;
+    private HeadCircumferenceForAge headCircumferenceForAge = null;
+
     Menu menu;
 
 
@@ -170,10 +175,6 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
     }
 
     public void onFormSubmit(){
-        WeightForAge weightForAge = null;
-        HeightForAge heightForAge = null;
-        WeightForHeight weightForHeight = null;
-        HeadCircumferenceForAge headCircumferenceForAge = null;
 
         try{
 
@@ -216,6 +217,22 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public WeightForAge getWeightForAge() {
+        return weightForAge;
+    }
+
+    public HeightForAge getHeightForAge() {
+        return heightForAge;
+    }
+
+    public WeightForHeight getWeightForHeight() {
+        return weightForHeight;
+    }
+
+    public HeadCircumferenceForAge getHeadCircumferenceForAge() {
+        return headCircumferenceForAge;
     }
 
     @Override

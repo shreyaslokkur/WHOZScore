@@ -75,6 +75,7 @@
     <string name="weight_for_height_less_than_minus_two">Moderate Wasting</string>
     <string name="weight_for_height_more_than_two">Unavailable</string>
     <string name="weight_for_height_more_than_three">Unavailable</string>
+    <string name="zscore_values">ZScore Values</string>
 
 
 
