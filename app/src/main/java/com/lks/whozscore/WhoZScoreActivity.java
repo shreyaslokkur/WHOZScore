@@ -51,7 +51,6 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        patient = new Patient();
         getActionBar().setHomeButtonEnabled(true);
 
         setContentView(R.layout.main);
@@ -112,12 +111,11 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
     }
 
     private void clearBackStack() {
-        resetPatientValue();
         FragmentManager fm = getFragmentManager();
         fm.popBackStack(HomeView.class.getSimpleName(),fm.POP_BACK_STACK_INCLUSIVE);
     }
 
-    private void resetPatientValue() {
+    private void setPatientValue() {
         patient = new Patient();
     }
 

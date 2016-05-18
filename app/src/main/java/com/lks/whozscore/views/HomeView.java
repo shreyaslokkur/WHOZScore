@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import com.lks.whozscore.R;
 import com.lks.whozscore.WhoZScoreActivity;
 import com.lks.whozscore.enums.Sex;
+import com.lks.whozscore.model.Patient;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,7 +38,7 @@ public class HomeView extends Fragment {
         boyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("boy.............................");
+                ((WhoZScoreActivity)getActivity()).setPatient(new Patient());
                 ((WhoZScoreActivity)getActivity()).setPatientGender(Sex.MALE);
                 ((WhoZScoreActivity)getActivity()).replaceFragment(formView);
             }
@@ -46,7 +47,7 @@ public class HomeView extends Fragment {
         girlButton = (ImageButton)view.findViewById(R.id.girl_image);
         girlButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                System.out.println("girl............................");
+                ((WhoZScoreActivity)getActivity()).setPatient(new Patient());
                 ((WhoZScoreActivity)getActivity()).setPatientGender(Sex.FEMALE);
                 ((WhoZScoreActivity)getActivity()).replaceFragment(formView);
             }

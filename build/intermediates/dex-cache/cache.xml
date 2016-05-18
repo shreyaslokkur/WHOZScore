@@ -2,20 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/home/shreyaslokkur/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/home/shreyaslokkur/Sandbox/codebase/android/WHOZScore/app/build/intermediates/pre-dexed/release/support-annotations-23.1.1_0f68279e75b18ef172b629b26b8e40057d7e6817.jar" />
-    </item>
-    <item
-        jar="/home/shreyaslokkur/Sandbox/codebase/android/WHOZScore/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/home/shreyaslokkur/Sandbox/codebase/android/WHOZScore/app/build/intermediates/pre-dexed/release/com.android.support-appcompat-v7-23.1.1_a8808d1de421263c1488f96715f8fd59c4600d59.jar" />
-    </item>
-    <item
         jar="/home/shreyaslokkur/.gradle/caches/modules-2/files-2.1/com.parse/parse-android/1.10.0/79943588a3824033b3d813f43859ad1cffc6b557/parse-android-1.10.0.jar"
         jumboMode="false"
         revision="23.0.2"
@@ -28,6 +14,20 @@
         revision="23.0.2"
         sha1="8b31d5defc9310f5e1153cd6d212cc12233f373c">
         <dex dex="/home/shreyaslokkur/Sandbox/codebase/android/WHOZScore/app/build/intermediates/pre-dexed/release/achartengine-1.2.0_7ebc4510195f2ac4292127b78560da56ac197910.jar" />
+    </item>
+    <item
+        jar="/home/shreyaslokkur/Sandbox/codebase/android/WHOZScore/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="/home/shreyaslokkur/Sandbox/codebase/android/WHOZScore/app/build/intermediates/pre-dexed/release/com.android.support-appcompat-v7-23.1.1_a8808d1de421263c1488f96715f8fd59c4600d59.jar" />
+    </item>
+    <item
+        jar="/home/shreyaslokkur/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="/home/shreyaslokkur/Sandbox/codebase/android/WHOZScore/app/build/intermediates/pre-dexed/release/support-annotations-23.1.1_0f68279e75b18ef172b629b26b8e40057d7e6817.jar" />
     </item>
     <item
         jar="/home/shreyaslokkur/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.1/44780c2cf98f6a3cf4e77f1234d644758b329201/bolts-android-1.2.1.jar"
