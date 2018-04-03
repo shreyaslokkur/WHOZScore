@@ -34,8 +34,8 @@
                          android:layout_marginLeft="20dp"
                          android:layout_marginTop="5dp"
                          android:layout_marginBottom="10dp"
-                         android:id="@+id/boy_image"
-                         android:onClick="onBoyImageClickHandler"/>
+                         android:id="@+id/boy_image"/>
+                         <!--android:onClick="onBoyImageClickHandler"-->
             <ImageButton android:background="@drawable/girl_button_image"
                          android:contentDescription="Girl"
                          android:layout_height="match_parent"
@@ -45,8 +45,8 @@
                          android:layout_marginLeft="20dp"
                          android:layout_marginTop="10dp"
                          android:layout_marginBottom="10dp"
-                         android:id="@+id/girl_image"
-                         android:onClick="onGirlImageClickHandler"/>
+                         android:id="@+id/girl_image"/>
+                         <!--android:onClick="onGirlImageClickHandler"-->
 
         </LinearLayout>
     <LinearLayout android:orientation="horizontal"

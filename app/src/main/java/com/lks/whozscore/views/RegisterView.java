@@ -75,7 +75,7 @@ public class RegisterView extends Fragment {
                                         .show();
                             } else {
                                 Toast.makeText(getActivity().getApplicationContext(),
-                                        "Sign up Error: ", Toast.LENGTH_LONG)
+                                        "Sign up Error: "+ e.getLocalizedMessage(), Toast.LENGTH_LONG)
                                         .show();
                             }
 

@@ -6,25 +6,6 @@
             android:background="#ffffff"
             android:fillViewport="true">
 
-    <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:textStyle="bold"
-            android:textColor="#122e4d"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginBottom="20dp"
-            android:textSize="24dp"
-            android:textIsSelectable="false"
-            android:layout_weight="3"/>
-
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="#122e4d"
-            android:layout_gravity="left"
-            android:textSize="16dp"
-            android:textIsSelectable="false" />-->
 
     <LinearLayout
             android:id="@+id/chart"
@@ -32,6 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
             android:layout_below="@+id/graph_header_text"
            >
 

@@ -54,8 +54,14 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
         getActionBar().setHomeButtonEnabled(true);
 
         setContentView(R.layout.main);
+
+        HomeView newFragment = new HomeView();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.add(R.id.view, newFragment);
+        transaction.commit();
+
         // Determine whether the current user is an anonymous user
-        if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
+        /*if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
             LoginView loginView = new LoginView();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.add(R.id.view, loginView);
@@ -79,7 +85,7 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
                 transaction.commit();
 
             }
-        }
+        }*/
 
         
 
@@ -97,10 +103,10 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.logout:
+            /*case R.id.logout:
                 clearBackStack();
                 logout();
-                return true;
+                return true;*/
             case android.R.id.home:
                 clearBackStack();
                 replaceFragment(new HomeView());
@@ -122,7 +128,7 @@ public class WhoZScoreActivity extends Activity implements FragmentChangeListene
     public void showOverflowMenu(boolean showMenu){
         if(this.menu == null)
             return;
-        menu.setGroupVisible(R.id.main_menu_group, showMenu);
+        /*menu.setGroupVisible(R.id.main_menu_group, showMenu);*/
     }
 
     private void logout() {

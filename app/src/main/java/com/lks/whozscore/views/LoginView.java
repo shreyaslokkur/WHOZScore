@@ -1,6 +1,8 @@
 package com.lks.whozscore.views;
 
 import android.app.Fragment;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.Button;
