@@ -21,9 +21,9 @@ import com.lks.whozscore.enums.AgeGroup;
 import com.lks.whozscore.enums.ZScoreGraphTypes;
 import com.lks.whozscore.model.GraphModel;
 import com.lks.whozscore.model.Patient;
+
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
-import org.achartengine.chart.LineChart;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;

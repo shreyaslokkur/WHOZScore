@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+
+    <!-- Change the following strings as required -->
+    <string name="back4app_app_id">0FaDyY0RqyDSTOXhJDUVGTCFBDQVYVt4iwlsWse0</string>
+    <string name="back4app_client_key">SJm74WdtTgtS43WVJe1NdB8hDpj8S7qRxo8okqoN</string>
+
+
     <string name="app_name">WHO ZScore</string>
 
     <string name="years_prompt">Choose number of years</string>

@@ -4,8 +4,19 @@
     android:versionCode="1"
     android:versionName="1.0">
     <uses-sdk android:minSdkVersion="19"/>
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application android:name="com.lks.whozscore.WhoZScoreApplication" android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:theme="@style/Theme.Zscore">
+
+        <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="@string/back4app_server_url" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="@string/back4app_app_id" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="@string/back4app_client_key" />
         <activity android:name=".WhoZScoreActivity"
             android:label="@string/app_name">
             <intent-filter>

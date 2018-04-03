@@ -3,6 +3,7 @@ package com.lks.whozscore;
 import android.app.Application;
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 /**
@@ -15,14 +16,15 @@ public class WhoZScoreApplication extends Application {
         super.onCreate();
 
         // Add your initialization code here
-        Parse.initialize(this, "ov89x4kDpXMixnN5zHzjLl4QHwocKZHmqa3b0ISL", "lBUgwzHLd5hqInqYdpE8EALZeqNCKsy0GNtNG1wc");
-
+        Parse.initialize(this);
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
 
         // If you would like all objects to be private by default, remove this
         // line.
         defaultACL.setPublicReadAccess(true);
+
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
         ParseACL.setDefaultACL(defaultACL, true);
     }
