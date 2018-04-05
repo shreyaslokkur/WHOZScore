@@ -88,7 +88,7 @@ public class IndividualInfoView extends Fragment {
         return age;
     }
 
-    private void createIndividualParameterHeaders(String parameterName, String parameterValue){
+    private void createIndividualParameterHeaders(String parameterName, String parameterValue, String headerUnit){
         LinearLayout linearLayout = new LinearLayout(getActivity());
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -103,7 +103,7 @@ public class IndividualInfoView extends Fragment {
 
         TextView parameterValueTextView = new TextView(getActivity());
         parameterValueTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        parameterValueTextView.setText(parameterValue + unit);
+        parameterValueTextView.setText(parameterValue + headerUnit);
         linearLayout.addView(parameterValueTextView);
 
         headerLinearLayout.addView(linearLayout);
@@ -119,23 +119,23 @@ public class IndividualInfoView extends Fragment {
         if(zScoreCalculators.equals(ZScoreCalculators.WEIGHT_FOR_AGE)) {
             zScoreEntity = whoZScoreActivity.getWeightForAge();
             unit = "kg";
-            createIndividualParameterHeaders("Weight: ", String.valueOf(patient.getWeight()));
+            createIndividualParameterHeaders("Weight: ", String.valueOf(patient.getWeight()),"kg");
         }
         else if(zScoreCalculators.equals(ZScoreCalculators.HEIGHT_FOR_AGE)) {
             zScoreEntity = whoZScoreActivity.getHeightForAge();
             unit = "cms";
-            createIndividualParameterHeaders("Height: ", String.valueOf(patient.getHeight()));
+            createIndividualParameterHeaders("Height: ", String.valueOf(patient.getHeight()), "cms");
         }
         else if(zScoreCalculators.equals(ZScoreCalculators.WEIGHT_FOR_HEIGHT)) {
             zScoreEntity = whoZScoreActivity.getWeightForHeight();
             unit = "kg";
-            createIndividualParameterHeaders("Weight: ", String.valueOf(patient.getWeight()));
-            createIndividualParameterHeaders("Height: ", String.valueOf(patient.getHeight()));
+            createIndividualParameterHeaders("Weight: ", String.valueOf(patient.getWeight()), "kg");
+            createIndividualParameterHeaders("Height: ", String.valueOf(patient.getHeight()), "cms");
         }
         else if(zScoreCalculators.equals(ZScoreCalculators.HEAD_CIRCUMFERENCE_FOR_AGE)) {
             zScoreEntity = whoZScoreActivity.getHeadCircumferenceForAge();
             unit = "cms";
-            createIndividualParameterHeaders("Head Circumference: ", String.valueOf(patient.getHeadCircumference()));
+            createIndividualParameterHeaders("Head Circumference: ", String.valueOf(patient.getHeadCircumference()), "cms");
         }
     }
 
